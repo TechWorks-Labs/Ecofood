@@ -1,0 +1,33 @@
+version: "3"
+services:
+  www:
+    build: .
+    restart: always
+    volumes:
+      - ./html:/var/www/html/
+    ports:
+      - 9000:80
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.9.4
+    restart: always
+    environment:
+      MARIADB_DATABASE: ecofood
+      MARIADB_USER: user
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_PASSWORD: password
+    ports:
+    - "3360:3306"
+    volumes:
+      - db-ecofood:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  db-ecofood:
