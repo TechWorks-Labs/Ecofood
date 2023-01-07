@@ -12,8 +12,13 @@ class ApiController
 
     public function getAllProduct()
     {
-    $all_products = $this->api_manager->getAllProduct();
-    Model::sendJSON($all_products);
+        $all_products = $this->api_manager->getAllProduct();
+        Model::sendJSON($all_products);
     }
 
+    public function getProductByType($value)
+    {
+        $product = $this->api_manager->getProductByType($value);
+        Model::sendJSON($product);
+    }
 }

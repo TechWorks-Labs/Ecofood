@@ -12,4 +12,15 @@ class ApiManager extends Model
         $stmt->closeCursor();
         return $all_product;
     }
+
+    public function getProductByType($value)
+    {
+        $req = "SELECT * FROM product WHERE type = :idType";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":idType", $value, PDO::PARAM_INT);
+        $stmt->execute();
+        $product = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $product;
+    }
 }
