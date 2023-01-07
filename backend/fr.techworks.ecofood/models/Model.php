@@ -16,8 +16,6 @@ abstract class Model {
         if( self::$pdo === null ){
             self::setBdd();
         }
-        var_dump(self::$pdo);
-        
         return self::$pdo;
     }
 
