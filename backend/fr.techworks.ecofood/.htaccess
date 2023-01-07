@@ -1,0 +1,6 @@
+# url rewriting, all request go to index.php
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+# If the rule applies, no other rule will be processed, 
+# query strings can be combined for GET method.
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
