@@ -1,5 +1,7 @@
 <?php
 
+require_once "./models/Model.php";
+
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -8,8 +10,7 @@ $data = explode('/', $url);
 $page = $data[1];
 
 switch ($page) {
-    case '':
+    case 'homepage':
         echo "coucou";
-        var_dump($_ENV);
         break;
 }
