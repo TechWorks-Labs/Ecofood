@@ -4,9 +4,10 @@ import { useRef, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
 export default function Carousel(props){
+    const [carouselWidth, setCarouselWidth] = useState(1152);
     const carouselRef = useRef(null);
-
     const productCardRefs = [];
+
     const setProductCardsRef = () => {
         for(let i = 1; i<= 16; i++) {
             productCardRefs.push(useRef(null))
@@ -18,8 +19,10 @@ export default function Carousel(props){
     function MyProductCardList() {
         const myList = [];
         for (let i = 0; i <= 16; i++) {
+          let width = "w-["+(carouselWidth/4)+"px]";
+          console.log("width "+width)
           myList.push(
-            <li key={i} className="multi-carousel" ref={productCardRefs[i]}>
+            <li key={i} className={` ${width} multi-carousel`} ref={productCardRefs[i]}>
               <ProductCard />
             </li>
           );
@@ -27,13 +30,16 @@ export default function Carousel(props){
         return myList;
       }
 
+
       // Update carousel data based on screen resolution
       useEffect(() => {
+        setCarouselWidth(carouselRef.current.offsetWidth);
+        productCardRefs.forEach(element => {
+          element.current.style.width = Math.ceil((carouselRef.current.offsetWidth)/4)+"px";
+        });
         function updateWidth() {
-        //   console.log(carouselRef.current.offsetWidth);
           productCardRefs.forEach(element => {
             element.current.style.width = Math.ceil((carouselRef.current.offsetWidth)/4)+"px";
-            console.log(element.current.style.width);
           });
         }
     
@@ -47,7 +53,7 @@ export default function Carousel(props){
     const getInputId = (event) => {
         const multiCarousel = document.querySelectorAll('.multi-carousel');
         const id = parseInt(event);
-        let translateX = id*((1152/4)*4);
+        let translateX = id*((carouselRef.current.offsetWidth/4)*4);
         multiCarousel.forEach(element => {
             element.style.transform = 'translateX(-' + translateX + 'px)';
         });
