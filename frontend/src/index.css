@@ -19,6 +19,5 @@ overflow: hidden;
 }
 .multi-carousel {
     list-style-type: none;
-    transition: all 0.6s ease-in-out;
-    width: 288px;
+    transition: transform 0.6s ease-in-out;
 }
