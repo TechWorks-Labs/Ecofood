@@ -13,25 +13,25 @@ function Header(props){
     }
 
     return(
-    <div className="shadow-lg">
-        <div className="min-w-[400px] max-w-6xl bg-red-400 h-full mx-auto flex flex-row justify-between items-center p-2">
-            <div className="bg-cyan-400">
-                <h1>ECOFOOD</h1>
+    <div className="bg-slate-800 shadow-lg w-full min-w-[300px]">
+        <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2">
+            <div>
+                <h1 className="text-white font-semibold text-xl">ECOFOOD</h1>
             </div>
 
-            <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-6 ">
+            <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-6 text-white">
                 <li><a href='#'>FRUITS</a></li>
                 <li><a href='#'>LEGUMES</a></li>
                 <li><a href='#'>VIANDES</a></li>
             </ul>
   
 
-            <div className="bg-green-400 flex flex-row items-center justify-center">
-                <div className="flex flex-row justify-around items-center min-w-[180px] p-2">
+            <div className="flex flex-row items-center justify-center ">
+                <div className="flex flex-row justify-around items-center min-w-[180px] p-2 md:min-w-[110px]">
                     <img src={profil} className="w-[35px]"></img>
                     <img src={shop} className="w-[35px]"></img>
                     <button onClick={HamburgerToggle} className="p-2 rounded-lg md:hidden">
-                        <svg width="32" height="32" viewBox="0 0 32 32">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
                             <rect x="6" y="8" width="20" height="2"/>
                             <rect x="6" y="16" width="20" height="2"/>
                             <rect x="6" y="24" width="20" height="2"/>
