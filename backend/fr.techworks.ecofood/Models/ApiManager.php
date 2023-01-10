@@ -18,7 +18,6 @@ class ApiManager extends Model
     {
         $req = "SELECT * FROM product WHERE type = :idType";
         $stmt = $this->getBdd()->prepare($req);
-        echo $stmt;
         $stmt->bindValue(":idType", $value, \PDO::PARAM_INT);
         $stmt->execute();
         $product = $stmt->fetchAll(\PDO::FETCH_ASSOC);
