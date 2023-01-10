@@ -1,5 +1,9 @@
 <?php
-require_once "models/ApiManager.php";
+
+namespace Controllers\Api;
+
+use Models\ApiManager;
+use Models\Model;
 
 class ApiController 
 {
