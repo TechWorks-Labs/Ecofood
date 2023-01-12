@@ -1,89 +1,99 @@
 import React from "react";
 import { useState } from "react";
 import { useRef, useEffect } from "react";
-import panier from "/src/assets/images/paniers/panier.png";
-import ProductCard from "./Item";
-import { useContext } from "react";
-import { myContext } from "../../context/MyContextProvider";
+import Item from "./Item";
+import arrowLeft from '../../assets/images/icons/arrow-left.svg';
+import arrowRight from '../../assets/images/icons/arrow-right.svg';
 
-export default function Carousel(props){
-  
-    const { fruits, legumes } = useContext(myContext);
-    const [carouselWidth, setCarouselWidth] = useState(1152);
-    const carouselRef = useRef(null);
-    const productCardRefs = Array.from({ length: 16 }, (_, i) => useRef(null));
+export default function Carousel(props) {
+  const itemsRef = Array.from({ length: 16 }, (_, i) => useRef(null));
+  const carouselRef = useRef(null);
+  const [carouselWidth, setCarouselWidth] = useState(null);
 
-    function MyProductCardList() {
+  const updateCarouselWidthOnResize = () => {
+    setCarouselWidth(carouselRef.current.offsetWidth);
+  }
+
+  function MyItems() {
       let myList = [];
-      // Check si la variable fruits existe et contient des éléments
-      if (fruits && fruits.length > 0) {
-        console.log(fruits);
-        for (let i = 0; i <= 16; i++) {
-          let width = "w-["+(carouselWidth/4)+"px]";
-
+      for (let i = 0; i <= itemsRef.length; i++) {
+        if (i < 8) {
           myList.push(
-            <li key={i} className={` ${width} multi-carousel`} ref={productCardRefs[i]}>
-              <ProductCard />
+            <li key={i} className={`hidden md:inline-flex list-none transition-all duration-150 ease-in-out border`} ref={itemsRef[i]}>
+              <Item />
+            </li>
+          );
+        } else {
+          myList.push(
+            <li key={i} className={`list-none border transition-all duration-150 ease-in-out`} ref={itemsRef[i]}>
+              <Item  />
             </li>
           );
         }
       }
-      return myList;
-    }
+      return myList;   
+  }
 
 
-      // Update carousel data based on screen resolution
-      useEffect(() => {
+  const translateItemByInputRadio = (event) => {
+    const inputID = parseInt(event.target.id);
 
-        setCarouselWidth(carouselRef.current.offsetWidth);
-        productCardRefs.forEach(element => {
-          element.current.style.width = Math.ceil((carouselRef.current.offsetWidth)/4)+"px";
-        });
-        function updateWidth() {
-          productCardRefs.forEach(element => {
-            element.current.style.width = Math.ceil((carouselRef.current.offsetWidth)/4)+"px";
-          });
+    itemsRef.forEach(item => {
+      item.current.style.transform = 'translateX(-' + inputID * (item.current.offsetWidth) + 'px';
+    });
+  }
 
-        }
+  const updateItemsWidth = () => {
+    itemsRef.forEach(element => {
+      if (carouselRef.current.offsetWidth < 400) {
+        element.current.style.width = Math.ceil(carouselRef.current.offsetWidth) + "px";
+      } else if (carouselRef.current.offsetWidth > 400 && carouselRef.current.offsetWidth < 768) {
+        element.current.style.width = Math.ceil((carouselRef.current.offsetWidth) / 2) + "px";
+      } else if (carouselRef.current.offsetWidth > 768) {
+        element.current.style.width = Math.ceil((carouselRef.current.offsetWidth) / 4) + "px";
+      };
+    });
+  }
+
+
+
+  useEffect(() => {
+    // initalisation carousel useState
+    setCarouselWidth(carouselRef.current.offsetWidth);
+    // initialisation items width
+    updateItemsWidth();
+    // update carousel useState
+    window.addEventListener('resize', updateCarouselWidthOnResize);
+    // stop eventListener after work
     
-        window.addEventListener('resize', updateWidth);
-    
-        return () => {
-          window.removeEventListener('resize', updateWidth);
-        };
-      }, [productCardRefs]);
+    return () => {
+      window.removeEventListener('resize', updateCarouselWidthOnResize);
+    };
+  })
 
 
-    const getInputId = (event) => {
 
-        const id = parseInt(event.target.id);
-        const multiCarousel = document.querySelectorAll('.multi-carousel');
-        let translateX = id*((carouselRef.current.offsetWidth/4)*4);
-        multiCarousel.forEach(element => {
-            element.style.transform = 'translateX(-' + translateX + 'px)';
-        });
-    }
-
-    return(
-        <div className="flex flex-col items-center justify-center">
-            <span className="hidden sm:block font-bold text-xl underline underline-offset-4 mb-5">FRUITS DE SAISON</span>
-            <div className="carousel" ref={carouselRef}>
-                <div className="slide ">
-                     <MyProductCardList />
-                </div>
-            </div>
-            <div className="hidden sm:inline-flex carrousel_radio flex flex-row items-center justify-around w-[130px] mt-8">
-                <input type="radio" name='carrousel' id="0" onChange={(e)=>getInputId(e)} /> 
-                <input type="radio" name='carrousel' id="1" onChange={(e)=>getInputId(e)} />
-                <input type="radio" name='carrousel' id="2" onChange={(e)=>getInputId(e)} />
-                <input type="radio" name='carrousel' id="3" onChange={(e)=>getInputId(e)} />
-            </div>
-
-            <div className="flex flex-col items-center justify-around h-[390px] p-10 border border-slate-400 border-1 w-full border-r-0 border-l-0 mt-3 sm:hidden">
-              <span className="font-bold text-xl underline underline-offset-4">FRUITS DE SAISON</span>
-              <img src={panier} className="w-[200px]"></img>
-              <button className="bg-slate-800 text-white font-semibold rounded-lg pr-5 pl-5 p-2">Accéder au magasin</button>
-            </div>
+  return (
+    <div className="w-full flex flex-col justify-center items-center">
+      <span className="font-medium text-2xl underline underline-offset-4 mb-5">{props.title}</span>
+      <div className="carousel flex flex-row max-w-[1148px] w-[100%] h-[300px] overflow-hidden h-[300px] " ref={carouselRef}>
+        <button className="z-10 absolute self-center left-[-60px] rounded-full w-[100px] h-[150px]  border border-slate-200 bg-white shadow-lg md:hidden">
+          <img src={arrowLeft} className="absolute right-0 self-center translate-y-[-50%] w-[40px]"></img>
+        </button>
+        <button className="z-10 absolute self-center right-[-60px] rounded-full w-[100px] h-[150px] border border-slate-200 bg-white shadow-lg md:hidden">
+          <img src={arrowRight} className="absolute self-center translate-y-[-50%] w-[40px]"></img>
+        </button>
+        <div className="flex flex-row relative z-0">
+          <MyItems />
         </div>
-    )
+      </div>
+      <div className="hidden md:inline-flex carrousel_radio flex flex-row items-center justify-around w-[140px] mt-8">
+        <input type="radio" name='carrousel' id="0" className="bg-red-400" onChange={(e) => translateItemByInputRadio(e)} />
+        <input type="radio" name='carrousel' id="1" onChange={(e) => translateItemByInputRadio(e)} />
+        <input type="radio" name='carrousel' id="2" onChange={(e) => translateItemByInputRadio(e)} />
+        <input type="radio" name='carrousel' id="3" onChange={(e) => translateItemByInputRadio(e)} />
+      </div>
+      <button className="bg-[#EC3434] w-[160px] h-[45px] text-[0.9rem] p-2 rounded-lg text-white mt-5">TOUT CONSULTER</button>
+    </div>
+  )
 };

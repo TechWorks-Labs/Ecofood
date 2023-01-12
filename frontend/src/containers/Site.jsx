@@ -5,12 +5,10 @@ import HomePage from './homePage/HomePage';
 class Site extends Component {
     render() {
         return (
-            <>
             <Routes>
                 <Route path="/homepage" exact element={<HomePage />} />
-                <Route path="*" element={<span>ERROR 404</span>} />  
+                <Route path="*" element={<span>ERROR 404</span>} />   
             </Routes>
-            </>
         )
     }
 }

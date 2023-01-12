@@ -10,13 +10,11 @@ class HomePage extends Component {
 
     render() {
         return (
-            <div className="">
-                <MyContextProvider>
-                    <Header />
-                    <Presentation />
-                    <CarouselsContainer />
-                </MyContextProvider>
-            </div>
+             <MyContextProvider>
+                <Header />
+                <Presentation />
+                <CarouselsContainer />
+             </MyContextProvider> 
         )
     }
 }
