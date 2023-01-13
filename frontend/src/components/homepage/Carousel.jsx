@@ -10,6 +10,10 @@ export default function Carousel(props) {
   const carouselRef = useRef(null);
   const [carouselWidth, setCarouselWidth] = useState(null);
 
+  const updateCarouselWidthOnResize = () => {
+    setCarouselWidth(carouselRef.current.offsetWidth);
+  }
+
   const MyItems = () => {
     return props.itemsProduct.map((item, key) => {
       if (key<8){
@@ -28,10 +32,6 @@ export default function Carousel(props) {
     });
   }
  
-  const updateCarouselWidthOnResize = () => {
-    setCarouselWidth(carouselRef.current.offsetWidth);
-    console.log("carouselRef.current.offsetWidth "+carouselRef.current.offsetWidth)
-  }
 
   const translateItemByInputRadio = (event) => {
     const inputID = parseInt(event.target.id);
@@ -72,12 +72,10 @@ export default function Carousel(props) {
     };
   })
 
-
-
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <span className="font-medium text-2xl underline underline-offset-4 mb-5">{props.title}</span>
-      <div className="carousel flex flex-row max-w-[1148px] w-[100%] h-[300px] overflow-hidden h-[300px] " ref={carouselRef}> 
+      <div className="carousel flex flex-row max-w-[1148px] w-[100%] h-[350px] overflow-hidden " ref={carouselRef}>
         <button className="z-10 absolute self-center left-[-60px] rounded-full w-[100px] h-[150px]  border border-slate-200 bg-white shadow-lg md:hidden">
           <img src={arrowLeft} className="absolute right-0 self-center translate-y-[-50%] w-[40px]"></img>
         </button>
@@ -85,14 +83,14 @@ export default function Carousel(props) {
           <img src={arrowRight} className="absolute self-center translate-y-[-50%] w-[40px]"></img>
         </button>
         <div className="flex flex-row relative z-0">
-        {MyItems()}
+        <MyItems />
         </div>
       </div>
       <div className="hidden md:inline-flex carrousel_radio flex flex-row items-center justify-around w-[140px] mt-8">
-        <input type="radio" name='carrousel' id="0" className="bg-red-400" onChange={(e) => translateItemByInputRadio(e)} />
-        <input type="radio" name='carrousel' id="1" onChange={(e) => translateItemByInputRadio(e)} />
-        <input type="radio" name='carrousel' id="2" onChange={(e) => translateItemByInputRadio(e)} />
-        <input type="radio" name='carrousel' id="3" onChange={(e) => translateItemByInputRadio(e)} />
+        <input type="radio" name={props.inputName} id="0" className="bg-red-400" onChange={(e) => translateItemByInputRadio(e)} />
+        <input type="radio" name={props.inputName} id="1" onChange={(e) => translateItemByInputRadio(e)} />
+        <input type="radio" name={props.inputName} id="2" onChange={(e) => translateItemByInputRadio(e)} />
+        <input type="radio" name={props.inputName} id="3" onChange={(e) => translateItemByInputRadio(e)} />
       </div>
       <button className="bg-[#EC3434] w-[160px] h-[45px] text-[0.9rem] p-2 rounded-lg text-white mt-5">TOUT CONSULTER</button>
     </div>

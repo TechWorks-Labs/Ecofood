@@ -2,7 +2,8 @@ import { Component } from 'react'
 import Header from '../../components/header/Header';
 import Presentation from '../../components/homepage/Presentation';
 import CarouselsContainer from '../../components/homepage/CarouselsContainer';
-import MyContextProvider from '../../context/MyContextProvider';
+import Footer from '../../components/footer/footer';
+import MyApiContextProvider from '../../context/MyApiContextProvider';
 
 class HomePage extends Component {
 
@@ -10,11 +11,12 @@ class HomePage extends Component {
 
     render() {
         return (
-             <MyContextProvider>
+             <MyApiContextProvider>
                 <Header />
                 <Presentation />
                 <CarouselsContainer />
-             </MyContextProvider> 
+                <Footer />
+             </MyApiContextProvider> 
         )
     }
 }

@@ -5,7 +5,8 @@ export const myContext = createContext();
 class MyContextProvider extends Component {
     state = {
       fruits: [],
-      vegetable:[]
+      vegetable:[],
+      meat:[]
     };
   
 loadDada = () => {
@@ -16,6 +17,10 @@ loadDada = () => {
   fetch('http://localhost:9000/product/vegetable')
   .then((response) => response.json())
   .then((data) => this.setState({ vegetable: data })); 
+
+  fetch('http://localhost:9000/product/meat')
+  .then((response) => response.json())
+  .then((data) => this.setState({ meat: data })); 
 }
 
 
