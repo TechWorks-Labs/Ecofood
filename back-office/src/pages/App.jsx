@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Connect from './Connect';
-import Dashboard from './Dashboard';
+import { Route, Routes } from "react-router";
+import VerticalNavBar from '../components/VerticalNavBar';
+import Products from './Products';
+import Home from './Home';
 
 function App() {
   return (
-    <div className="App">
-    
+    <div className="container flex">
+      <VerticalNavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Products />} />
+      </Routes>
     </div>
   )
 }
