@@ -5,8 +5,10 @@ define('DS', DIRECTORY_SEPARATOR);
 
 require_once "./models/Model.php";
 require_once "controllers/api/ApiController.php";
+require_once "controllers/UserController.php";
 
 $api_controller = new ApiController();
+$user_controller = new UserController();
 
 $url = explode('?', $_SERVER['REQUEST_URI'])[0];
 $data = explode('/', $url);
@@ -25,6 +27,12 @@ try{
                     case "vegetable": $api_controller->getProductByType(2);
                     break;
                     case "meat": $api_controller->getProductByType(3);
+                    break;
+                    default: throw new Exception ("url doesn't exist"); 
+                }
+            case  "account" :
+                switch($url[1]){
+                    case "sendUserIdentifiers": $user_controller->setUserIdentifiers();
                     break;
                     default: throw new Exception ("url doesn't exist"); 
                 }
