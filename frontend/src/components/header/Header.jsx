@@ -3,6 +3,7 @@ import { useState } from "react";
 import background from "/src/assets/images/background/backgroundEcofood.png";
 import profil from "/src/assets/images/icons/profil.svg";
 import shop from "/src/assets/images/icons/shopping-bag-header.svg";
+import { Link } from 'react-router-dom';
 
 function Header(props){
     const [hamburgerIsToggle, setHamburgerIsToggle] = useState(false);
@@ -28,7 +29,9 @@ function Header(props){
 
             <div className="flex flex-row items-center justify-center ">
                 <div className="flex flex-row justify-around items-center min-w-[180px] p-2 md:min-w-[110px]">
-                    <img src={profil} className="w-[35px]"></img>
+                    <Link to ="/mon-compte/creer-mon-compte">
+                        <img src={profil} className="w-[35px]"></img>
+                    </Link>
                     <img src={shop} className="w-[35px]"></img>
                     <button onClick={HamburgerToggle} className="p-2 rounded-lg md:hidden">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
