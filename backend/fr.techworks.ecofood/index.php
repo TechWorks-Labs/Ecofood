@@ -1,11 +1,13 @@
 <?php
 
+use Autoload\Autoloader;
+use Controllers\Api\ApiController;
+
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('DS', DIRECTORY_SEPARATOR);
 
-require_once "./models/Model.php";
-require_once "controllers/api/ApiController.php";
-require_once "controllers/UserController.php";
+require('Autoload/Autoloader.php');
+Autoloader::register();
 
 $api_controller = new ApiController();
 $user_controller = new UserController();

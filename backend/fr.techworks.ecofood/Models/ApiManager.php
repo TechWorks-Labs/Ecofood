@@ -1,5 +1,6 @@
 <?php
-require_once "models/Model.php";
+
+namespace Models;
 
 class ApiManager extends Model
 {
@@ -8,7 +9,7 @@ class ApiManager extends Model
         $req = " SELECT * from product ";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->execute();
-        $all_product = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $all_product = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         return $all_product;
     }
@@ -17,9 +18,9 @@ class ApiManager extends Model
     {
         $req = "SELECT * FROM product WHERE type = :idType";
         $stmt = $this->getBdd()->prepare($req);
-        $stmt->bindValue(":idType", $value, PDO::PARAM_INT);
+        $stmt->bindValue(":idType", $value, \PDO::PARAM_INT);
         $stmt->execute();
-        $product = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $product = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         return $product;
     }
