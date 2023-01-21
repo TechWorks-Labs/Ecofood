@@ -2,6 +2,7 @@
 
 use Autoload\Autoloader;
 use Controllers\Api\ApiController;
+use Controllers\UserController;
 
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('DS', DIRECTORY_SEPARATOR);

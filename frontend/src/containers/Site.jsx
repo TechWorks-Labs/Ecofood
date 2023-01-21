@@ -7,7 +7,7 @@ class Site extends Component {
     render() {
         return (
             <Routes>
-                <Route path="/homepage" exact element={<HomePage />} />
+                <Route path="/" exact element={<HomePage />} />
                 <Route path="/mon-compte/creer-mon-compte" exact element={<SignUpPage />} />
                 <Route path="*" element={<span>ERROR 404</span>} />   
             </Routes>

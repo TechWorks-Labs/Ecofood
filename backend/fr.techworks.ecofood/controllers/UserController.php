@@ -1,6 +1,7 @@
 <?php
+    namespace Controllers;
 
-    require_once 'models/UserManager.php';
+    use Models\UserManager;
 
     class UserController 
     {

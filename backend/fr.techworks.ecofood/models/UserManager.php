@@ -1,11 +1,12 @@
 <?php
-require_once 'models/Model.php';
+    namespace Models;
+
+    use Models\Model;
 
     class UserManager extends Model 
     {
         public function register($user,$password) 
         {
-          
                 $bdd = $this->getBdd();
                 $bdd->beginTransaction();
         
