@@ -6,10 +6,14 @@ import { useContext } from "react";
 import { myFormContext } from "../../../containers/signUpPage/SignUpPage";
 
 export default function AccountIdentifiers(props){
-    const{ setAccountIdentifiers, setPage } = useContext(myFormContext);
+    const{ setAccountIdentifiers, setPage, setUserAccount } = useContext(myFormContext);
 
     const handleAccountIdentifiersSubmit = (value) => {
-        setAccountIdentifiers(value);
+        setUserAccount({
+        ...setUserAccount, 
+        email: value.email,
+        password: value.password
+        });
         setPage("userInformations");
     }
         return (

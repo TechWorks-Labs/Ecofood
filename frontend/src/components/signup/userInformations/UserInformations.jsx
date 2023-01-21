@@ -41,14 +41,16 @@ import * as Yup from 'yup';
                          onChange = {props.handleChange}
                          value = {props.values.name}
                          onBlur = {props.handleBlur} />        
+                          {props.touched.name && props.errors.name && <span className="text-red-400">{props.errors.name}</span>}
                     </div>            
                     <div className="w-full flex-col">
                         <label htmlFor="lastname">Prénom * </label>
                         <input type='text' className="mt-3 border border-1 border-slate-300 w-full h-[35px] rounded-md" 
-                        name = 'lastName'
+                        name = 'lastname'
                         onChange = {props.handleChange}
-                        value = {props.values.lastName}
-                        onBlur = {props.handleBlur} />           
+                        value = {props.values.lastname}
+                        onBlur = {props.handleBlur} />   
+                        {props.touched.lastname && props.errors.lastname && <span className="text-red-400">{props.errors.lastname}</span>} 
                     </div>            
                     <div className="w-full flex flex-col">
                         <span>Date de naissance *</span>
@@ -75,7 +77,10 @@ import * as Yup from 'yup';
                             value = {props.values.year}
                             onBlur = {props.handleBlur} />  
 
-                        </div>        
+                        </div>       
+                        {props.touched.day && props.errors.day && <span className="text-red-400">{props.errors.day}</span>}  
+                        {props.touched.month && props.errors.month && <span className="text-red-400">{props.errors.month}</span>}  
+                        {props.touched.year && props.errors.year && <span className="text-red-400">{props.errors.year}</span>}  
                         <span className="mt-1">La création de compte est réservée aux personnes majeures.</span>
                     </div>   
                     <div className="w-full flex flex-row justify-between items-center p-3">
@@ -94,7 +99,7 @@ export default withFormik({
     mapPropsToValues : () => ({
         civility : "",
         name: "",
-        lastName : "",
+        lastname : "",
         day : "",
         month : "", 
         year : "",
@@ -106,29 +111,26 @@ export default withFormik({
         .max(32, "Le mot de passe doit comporter moins de 32 caracères")
         .matches(/^[\w-]+$/)
         .required("Le nom est obligatoire."),
-        lastName : Yup.string()
+        lastname : Yup.string()
         .max(32, "Le mot de passe doit comporter moins de 32 caracères")
         .matches(/^[\w-]+$/)
         .required("Le prénom est obligatoire."),
         day : Yup.string()
         .max(2, "Vous devez mettre deux chiffres maximum")
-        .matches(/^[0-9]+$/)
         .required('Le jour est obligatoire'),
         month : Yup.string()
         .max(2, "Vous devez mettre deux chiffres maximum")
-        .matches(/^[0-9]+$/)
         .required('Le mois est obligatoire'),
         year : Yup.string()
         .min(4, "Vous devez mettre 4 chiffres à lannée.")
-        .max(4, "Vous devez mettre 2 chiffres maximum")
-        .matches(/^[0-9]+$/)
+        .max(4, "Vous devez mettre 4 chiffres maximum")
         .required('Le mois est obligatoire'),
     }),
     handleSubmit : (values,{props}) => {
         const userInformations = {
             civility : values.civility, 
             name : values.name, 
-            lastName : values.lastName, 
+            lastname : values.lastname, 
             day : values.day, 
             month : values.month, 
             year : values.year

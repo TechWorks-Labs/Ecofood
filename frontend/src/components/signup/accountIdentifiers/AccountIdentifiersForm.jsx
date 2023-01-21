@@ -29,6 +29,17 @@ return(
                 {props.touched.password && props.errors.password && <span className="text-red-400">{props.errors.password}</span>}
             </div>
 
+            <div className="w-full">
+                <label htmlFor="form-control">Confirmez votre mot de passe * </label>
+                <input type='password' className="mt-3 border border-1 border-slate-300 w-full h-[35px] rounded-md" id='passwordConfirmation' 
+                name ='passwordConfirmation'
+                onChange={props.handleChange}
+                value={props.values.passwordConfirmation}
+                onBlur = {props.handleBlur}
+                />
+                {props.touched.passwordConfirmation && props.errors.passwordConfirmation && <span className="text-red-400">{props.errors.passwordConfirmation}</span>}
+            </div>
+
             <PasswordConditions />
 
             <div className="w-full flex flex-col sm:flex-row justify-between items-center mt-3">
@@ -42,7 +53,8 @@ return(
 export default withFormik({
     mapPropsToValues : () => ({
         email: "",
-        password: ""
+        password: "", 
+        passwordConfirmation : ""
     }),
     validationSchema : Yup.object().shape({
         email: Yup.string()
@@ -55,11 +67,15 @@ export default withFormik({
         .matches(/[0-9]/, "Le mot de passe doit comporter au moins un chiffre")
         .matches(/[@!&]/, "Le mot de passe doit comporter au moins un caractère spécial (@,!,&)")
         .required('Le mot de passe est obligatoire'),
+        passwordConfirmation : Yup.string()
+        .oneOf([Yup.ref('password')],"Le mot de passe n'est pas identique")
+        .required("Vous devez confirmer votre mot de passe"),
     }),
     handleSubmit : (values, {props}) => {
         const AccountIdentifiers = {
             email : values.email,
-            password : values.password
+            password : values.password,
+            passwordConfirmation : values.passwordConfirmation
         }
         props.submit(AccountIdentifiers);
     }

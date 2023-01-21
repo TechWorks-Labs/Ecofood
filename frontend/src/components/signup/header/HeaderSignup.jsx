@@ -37,10 +37,10 @@ const HeaderSignUp = (props) => (
                             <div className='h-[1px] w-full bg-slate-500 mr-3 ml-3'></div>
 
                             <div className='flex justify-center items-center h-full'>
-                                <div className='rounded-full w-[15px] h-[15px] bg-white flex justify-center items-center mr-2 p-3'>
-                                    <span className='font-bold text-md'>4</span>
+                                <div className={`rounded-full w-[20px] h-[20px] ${props.step === "validation" ? "bg-lime-500" : "bg-white"} flex justify-center items-center mr-2 p-3`}>
+                                    <span className={`font-bold text-md ${props.step === "validation" ? "text-white" : "text-black"}`}>3</span>
                                 </div>
-                                <h1 className="hidden lg:inline-flex text-white font-semibold text-md">Confirmation</h1>
+                                <h1 className={`hidden lg:inline-flex ${props.step === "validation" ? "text-lime-500" : "text-white"} font-semibold text-md`}>Validation</h1>
                             </div>
                         </div>
                     </div>
