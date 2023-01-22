@@ -8,28 +8,28 @@ export default function VerticalBar() {
         <span>Victorien Lambert</span>
       </div>
       <ul>
-        <li className=" my-2">
+        <li className="my-1">
           <a href="/">
             <div className="w-32 p-2 hover:bg-slate-100">
               Acceuil
             </div>
           </a>
         </li>
-        <li className="my-2">
+        <li className="my-1">
           <a href="/product" >
             <div className="w-32 p-2 hover:bg-slate-100">
               Produits
             </div>
           </a>
         </li>
-        <li className="my-2">
+        <li className="my-1">
           <a href="#" >
             <div className="w-32 p-2 hover:bg-slate-100">
               Commandes
             </div>
           </a>
         </li>
-        <li className="my-2">
+        <li className="my-1">
           <a href="#" >
             <div className="w-32 p-2 hover:bg-slate-100">
               Statistiques

@@ -7,7 +7,7 @@ class Site extends Component {
         return (
             <div className="">
                 <Routes>
-                    <Route path="/homepage" exact element={<HomePage />} />
+                    <Route path="/" exact element={<HomePage />} />
                     <Route path="*" element={<span>ERROR 404</span>} />   
                 </Routes>
             </div>
