@@ -29,7 +29,7 @@ function Header(props){
 
             <div className="flex flex-row items-center justify-center ">
                 <div className="flex flex-row justify-around items-center min-w-[180px] p-2 md:min-w-[110px]">
-                    <Link to ="/mon-compte/creer-mon-compte">
+                    <Link to ="/signin">
                         <img src={profil} className="w-[35px]"></img>
                     </Link>
                     <img src={shop} className="w-[35px]"></img>

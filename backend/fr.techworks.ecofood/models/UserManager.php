@@ -35,6 +35,16 @@
                 $stmp->execute();
                 $bdd->commit();
         }
-    }   
 
-    //@7913582Jl
+        public function getPasswordByEmail($email)
+        {
+            $req = 'SELECT * FROM user WHERE email = :email';
+            $bdd = $this->getBdd();
+            $smtp = $bdd->prepare($req);
+            $smtp->bindValue(":email", $email);
+            $smtp->execute();
+            $password = $smtp->fetchAll(\PDO::FETCH_ASSOC);
+            $smtp->closeCursor();
+            return $password;
+        }
+    }   
