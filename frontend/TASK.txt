@@ -1,0 +1,4 @@
+Ajouter la fonctionnalité profil menu déroulant dans le homepage en absolute en haut a droite si l'utilisateur à son token valide
+sinon reconduire l'utilisateur sur le login pour générer un nouveau token.
+
+menu panier lateral sur le coté droit -> inspiration intermarché

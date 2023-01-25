@@ -10,44 +10,45 @@ import { myUserContext } from '../../context/MyUserContextProvider';
 import { useContext } from 'react';
 
 export default function SignInPage (){
+    
 const {user, setUser} = useContext(myUserContext);
 
-const [token, setToken] = useState();
-
-const signIn = {
-
-}
-    const [login, setLogin] = useState(signIn);
-
-
-    // const decodeTokenForSendUserContext = (token) => {
-    //     console.log(token);
-    //     tokenSendToLocalStorage(token.data);
-    //     const decodeToken = jwt_decode(token.data);
-
-    // }
-
     const handleLoginForm = (values) => {
-        setLogin({
-            ...login, 
-            email : values.email,
-            password : values.password,
-         });
-         authService.login(login);
+         authService.login(values);
     }
 
+    const setUserIsTokenAuth = () => {
+        authService.validateTokenSignature();
+        
+        if(authService.TokenUserIsExist()){  
+          const token = authService.getTokenInSessionStorage();
+          const tokenDecoded = jwt_decode(token);
+          
+          setUser({
+            ...user,
+            id_user : token.id_user,
+            email : token.email,
+            exp : token.exp,
+            valid : true,
+          });
+        } else {
+            console.log('le token n\'existe pas');
+        }
+    }
 
     useEffect(()=>{
-        setUser(authService.getUser);
-    },[login, token])
+        // setUserIsTokenAuth();
+
+    },[])
 
     return(
             <>
                 <Header />
-                { user ? <div>Utilisateur connecté</div> 
-                :
-                <SignInForm submit={handleLoginForm} />
-                }
+                {user.valid ?
+                 <span>{user.email}</span> 
+                 :
+                 <SignInForm submit={handleLoginForm} />}
+               
                 <Footer css="absolute bottom-0" />
             </>
     )

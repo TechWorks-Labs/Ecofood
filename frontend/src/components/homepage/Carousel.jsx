@@ -49,7 +49,7 @@ export default function Carousel(props) {
         } else if (carouselRef.current.offsetWidth > 400 && carouselRef.current.offsetWidth < 768) {
           element.current.style.width = Math.ceil((carouselRef.current.offsetWidth) / 2) + "px";
         } else if (carouselRef.current.offsetWidth > 768) {
-          console.log("element.current.style.width"+element.current.style.width);
+          // console.log("element.current.style.width"+element.current.style.width);
           element.current.style.width = Math.ceil((carouselRef.current.offsetWidth) / 4) + "px";
         };
       });
