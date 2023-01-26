@@ -13,7 +13,7 @@ function MyUserContextProvider(props) {
         email : "",
         exp : "",
         name : "",
-        valid : null,
+        valid : false,
     });
 
     const setUserIsTokenAuth = () => {
@@ -28,7 +28,7 @@ function MyUserContextProvider(props) {
           email : tokenDecoded.email,
           exp : tokenDecoded.exp,
           lastname : tokenDecoded.lastname,
-          valid : true,
+          valid : tokenDecoded.valid,
         });
       } else {
           console.log('le token n\'existe pas');

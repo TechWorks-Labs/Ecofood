@@ -15,9 +15,9 @@ const login = (value) => {
     }
 }
 
-// const logout = () => {
-//     localStorage.removeItem("user");
-// }
+const logout = () => {
+    sessionStorage.removeItem("user");
+}
 
 const signup = (value) => {
     if(value.postal_code !== "" && value.postal_code !== undefined){
@@ -73,7 +73,8 @@ const authService = {
     signup,
     getTokenInSessionStorage,
     validateTokenSignature,
-    TokenUserIsExist
+    TokenUserIsExist,
+    logout
   };
 
 export default authService;
