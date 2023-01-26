@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ProductForm from '../components/ProductForm/ProductForm';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -15,22 +16,7 @@ export default function Products() {
   
   return (
     <div className="container ml-4">
-      <h1>Ajouter un produit</h1>
-
-      <form action="http://localhost:9000/product/create" id="product" method="POST" className="flex flex-col">
-        <label htmlFor="name">Nom</label>
-        <input className="border" type="text" id="name"/>
-        <label htmlFor="weight">Poids</label>
-        <input className="border" type="text" id="weight"/>
-        <label htmlFor="nutrition">Nutrition</label>
-        <input className="border" type="text" id="nutrition"/>
-        <label htmlFor="price">Prix</label>
-        <input className="border" type="text" id="price"/>
-        <label htmlFor="origin">Origine</label>
-        <input className="border" type="text" id="origin"/>
-        <button type="submit">Ajouter</button>
-      </form>
-
+      <ProductForm />
       <h1 className="py-4">Produits</h1>
       <table className="table-auto border border-black">
         <thead>

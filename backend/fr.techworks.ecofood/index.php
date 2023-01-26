@@ -11,7 +11,7 @@ require('Autoload/Autoloader.php');
 Autoloader::register();
 
 $api_controller = new ApiController();
-$product_controller = new ProductController;
+$product_controller = new ProductController();
 
 $url = explode('?', $_SERVER['REQUEST_URI'])[0];
 $data = explode('/', $url);
@@ -33,8 +33,10 @@ try{
                     break;
                     default: throw new Exception ("url doesn't exist"); 
                     case "create":
-                        $new_product = $_POST['product'];
-                        $product_controller->create($new_product);
+                        echo 'create item';
+                        // $new_product = $_POST['product'];
+                        // print_r($new_product);
+                        // // $product_controller->create($new_product);
                         break;
                 }
             case  "account" :
