@@ -3,22 +3,25 @@ import axios from 'axios';
 export const myContext = createContext();
 
 class MyContextProvider extends Component {
-    state = {
-      fruits: [],
-      vegetable:[],
-      meat:[]
-    };
+  hostname = 'https://ecofood.techworks.fr/api';
+  // hostname = 'http://localhost:9000';
+
+  state = {
+    fruits: [],
+    vegetable:[],
+    meat:[]
+  };
   
 loadDada = () => {
-  fetch('http://localhost:9000/product/fruit')
+  fetch(`${hostname}/product/fruit`)
   .then((response) => response.json())
   .then((data) => this.setState({ fruits: data })); 
 
-  fetch('http://localhost:9000/product/vegetable')
+  fetch(`${hostname}/product/vegetable`)
   .then((response) => response.json())
   .then((data) => this.setState({ vegetable: data })); 
 
-  fetch('http://localhost:9000/product/meat')
+  fetch(`${hostname}/product/meat`)
   .then((response) => response.json())
   .then((data) => this.setState({ meat: data })); 
 }

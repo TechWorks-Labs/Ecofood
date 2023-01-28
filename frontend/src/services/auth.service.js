@@ -1,9 +1,13 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { createPath } from "react-router-dom";
+
+const hostname = 'https://ecofood.techworks.fr/api';
+// const hostname = 'http://localhost:9000';
 
 const login = (value) => {
     if(Object.keys(value).length !== 0){
-        axios.post("http://localhost:9000/account/loginAuthentification",value)
+        axios.post(`${hostname}/account/loginAuthentification`,value)
         .then(token => {
             if(Boolean(token.data)){
                 sessionStorage.setItem("user",token.data)
@@ -21,7 +25,7 @@ const logout = () => {
 
 const signup = (value) => {
     if(value.postal_code !== "" && value.postal_code !== undefined){
-        axios.post("http://localhost:9000/account/sendUserIdentifiers", value)
+        axios.post(`${hostname}/account/sendUserIdentifiers`, value)
             .then(reponse => {
             console.log(reponse)
         })
@@ -53,7 +57,7 @@ const getTokenInSessionStorage = () => {
 const validateTokenSignature = async() => {
     const token = getTokenInSessionStorage();
     if(Boolean(token)){
-        return axios.post("http://localhost:9000/account/validateTokenSignature", {user: token})
+        return axios.post(`${hostname}/account/validateTokenSignature`, {user: token})
         .then(response => {
             //delete old session token;
             sessionStorage.clear();
