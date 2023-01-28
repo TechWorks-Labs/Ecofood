@@ -3,15 +3,53 @@ import { useState } from "react";
 import background from "/src/assets/images/background/backgroundEcofood.png";
 import profil from "/src/assets/images/icons/profil.svg";
 import shop from "/src/assets/images/icons/shopping-bag-header.svg";
+import close from "/src/assets/images/icons/close.svg";
+import emptypanier from "/src/assets/images/icons/emptypanier.png";
 import authService from "../../services/auth.service";
 import { useContext } from "react";
 import { myUserContext } from "../../context/MyUserContextProvider";
 import { Link } from 'react-router-dom';
+import { useRef } from "react";
+import { useEffect } from "react";
 
 function Header(props){
+    useEffect(()=>{
+ 
+        document.addEventListener("mousedown", handleOutPanierSlide);
+        document.addEventListener("mousedown", handleOutProfilIcon);
+    })
+
     const [hamburgerIsToggle, setHamburgerIsToggle] = useState(false);
     const [profilIsToggle, setProfilIsToggle] = useState(false);
+    const [panierIsToggle, setPanierIsToggle] = useState(false);
     const {user, setUser} = useContext(myUserContext);
+
+    const panierSlideRef = useRef();
+    const panierIconRef = useRef();
+    const profilRef = useRef();
+
+    const handleOutPanierSlide = event => {
+        if(!panierSlideRef.current.contains(event.target) && !panierIconRef.current.contains(event.target)) {
+            setPanierIsToggle(false);
+            document.body.style.overflow = "scroll";
+        }
+    }
+    
+    const handleOutProfilIcon = event => {
+        if(!profilRef.current.contains(event.target)) {        
+            setProfilIsToggle(false);
+            document.body.style.overflow = "scroll";
+        }
+    }
+
+    const panierToggle = (event) => {
+        if(panierIconRef.current.contains(event.target)){
+            setPanierIsToggle(!panierIsToggle);
+        }
+        // if(panierIsToggle==false && panierIconRef.current.contains(event.target)){
+        //     setPanierIsToggle(true);
+        // }
+    }
 
     function HamburgerToggle(){
         setHamburgerIsToggle(!hamburgerIsToggle);
@@ -39,14 +77,28 @@ function Header(props){
 
     return(
         <div className="w-full h-full">
+            // panier menu latéral
+            <div ref={panierSlideRef} className={panierIsToggle ?
+             "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 h-screen bg-slate-200 w-[300px] p-2 flex flex-col items-center"
+            :
+            "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 translate-x-[100%] h-screen bg-slate-200 w-[300px] p-2 flex flex-col items-center"
+            }>
+                <a href="" className="absolute right-0" onClick={panierToggle}>
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="black"/>
+                    </svg>
+                </a>
+                <img src={emptypanier} className="w-[180px] mt-[80px]"/>
+                <p className="text-2xl font-bold mt-4">Votre panier est vide</p>
+            </div>
             <div className="z-20 absolute top-0 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
                     <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2 relative">
                     
+                    // profil menu
                     <div className={profilIsToggle ? 
-
                     "transition-all duration-300 ease-in-out absolute z-20 min-w-[300px] w-[300px] h-[350px] top-[300px] right-[50%] translate-x-[50%] rounded-lg md:absolute md:top-[67px] md:right-0 md:translate-x-0 md:w-[280px] md:h-[300px] md:rounded-b-xl md:rounded-t-none bg-white border border-1 border-slate-300 shadow-md  flex flex-col justify-around items-center pt-3 pb-2 overflow-hidden"
                     : 
-                    "absolute z-20 top-[67px] border border-1 border-slate-300 shadow-md w-[280px] h-[0px] right-0 rounded-b-xl flex flex-col justify-around items-center p-0 overflow-hidden"
+                    "transition-all duration-200 ease-in absolute z-20 top-[67px] border border-1 border-slate-300 shadow-md w-[280px] h-[0px] right-0 rounded-b-xl flex flex-col justify-around items-center p-0 overflow-hidden"
                     }>
 
                         <p className="font-bold text-xl text-black underline underline-offset-4">Bonjour {user.lastname}</p>
@@ -77,14 +129,14 @@ function Header(props){
                         </ul>
             
 
-                        <div className="flex flex-row items-center justify-center ">
-                            <div className="flex flex-row justify-around items-center min-w-[180px] p-2 md:min-w-[110px]">
+                        <div  className="flex flex-row items-center justify-center ">
+                            <div  className="flex flex-row justify-around items-center min-w-[180px] p-2 md:min-w-[110px]">
                                 {!user.valid ? <Link to ="/signin">
-                                    <img src={profil} className="w-[35px]" onClick={ProfilToggle}></img>
+                                    <img ref={profilRef} src={profil} className="w-[35px]"  onClick={ProfilToggle}></img>
                                 </Link> 
                                 :
-                                <img src={profil} className="w-[35px]" onClick={ProfilToggle}></img>}
-                                <img src={shop} className="w-[35px]"></img>
+                                <img ref={profilRef} src={profil} className="w-[35px]" onClick={ProfilToggle}></img>}
+                                <img src={shop} onClick={panierToggle} ref={panierIconRef} className="w-[35px]"></img>
                                 <button onClick={HamburgerToggle} className="p-2 rounded-lg md:hidden">
                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
                                         <rect x="6" y="8" width="20" height="2"/>
@@ -104,11 +156,11 @@ function Header(props){
                         </ul>            
                     </div>
                 </div>
-                
-                {profilIsToggle ?
+
+                {profilIsToggle || panierIsToggle ?
                  <div className="transition-all duration-1000 ease-in-out absolute top-0 z-10 w-full h-screen bg-black opacity-80"></div>
                 :
-                <div className="transition-all duration-1000 ease-in-out  absolute top-0 z-10 w-full h-screen bg-black opacity-0"></div>
+                <div className="transition-all duration-1000 ease-in-out  absolute top-0 z-10 w-full h-screen bg-black opacity-0 hidden"></div>
                 }
         </div>
    
