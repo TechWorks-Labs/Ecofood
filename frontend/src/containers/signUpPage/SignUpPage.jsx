@@ -4,6 +4,7 @@ import HeaderSignUp from '../../components/signup/header/HeaderSignup';
 import AccountIdentifiers from '../../components/signup/accountIdentifiers/AccountIdentifiers';
 import UserInformation from '../../components/signup/userInformations/UserInformations';
 import Address from '../../components/signup/address/Address';
+import authService from '../../services/auth.service';
 import { createContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -31,7 +32,7 @@ export default function SignUpPage() {
     const [userAccount, setUserAccount] = useState(user);
 
     useEffect(()=>{
-        sendUserRegisteringToBdd(userAccount);
+        authService.signup(userAccount);
     },[userAccount])
 
     const handleUserInformationsSubmit = (value) => {
@@ -58,16 +59,6 @@ export default function SignUpPage() {
             });
     };
 
-    const sendUserRegisteringToBdd = (value) => {
-        if(value.postal_code !== "" && value.postal_code !== undefined){
-            axios.post("http://localhost:9000/account/sendUserIdentifiers", value)
-                .then(reponse => {
-                console.log(reponse)
-            })
-                .catch(error => {console.log(error)
-            })
-        }
-    }
 
         return (
             <myFormContext.Provider  value={{page, setPage, setUserAccount}}> 

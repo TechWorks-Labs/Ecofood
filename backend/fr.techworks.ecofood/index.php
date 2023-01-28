@@ -37,6 +37,8 @@ try{
                 switch($url[1]){
                     case "sendUserIdentifiers": $user_controller->setUserIdentifiers();
                     break;
+                    case "loginAuthentification": $user_controller->authenticateUser();
+                    break;
                     default: throw new Exception ("url doesn't exist"); 
                 }
         }

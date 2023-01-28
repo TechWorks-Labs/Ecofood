@@ -4,12 +4,12 @@ import Presentation from '../../components/homepage/Presentation';
 import CarouselsContainer from '../../components/homepage/CarouselsContainer';
 import Footer from '../../components/footer/footer';
 import MyApiContextProvider from '../../context/MyApiContextProvider';
+import authService from '../../services/auth.service';
+import { useContext } from 'react';
+import { myUserContext } from '../../context/MyUserContextProvider';
 
-class HomePage extends Component {
+export default function HomePage(){
 
-
-
-    render() {
         return (
              <MyApiContextProvider>
                 <Header />
@@ -18,7 +18,4 @@ class HomePage extends Component {
                 <Footer />
              </MyApiContextProvider> 
         )
-    }
 }
-
-export default HomePage;
