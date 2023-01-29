@@ -5,10 +5,11 @@ services:
     restart: always
     volumes:
       - ./fr.techworks.ecofood:/var/www/html
+      - ./fr.techworks.ecofood/vendor:/var/www/html/vendor
     ports:
       - 9000:80
     env_file:
-      - .envA
+      - .env
     environment:
       MARIADB_DATABASE: ${DB_DATABASE}
       MARIADB_USER: ${DB_USER}
