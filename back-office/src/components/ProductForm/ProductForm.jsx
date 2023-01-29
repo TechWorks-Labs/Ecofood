@@ -8,9 +8,17 @@ const validate = values => {
   if (!values.productName) {
     errors.productName = 'Requis';
   }
-
   if (!values.weight) {
     errors.weight = 'Requis';
+  }
+  if (!values.nutrition) {
+    errors.nutrition = 'Requis';
+  }
+  if (!values.price) {
+    errors.price = 'Requis';
+  }
+  if (!values.origin) {
+    errors.origin = 'Requis';
   }
 
   return errors;
@@ -48,7 +56,7 @@ export default function ProductForm() {
   return (
     <div>
       <h1>Ajouter un produit</h1>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="flex flex-col">
         { formik.errors.productName && formik.touched.productName ? <label className='text-red-600' htmlFor="productName">Nom requis</label> : <label htmlFor="productName">Nom</label> }
         <input
           id="productName"
@@ -71,7 +79,40 @@ export default function ProductForm() {
           className="pl-2"
         />
 
-        <button type="submit">Submit</button>
+        {formik.errors.nutrition && formik.touched.nutrition ? <label className='text-red-600' htmlFor="nutrition">Nutrition requis</label> : <label htmlFor="nutrition">Nutrition</label>}
+        <input
+          id="nutrition"
+          name="nutrition"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.nutrition}
+          className="pl-2"
+        />
+
+        {formik.errors.price && formik.touched.price ? <label className='text-red-600' htmlFor="price">Prix requis</label> : <label htmlFor="price">Prix</label>}
+        <input
+          id="price"
+          name="price"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.price}
+          className="pl-2"
+        />
+
+        {formik.errors.origin && formik.touched.origin ? <label className='text-red-600' htmlFor="origin">Origine requis</label> : <label htmlFor="origin">Origine</label>}
+        <input
+          id="origin"
+          name="origin"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.origin}
+          className="pl-2"
+        />
+
+        <button type="submit" className="self-start bg-green-400 hover:bg-green-500 p-2 mt-2 rounded-md">Valider</button>
       </form>
     </div>
   );
