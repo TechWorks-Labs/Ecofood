@@ -16,7 +16,7 @@ export default function VerticalBar() {
           </a>
         </li>
         <li className="my-1">
-          <a href="/product" >
+          <a href="/products" >
             <div className="w-32 p-2 hover:bg-slate-100">
               Produits
             </div>

@@ -10,7 +10,7 @@ function App() {
       <VerticalNavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/product" element={<Products />} />
+        <Route path="/products" element={<Products />} />
       </Routes>
     </div>
   )

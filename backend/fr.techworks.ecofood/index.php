@@ -33,10 +33,7 @@ try{
                     break;
                     default: throw new Exception ("url doesn't exist"); 
                     case "create":
-                        echo 'create item';
-                        // $new_product = $_POST['product'];
-                        // print_r($new_product);
-                        // // $product_controller->create($new_product);
+                        $product_controller->create();         
                         break;
                 }
             case  "account" :

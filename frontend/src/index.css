@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
 
 .carousel {
 display: flex;
@@ -22,23 +21,3 @@ overflow: hidden;
     list-style-type: none;
     transition: transform 0.6s ease-in-out;
 }
-=======
-input[type="radio"] {
-    /* remove standard background appearance */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    /* create custom radiobutton appearance */
-    width: 15px;
-    height: 15px;
-    /* background-color only for content */
-    border: 2px solid #bbbbbb;
-    background-color: white;
-    border-radius: 50%;
-  }
-  
-  /* appearance for checked radiobutton */
-  input[type="radio"]:checked {
-    background-color: #EC3434;
-  }
->>>>>>> 305a4a16de21b927128c052e90c44e2d1697d574

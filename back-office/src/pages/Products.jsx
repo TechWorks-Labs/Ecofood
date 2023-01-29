@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import ProductForm from '../components/ProductForm/ProductForm';
 
+const hostname = 'http://localhost:9000';
+// const hostname = 'https://ecofood.techworks.fr';
+
 export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch('https://ecofood.techworks.fr/product/fruit');
+      const response = await fetch(`${hostname}/product/fruit`);
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setProducts(data);
     }
     fetchProducts();
@@ -27,17 +30,19 @@ export default function Products() {
             <th>Origine</th>
           </tr>
         </thead>
-        {products.map((fruit) => 
-            <tr key={fruit.id} className="border border-black hover:bg-slate-100">
-              <td className="p-2">{ fruit.id_product }</td>
-              <td className="p-2">{ fruit.name }</td>
-              <td className="p-2">{ fruit.type }</td>
-              <td className="p-2">{ fruit.origin }</td>
-              <td className="p-2">
-                <img src={`https://ecofood.techworks.fr${fruit.image}`} alt="" className="w-12"/>
-              </td>
-            </tr>
-        )}
+        <tbody>
+          {products.map((fruit) => 
+              <tr key={fruit.id} className="border border-black hover:bg-slate-100">
+                <td className="p-2">{ fruit.id_product }</td>
+                <td className="p-2">{ fruit.name }</td>
+                <td className="p-2">{ fruit.type }</td>
+                <td className="p-2">{ fruit.origin }</td>
+                <td className="p-2">
+                  <img src={`${hostname}${fruit.image}`} alt="" className="w-12"/>
+                </td>
+              </tr>
+          )}
+        </tbody>
       </table>
     </div>
   )
