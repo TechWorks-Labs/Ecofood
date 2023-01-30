@@ -55,7 +55,6 @@ export default function ProductForm() {
 
   return (
     <div>
-      <h1>Ajouter un produit</h1>
       <form onSubmit={formik.handleSubmit} className="flex flex-col">
         { formik.errors.productName && formik.touched.productName ? <label className='text-red-600' htmlFor="productName">Nom requis</label> : <label htmlFor="productName">Nom</label> }
         <input
