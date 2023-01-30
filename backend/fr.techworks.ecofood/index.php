@@ -31,6 +31,9 @@ try{
                     break;
                     case "meat": $api_controller->getProductByType(3);
                     break;
+                    break;
+                    case "brand": $api_controller->getAllBrand();
+                    break;
                     default: throw new Exception ("url doesn't exist"); 
                 }
             case  "account" :
@@ -38,6 +41,8 @@ try{
                     case "sendUserIdentifiers": $user_controller->setUserIdentifiers();
                     break;
                     case "loginAuthentification": $user_controller->authenticateUser();
+                    break;
+                    case "validateTokenSignature": $user_controller->validateTokenSignature();
                     break;
                     default: throw new Exception ("url doesn't exist"); 
                 }

@@ -24,8 +24,10 @@ class Autoloader
         foreach($paths as $path) {
             $file = implode(DS, [$path, $class . '.php']);
             if (file_exists($file)) {
-                return require_once($file);
+                require_once($file);
+                return true;
             }
         }
+        return false;
     }
 }
