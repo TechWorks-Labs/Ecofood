@@ -6,7 +6,8 @@ class MyContextProvider extends Component {
     state = {
       fruits: [],
       vegetable:[],
-      meat:[]
+      meat:[],
+      brand: [],
     };
   
 loadDada = () => {
@@ -21,6 +22,10 @@ loadDada = () => {
   fetch('http://localhost:9000/product/meat')
   .then((response) => response.json())
   .then((data) => this.setState({ meat: data })); 
+
+  fetch('http://localhost:9000/product/brand')
+  .then((response) => response.json())
+  .then((data) => this.setState({ brand: data })); 
 }
 
 

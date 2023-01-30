@@ -5,6 +5,7 @@ import profil from "/src/assets/images/icons/profil.svg";
 import shop from "/src/assets/images/icons/shopping-bag-header.svg";
 import close from "/src/assets/images/icons/close.svg";
 import emptypanier from "/src/assets/images/icons/emptypanier.png";
+import rayon from "/src/assets/images/icons/hamburger.svg";
 import authService from "../../services/auth.service";
 import { useContext } from "react";
 import { myUserContext } from "../../context/MyUserContextProvider";
@@ -76,8 +77,7 @@ function Header(props){
     }
 
     return(
-        <div className="w-full h-full">
-            // panier menu latéral
+        <div className="w-full h-full sticky top-0 z-50">
             <div ref={panierSlideRef} className={panierIsToggle ?
              "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 h-screen bg-slate-200 w-[300px] p-2 flex flex-col items-center"
             :
@@ -91,10 +91,9 @@ function Header(props){
                 <img src={emptypanier} className="w-[180px] mt-[80px]"/>
                 <p className="text-2xl font-bold mt-4">Votre panier est vide</p>
             </div>
-            <div className="z-20 absolute top-0 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
+            <div className="z-20 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
                     <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2 relative">
                     
-                    // profil menu
                     <div className={profilIsToggle ? 
                     "transition-all duration-300 ease-in-out absolute z-20 min-w-[300px] w-[300px] h-[350px] top-[300px] right-[50%] translate-x-[50%] rounded-lg md:absolute md:top-[67px] md:right-0 md:translate-x-0 md:w-[280px] md:h-[300px] md:rounded-b-xl md:rounded-t-none bg-white border border-1 border-slate-300 shadow-md  flex flex-col justify-around items-center pt-3 pb-2 overflow-hidden"
                     : 
@@ -115,19 +114,25 @@ function Header(props){
 
                         <button onClick={handleLogout} className="flex justify-center items-center bg-[#EC3434] w-[140px] h-[40px] text-[0.9rem] p-2 rounded-lg text-white mt-5 text-lg">Déconnexion</button>
                     </div>
-                    
-                
-
-                        <div>
+                        <div className="flex flex-row items-center justify-center gap-x-4">
+                            <button className="bg-white w-[100px] h-[40px] p-1 rounded-2xl font-semibold text-md flex flex-row justify-center items-center gap-x-1">
+                            <img src={rayon} className="w-[25px] border border-[1.3px] bg-slate-800 border-white rounded-full p-1"/> 
+                                Rayons
+                            </button>
                             <h1 className="text-white font-semibold text-xl">ECOFOOD</h1>
                         </div>
 
                         <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-6 text-white">
-                            <li><a href='#'>FRUITS</a></li>
-                            <li><a href='#'>LEGUMES</a></li>
-                            <li><a href='#'>VIANDES</a></li>
+                            <li>
+                                <Link to="/rayon">FRUITS</Link>
+                            </li>
+                            <li>
+                                <Link to="/rayon">LEGUMES</Link>
+                            </li>
+                            <li>
+                                <Link to="/rayon">VIANDES</Link>
+                            </li>
                         </ul>
-            
 
                         <div  className="flex flex-row items-center justify-center ">
                             <div  className="flex flex-row justify-around items-center min-w-[180px] p-2 md:min-w-[110px]">
