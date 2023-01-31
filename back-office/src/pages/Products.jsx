@@ -61,12 +61,15 @@ export default function Products() {
               <td className="text-left">{fruit.type}</td>
               <td className="text-left">{fruit.origin}</td>
               <td className="text-left">{fruit.status == '0' ? 'Hors ligne' : 'En ligne'}</td>
-              
-              <td className="flex justify-center">
-                <Link to={`/product/${fruit.id_product}`}>
-                  <button className="m-2 p-2 rounded bg-green-400 hover:bg-green-500">Modifier</button>
-                </Link>
-                <button className="m-2 p-2 rounded bg-red-400 hover:bg-red-500">Supprimer</button>
+              <td>
+                <div className="flex justify-center items-center">
+                  <Link to={`/product/${fruit.id_product}`} className="mr-4">
+                    <img src="/src/assets/pen.svg" alt="Pen icon for editing product" className="w-8"/>
+                  </Link>
+                  <Link to={`#`}>
+                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-8"/>
+                  </Link>
+                </div>
               </td>
             </tr>
           )}
