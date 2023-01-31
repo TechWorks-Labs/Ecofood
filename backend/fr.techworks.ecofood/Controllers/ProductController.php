@@ -2,6 +2,8 @@
 
 namespace Controllers;
 
+use Models\ProductModel;
+
 class ProductController
 {
     public function setHeaders() {
@@ -16,10 +18,15 @@ class ProductController
 
         $filters = array(
             'productName' => FILTER_SANITIZE_ENCODED,
-            'weight' => FILTER_SANITIZE_ENCODED
+            'weight' => FILTER_SANITIZE_ENCODED,
+            'nutrition' => FILTER_SANITIZE_ENCODED,
+            'price' => FILTER_SANITIZE_ENCODED,
+            'origin' => FILTER_SANITIZE_ENCODED
         );
 
-        
-        print_r($_POST);
+        // $new_product = filter_var_array($_POST, $filter
+
+        $Product = new ProductModel();
+        $Product->create('product', $_POST);
     }
 }
