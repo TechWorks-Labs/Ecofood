@@ -5,6 +5,7 @@ services:
     restart: always
     volumes:
       - ./fr.techworks.ecofood:/var/www/html
+      - ./fr.techworks.ecofood/vendor:/var/www/html/vendor
     ports:
       - 9000:80
     env_file:

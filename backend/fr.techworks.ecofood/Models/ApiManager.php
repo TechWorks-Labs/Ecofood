@@ -24,4 +24,14 @@ class ApiManager extends Model
         $stmt->closeCursor();
         return $product;
     }
+
+    public function getBrandNames()
+    {
+        $req = "SELECT * FROM brand";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->execute();
+        $brand = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $brand;
+    }
 }

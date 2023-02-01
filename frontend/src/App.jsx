@@ -3,16 +3,15 @@ import { useState, Component } from 'react'
 import { BrowserRouter } from 'react-router-dom';
 import Site from './containers/Site';
 
-class App extends Component {
-  render() {
+export default function App() {
+
+
     return (
       <div className="App">
-         <BrowserRouter>
+         <BrowserRouter basename='/'>
           <Site />
          </BrowserRouter>
       </div>
     )
   }
-}
 
-export default App;
