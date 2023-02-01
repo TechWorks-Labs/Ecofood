@@ -11,20 +11,20 @@ class MyContextProvider extends Component {
       brand: [],
     };
 
-  hostname = 'https://ecofood.techworks.fr/api';
-  // hostname = 'http://localhost:9000';
+  // hostname = 'https://ecofood.techworks.fr/api';
+  hostname = 'http://localhost:9000';
 
   
 loadDada = () => {
-  fetch(`${hostname}/product/fruit`)
+  fetch(`${this.hostname}/product/fruit`)
   .then((response) => response.json())
   .then((data) => this.setState({ fruits: data })); 
 
-  fetch(`${hostname}/product/vegetable`)
+  fetch(`${this.hostname}/product/vegetable`)
   .then((response) => response.json())
   .then((data) => this.setState({ vegetable: data })); 
 
-  fetch(`${hostname}/product/meat`)
+  fetch(`${this.hostname}/product/meat`)
   .then((response) => response.json())
   .then((data) => this.setState({ meat: data })); 
 

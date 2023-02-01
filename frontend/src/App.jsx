@@ -8,7 +8,7 @@ export default function App() {
 
     return (
       <div className="App">
-         <BrowserRouter basename='/react/'>
+         <BrowserRouter basename='/'>
           <Site />
          </BrowserRouter>
       </div>
