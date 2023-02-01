@@ -12,7 +12,6 @@ export default function HomePage(){
 
         return (
              <MyApiContextProvider>
-                <Header />
                 <Presentation />
                 <CarouselsContainer />
                 <Footer />

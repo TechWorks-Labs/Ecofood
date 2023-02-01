@@ -47,4 +47,16 @@
             $smtp->closeCursor();
             return $password;
         }
+
+        public function getUser($email)
+        {
+            $req = 'SELECT * FROM user_data inner join user on user.id_user = user_data.id_user WHERE user.email = :email';
+            $bdd = $this->getBdd();
+            $smtp = $bdd->prepare($req);
+            $smtp->bindValue(":email", $email);
+            $smtp->execute();
+            $user = $smtp->fetchAll(\PDO::FETCH_ASSOC);
+            $smtp->closeCursor();
+            return $user;           
+        }
     }   

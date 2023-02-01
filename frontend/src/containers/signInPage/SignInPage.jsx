@@ -43,7 +43,6 @@ const {user, setUser} = useContext(myUserContext);
 
     return(
             <>
-                <Header />
                 {user.valid ?
                  <span>{user.email}</span> 
                  :
