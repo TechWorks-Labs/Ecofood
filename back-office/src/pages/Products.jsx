@@ -64,10 +64,10 @@ export default function Products() {
               <td>
                 <div className="flex justify-center items-center">
                   <Link to={`/product/${fruit.id_product}`} className="mr-4">
-                    <img src="/src/assets/pen.svg" alt="Pen icon for editing product" className="w-8"/>
+                    <img src="/src/assets/pen.svg" alt="Pen icon for editing product" className="w-7"/>
                   </Link>
                   <Link to={`#`}>
-                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-8"/>
+                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-7"/>
                   </Link>
                 </div>
               </td>
