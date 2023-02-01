@@ -2,7 +2,7 @@
 
 use Autoload\Autoloader;
 use Controllers\Api\ApiController;
-use Controllers\UserController;
+use Controllers\ProductController;
 
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('DS', DIRECTORY_SEPARATOR);
@@ -11,7 +11,7 @@ require('Autoload/Autoloader.php');
 Autoloader::register();
 
 $api_controller = new ApiController();
-$user_controller = new UserController();
+$product_controller = new ProductController();
 
 $url = explode('?', $_SERVER['REQUEST_URI'])[0];
 $data = explode('/', $url);
@@ -34,12 +34,13 @@ try{
                     case "brand": $api_controller->getAllBrand();
                     break;
                     default: throw new Exception ("url doesn't exist"); 
+                    case "create":
+                        $product_controller->create();         
+                        break;
                 }
             case  "account" :
                 switch($url[1]){
                     case "sendUserIdentifiers": $user_controller->setUserIdentifiers();
-                    break;
-                    case "loginAuthentification": $user_controller->authenticateUser();
                     break;
                     default: throw new Exception ("url doesn't exist"); 
                 }

@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    input {
+        border: 1px solid black;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+}
