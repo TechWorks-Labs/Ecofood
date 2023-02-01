@@ -43,9 +43,7 @@ export default function ProductForm() {
       const formData = valuesToFormdata(values);
       console.log(formData.getAll('productName'));
       await fetch(`${hostname}/product/create`, {
-        // headers: { 'Content-Type': 'multipart/form-data; boundary=something' },
         method: 'POST',
-        // body: JSON.stringify({ values }),
         body: formData,
       })
         .then(res => res.json())

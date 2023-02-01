@@ -39,13 +39,13 @@ try {
                     case "brand":
                         $api_controller->getAllBrand();
                         break;
-                    default:
-                        throw new Exception("url doesn't exist");
                     case "create":
                         $product_controller->create();
                         break;
+                    default:
+                        throw new Exception("url doesn't exist");
                 }
-            case  "account":
+            case "account":
                 switch ($url[1]) {
                     case "sendUserIdentifiers":
                         $user_controller->setUserIdentifiers();
@@ -56,6 +56,8 @@ try {
                     default:
                         throw new Exception("url doesn't exist");
                 }
+            default:
+                break;    
         }
     }
 } catch (Exception $e) {

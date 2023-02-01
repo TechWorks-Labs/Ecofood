@@ -35,13 +35,18 @@ abstract class Model
                 return ':' . $key;
             }, array_keys($data)));
 
-            self::setBdd();
+            $bdd = self::getBdd();
+            $bdd->beginTransaction();
 
-            $stmt = self::$pdo->prepare("INSERT INTO $table ($keys) VALUES ($placeholders)");
+            $req = "INSERT INTO $table ($keys) VALUES ($placeholders)";
+            $stmt = $bdd->prepare($req);
+
             foreach ($data as $key => $value) {
                 $stmt->bindValue(':' . $key, $value);
             }
+
             $stmt->execute();
+            $bdd->commit();
         } catch (PDOException $error) {
             echo $error->getMessage();
         }
