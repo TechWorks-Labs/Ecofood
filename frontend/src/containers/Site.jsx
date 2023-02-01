@@ -4,13 +4,17 @@ import HomePage from './homePage/HomePage';
 import SignUp from './signUpPage/SignUpPage';
 import SignIn from './signInPage/SignInPage';
 import MyUserContextProvider from '../context/MyUserContextProvider';
+import Header from '../components/header/Header';
+import Boutique from './boutique/Boutique';
 
 class Site extends Component {
     render() {
         return (
             <MyUserContextProvider>
+                <Header />
                 <Routes>
                     <Route path="/" exact element={<HomePage />} />
+                    <Route path="/boutique" exact element={<Boutique />} />
                     <Route path="/signin" exact element={<SignIn/>} />
                     <Route path="/mon-compte/creer-mon-compte" exact element={<SignUp />} />
                     <Route path="*" element={<span>ERROR 404</span>} />   

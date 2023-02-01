@@ -31,6 +31,8 @@ try{
                     break;
                     case "meat": $api_controller->getProductByType(3);
                     break;
+                    case "brand": $api_controller->getAllBrand();
+                    break;
                     default: throw new Exception ("url doesn't exist"); 
                 }
             case  "account" :
