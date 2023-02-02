@@ -50,22 +50,10 @@ class ProductController
         $Product->create('product', $new_product);
     }
 
-    public function getProductFromId($id)
+    public function getProductFromId(int $id)
     {
-        $req = 'SELECT 
-        p.name,
-        p.type,
-        p.brand,
-        p.image,
-        p.weight,
-        p.composition,
-        p.nutrition,
-        p.price,
-        p.sku,
-        p.origin,
-        p.status
-        FROM product
-        INNER JOIN product_type AS pt WHERE pt.id_type = p.type
-        WHERE email = :email';
+        $Product = new ProductModel();
+        $product = $Product->getProductFromId($id);
+        $Product->sendJSON($product);
     }
 }

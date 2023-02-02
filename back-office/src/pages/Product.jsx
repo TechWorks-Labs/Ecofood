@@ -7,14 +7,13 @@ const hostname = 'http://localhost:9000';
 
 export default function Product() {
   const { id } = useParams();
-  const { product, setProduct} = useState([]);
+  const [product, setProduct]  = useState([]);
 
   useEffect(() => {
     if (id) {
       async function fetchProduct() {
-        const response = await fetch(`${hostname}/product/?id=${id}`);
+        const response = await fetch(`${ hostname }/product/${id}`);
         const productData = await response.json();
-        // console.log(data);
         setProduct(productData);
       };
       fetchProduct();
@@ -23,8 +22,8 @@ export default function Product() {
   
   return (
     <div className="container ml-4">
-        <h1 className="py-4">Produit { id }</h1>
-        <ProductForm />
+      <h1 className="py-4">Produit { id }</h1>
+      <ProductForm productData={product} />
     </div>
   )
 }

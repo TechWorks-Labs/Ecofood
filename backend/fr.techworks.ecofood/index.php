@@ -42,6 +42,8 @@ try {
                     case "create":
                         $product_controller->create();
                         break;
+                    case is_numeric($url[1]):
+                        $product_controller->getProductFromId($url[1]);
                     default:
                         throw new Exception("url doesn't exist");
                 }
