@@ -51,16 +51,16 @@ export default function Products() {
         </thead>
         <tbody>
           {products.map((fruit) =>
-            <tr key={fruit.id_product} className="hover:bg-slate-100">
+            <tr key={fruit.id_product} className="hover:bg-slate-100 h-6">
               <td className="p-2">
-                <img src={`${hostname}${fruit.image}`} alt="" className="w-12" />
+                <img src={`${hostname}${ fruit.image }`} alt="" className="w-8" />
               </td>
 
-              <td className="text-left">{fruit.id_product}</td>
-              <td className="text-left">{fruit.name}</td>
-              <td className="text-left">{fruit.type}</td>
-              <td className="text-left">{fruit.origin}</td>
-              <td className="text-left">{fruit.status == '0' ? 'Hors ligne' : 'En ligne'}</td>
+              <td className="text-left">{ fruit.id_product }</td>
+              <td className="text-left">{ fruit.name }</td>
+              <td className="text-left">{ fruit.type }</td>
+              <td className="text-left">{ fruit.origin }</td>
+              <td className="text-left">{ fruit.status == '0' ? 'Hors ligne' : 'En ligne' }</td>
               <td>
                 <div className="flex justify-center items-center">
                   <Link to={`/product/${fruit.id_product}`} className="mr-4">

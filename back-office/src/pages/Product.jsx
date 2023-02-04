@@ -23,7 +23,7 @@ export default function Product() {
   return (
     <div className="container ml-4">
       <h1 className="py-4">Produit { id }</h1>
-      <ProductForm productData={product} />
+      { id ? <ProductForm productData={product} update={true} /> : <ProductForm update={false} /> }
     </div>
   )
 }

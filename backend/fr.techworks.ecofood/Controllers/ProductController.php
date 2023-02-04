@@ -45,7 +45,7 @@ class ProductController
         );
        
         $new_product = filter_var_array($data_product, $filters);
-
+        
         $Product = new ProductModel();
         $Product->create('product', $new_product);
     }

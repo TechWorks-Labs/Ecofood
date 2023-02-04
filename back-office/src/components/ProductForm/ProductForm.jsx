@@ -12,7 +12,7 @@ function valuesToFormdata(values) {
   return formData;
 }
 
-export default function ProductForm({ productData }) {
+export default function ProductForm({ productData, update }) {
   const [product, setproduct] = useState({});
 
   useEffect(() => {
@@ -42,12 +42,19 @@ export default function ProductForm({ productData }) {
       // })}
       onSubmit={async values => {
         const formData = valuesToFormdata(values);
-        await fetch(`${hostname}/product/create`, {
-          method: 'POST',
-          body: formData,
-        })
-          .then(res => res.json())
-          .then(json => console.log(json));
+        if (update) {
+
+        } else {
+          await fetch(`${hostname}/product/create`, {
+            method: 'POST',
+            body: formData,
+          })
+            .then(res => {
+              if (res.status === 200) {
+
+              }  
+            });
+        }
       }}
     >
       {formik => (
@@ -92,8 +99,10 @@ export default function ProductForm({ productData }) {
             {...formik.getFieldProps('origin')}
             className="pl-2"
           />
-
-          <button type="submit" className="self-start bg-green-400 hover:bg-green-500 p-2 mt-2 rounded-md">Valider</button>
+          {!update
+            ? <button type="submit" className="self-start bg-green-400 hover:bg-green-500 p-2 mt-2 rounded-md">Valider</button>
+            : <button type="submit" className="self-start bg-green-400 hover:bg-green-500 p-2 mt-2 rounded-md">Mettre à jour</button>
+          }
         </form>
       )}
     </Formik>
