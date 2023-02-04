@@ -29,7 +29,7 @@ export default function ProductList(){
     return(
         <div className="w-full mt-[50px] flex flex-row">
             <VerticalFilters />
-            <div className="grow grid grid-cols-4 gap-0">
+            <div className="grow grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4">
                 <ListProduct />
             </div>
         </div>

@@ -10,7 +10,7 @@ export default function FiltersContents(props){
 
     const MyFilterContent = () => {
         return FilterContent.map((filter, key)=> {
-            return <li key={key} className="list-none hover:bg-slate-400 p-1" onClick={(e)=>handleModifyStatus(e)}>Content {key}</li>
+            return <li data-id={props.content[key]} key={key} className="list-none hover:bg-slate-400 p-1" onClick={(e)=>handleModifyStatus(e)}>{props.content[key]}</li>
         })
     }
 

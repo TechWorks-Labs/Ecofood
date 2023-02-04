@@ -19,6 +19,7 @@ $url = explode('?', $_SERVER['REQUEST_URI'])[0];
 $data = explode('/', $url);
 $page = $data[1];
 
+
 try {
     if (empty($_GET['page'])) {
         throw new Exception("url doesn't exist");
@@ -39,11 +40,18 @@ try {
                     case "brand":
                         $api_controller->getAllBrand();
                         break;
-                    default:
-                        throw new Exception("url doesn't exist");
                     case "create":
                         $product_controller->create();
                         break;
+                    case "products":
+                        if (isset($url[2]) && isset($url[3])) {
+                            $api_controller->getProductsByTypeAndCount($url[2], $url[3]);
+                        } else {
+                            throw new Exception("url doesn't exist");
+                        }
+                        break;
+                    default:
+                    throw new Exception("url doesn't exist");
                 }
             case  "account":
                 switch ($url[1]) {

@@ -132,13 +132,13 @@ function Header(props){
 
                         <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-6 text-white">
                             <li>
-                                <Link to="/rayon">FRUITS</Link>
+                                <Link to="/boutique">FRUITS</Link>
                             </li>
                             <li>
-                                <Link to="/rayon">LEGUMES</Link>
+                                <Link to="/boutique">LEGUMES</Link>
                             </li>
                             <li>
-                                <Link to="/rayon">VIANDES</Link>
+                                <Link to="/boutique">VIANDES</Link>
                             </li>
                         </ul>
 

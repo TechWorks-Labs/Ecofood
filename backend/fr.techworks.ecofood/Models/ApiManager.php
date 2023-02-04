@@ -25,6 +25,17 @@ class ApiManager extends Model
         return $product;
     }
 
+    public function getProductsByTypeAndCount($type, $count)
+    {
+        $req = "SELECT * FROM product WHERE type = :idType LIMIT $count";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":idType", $type, \PDO::PARAM_INT);
+        $stmt->execute();
+        $products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $products;
+    }
+
     public function getBrandNames()
     {
         $req = "SELECT * FROM brand";

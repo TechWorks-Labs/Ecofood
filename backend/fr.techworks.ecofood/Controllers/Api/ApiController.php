@@ -25,7 +25,13 @@ class ApiController
         $product = $this->api_manager->getProductByType($value);
         Model::sendJSON($product);
     }
-    
+
+    public function getProductsByTypeAndCount($type, $count)
+    {
+        $products = $this->api_manager->getProductsByTypeAndCount($type, $count);
+        Model::sendJSON($products);
+    }
+
     public function getAllBrand()
     {
         $brand = $this->api_manager->getBrandNames();
