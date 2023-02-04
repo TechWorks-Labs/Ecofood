@@ -6,7 +6,8 @@ use Models\ProductModel;
 
 class ProductController
 {
-    public function setHeaders() {
+    public function setHeaders() 
+    {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
         header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
@@ -33,7 +34,7 @@ class ProductController
         $filters = array(
             'name' => FILTER_SANITIZE_ENCODED,
             'type' => FILTER_SANITIZE_NUMBER_INT,
-            'brand' => FILTER_SANITIZE_ENCODED,
+            'brand_id' => FILTER_SANITIZE_NUMBER_INT,
             'image' => FILTER_SANITIZE_URL,
             'weight' => FILTER_SANITIZE_NUMBER_INT,
             'composition' => FILTER_SANITIZE_ENCODED,
