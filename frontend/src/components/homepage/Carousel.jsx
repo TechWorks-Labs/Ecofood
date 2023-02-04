@@ -9,27 +9,54 @@ export default function Carousel(props) {
   const itemsRef = Array.from({ length: 16 }, (_, i) => useRef(null));
   const carouselRef = useRef(null);
   const [carouselWidth, setCarouselWidth] = useState(null);
+  const [isPositioned, setIsPositioned] = useState(false);
 
   const updateCarouselWidthOnResize = () => {
     setCarouselWidth(carouselRef.current.offsetWidth);
+    updateItemsWidth();
+  }
+
+  const updateItemsWidth = () => {
+    if(Boolean(props.itemsProduct.length) && Boolean(carouselRef.current.offsetWidth)){
+          let width = getItemsWidth();
+          itemsRef.forEach(element => {
+          element.current.style.width = width+"px";
+        });        
+    }};
+
+  const getItemsWidth = () => {
+    let width = null;
+    if (carouselRef.current.offsetWidth < 400) {
+       width = Math.ceil(carouselRef.current.offsetWidth);
+    } else if (carouselRef.current.offsetWidth > 400 && carouselRef.current.offsetWidth < 768) {
+       width = Math.ceil((carouselRef.current.offsetWidth) / 2);
+    } else if (carouselRef.current.offsetWidth > 768) {
+       width = Math.ceil((carouselRef.current.offsetWidth) / 4);
+    };
+
+    return width;
   }
 
   const MyItems = () => {
-    return props.itemsProduct.map((item, key) => {
-      if (key<8){
-        return (
-          <li key={key} className={`hidden md:inline-flex list-none transition-transform duration-150 ease-in-out border`} ref={itemsRef[key]}>
-            <Item origin={item.origin} weight={item.weight} name={item.name} />
-          </li>
-        )
-      } else {
-        return (
-          <li key={key} className={`list-none border transition-transform duration-150 ease-in-out`} ref={itemsRef[key]}>
-            <Item origin={item.origin} weight={item.weight} name={item.name} />
-          </li>
-        )
-      }
-    });
+    if(Boolean(props.itemsProduct.length) && Boolean(carouselRef.current.offsetWidth)){
+      // width renvoie bien une valeur numérique correct
+      let width = getItemsWidth();
+      return props.itemsProduct.map((item, key) => {
+        if (key<8){
+          return (
+            <li key={key} style={{width: `${width}px`}} className={`hidden md:inline-flex list-none transition-transform duration-150 ease-in-out border bg-red-400`} ref={itemsRef[key]}>
+              <Item origin={item.origin} weight={item.weight} name={item.name} />
+            </li>
+          )
+        } else {
+          return (
+            <li key={key} style={{width: `${width}px`}} className={`list-none border transition-transform duration-150 ease-in-out bg-red-400`} ref={itemsRef[key]}>
+              <Item origin={item.origin} weight={item.weight} name={item.name} />
+            </li>
+          )
+        }
+      });
+    }
   }
  
 
@@ -41,34 +68,20 @@ export default function Carousel(props) {
     });
   }
 
-  const updateItemsWidth = () => {
-    if(props.itemsProduct.length>0){
-      itemsRef.forEach(element => {
-        if (carouselRef.current.offsetWidth < 400) {
-          element.current.style.width = Math.ceil(carouselRef.current.offsetWidth) + "px";
-        } else if (carouselRef.current.offsetWidth > 400 && carouselRef.current.offsetWidth < 768) {
-          element.current.style.width = Math.ceil((carouselRef.current.offsetWidth) / 2) + "px";
-        } else if (carouselRef.current.offsetWidth > 768) {
-          // console.log("element.current.style.width"+element.current.style.width);
-          element.current.style.width = Math.ceil((carouselRef.current.offsetWidth) / 4) + "px";
-        };
-      });
-    }
-  }
-
 
   useEffect(() => {
     // initalisation carousel useState
     setCarouselWidth(carouselRef.current.offsetWidth);
     // initialisation items width
-    updateItemsWidth();
+    // updateItemsWidth();
     // update carousel useState
-
+    console.log(itemsRef[0].current);
     window.addEventListener('resize', updateCarouselWidthOnResize);
+    
     // stop eventListener after work
     
     return () => {
-      window.removeEventListener('resize', updateCarouselWidthOnResize);
+      // window.removeEventListener('resize', updateCarouselWidthOnResize);
     };
   })
 
@@ -83,7 +96,7 @@ export default function Carousel(props) {
           <img src={arrowRight} className="absolute self-center translate-y-[-50%] w-[40px]"></img>
         </button>
         <div className="flex flex-row relative z-0">
-        <MyItems />
+          <MyItems />
         </div>
       </div>
       <div className="hidden md:inline-flex carrousel_radio flex flex-row items-center justify-around w-[140px] mt-8">

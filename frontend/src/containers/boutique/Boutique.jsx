@@ -8,19 +8,17 @@ import { useEffect } from "react";
 export default function Boutique(){
 
     const {state} = useContext(myContext);
+    const {product} = useContext(myContext).products;
     const {getProducts} = useContext(myContext);
-    const products = state.products;
-    // getProducts(1,10);
-    // console.log(state);
+    
     useEffect(()=>{
-        getProducts(1,10);
-        console.log(products);
+        getProducts(1,16);
     }, []);
         return (
             <div className="max-w-7xl h-screen mx-auto">
                 <HeaderBanner />
                 <ProductCategoryBanner />
-                <ProductList products={products}/>
+                <ProductList products={product}/>
             </div>
         )
 }

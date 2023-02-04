@@ -5,7 +5,7 @@ import { myContext } from "../../context/MyApiContextProvider";
 
 export default function CarouselsContainer(props){
     const { state } = useContext(myContext);
-    console.log(state);
+
     const fruits = state.fruits;
     const vegetable = state.fruits;
     const meat = state.fruits;

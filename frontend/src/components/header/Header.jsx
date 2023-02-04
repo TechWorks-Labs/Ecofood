@@ -13,8 +13,11 @@ import { Link } from 'react-router-dom';
 import { useRef } from "react";
 import { useEffect } from "react";
 import SidebarRayons from "./sidebar/SidebarRayons";
+import { myContext } from "../../context/MyApiContextProvider";
 
 function Header(props){
+    const {getProducts} = useContext(myContext);
+
     useEffect(()=>{
  
         document.addEventListener("mousedown", handleOutPanierSlide);
@@ -127,17 +130,19 @@ function Header(props){
                             <img src={rayon} className="w-[25px] border border-[1.3px] bg-slate-800 border-white rounded-full p-1"/> 
                                 Rayons
                             </button>
-                            <h1 className="text-white font-semibold text-xl">ECOFOOD</h1>
+                            <Link to="/">
+                                <h1 className="text-white font-semibold text-xl">ECOFOOD</h1>
+                            </Link>
                         </div>
 
                         <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-6 text-white">
-                            <li>
+                            <li onClick={()=>getProducts(1,16)}>
                                 <Link to="/boutique">FRUITS</Link>
                             </li>
-                            <li>
+                            <li onClick={()=>getProducts(2,16)}>
                                 <Link to="/boutique">LEGUMES</Link>
                             </li>
-                            <li>
+                            <li onClick={()=>getProducts(3,16)}>
                                 <Link to="/boutique">VIANDES</Link>
                             </li>
                         </ul>

@@ -11,15 +11,20 @@ export const myContext = createContext();
       vegetables: [],
       meat: [],
       brand: [],
-      products: []
     });
 
-    const getProducts = async(type, count) => {
-      fetch(`${hostname}/product/products/${type}/${count}`)
-      .then(response => response.json())
-      .then(data => setState({products : data}))
-      .catch(error => console.log(error));
-    }
+    const [products, setProducts] = useState({
+      product: [],
+      maxProduct: 16
+    });
+
+    const getProducts = async (type, count) => {
+      await fetch(`${hostname}/product/products/${type}/${count}`)
+        .then(response => response.json())
+        .then(data => setProducts({...products, product: data}))
+        .catch(error => console.log(error));
+    };
+
 
     useEffect(() => {
 
@@ -44,12 +49,10 @@ export const myContext = createContext();
       };
       
       loadData();
-              
-      console.log(state);
     }, []);
 
     return(
-      <myContext.Provider value={{state, setState, getProducts}}>
+      <myContext.Provider value={{state, setState, getProducts, setProducts, products}}>
         {props.children}
       </myContext.Provider>
     )
