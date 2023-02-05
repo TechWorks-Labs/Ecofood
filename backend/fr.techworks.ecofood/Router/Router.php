@@ -20,6 +20,10 @@ class Router
         return $this->add($path, $callback, 'POST');
     }
 
+    public function delete($path, $callback) {
+        return $this->add($path, $callback, 'DELETE');
+    }
+
     private function add($path, $callback, $method) {
         $route = new Route($path, $callback);
         $this->routes[$method][] = $route;

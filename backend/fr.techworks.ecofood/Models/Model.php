@@ -52,6 +52,16 @@ abstract class Model
         }
     }
 
+    public static function delete(string $table, int $id)
+    {
+        $bdd = self::getBdd();
+        $bdd->beginTransaction();
+        $req = "DELETE FROM $table WHERE id = $id;";
+        $stmt = $bdd->prepare($req);
+        $stmt->execute();
+        $bdd->commit();
+    }
+
     public static function sendJSON($info)
     {
         header("Access-Control-Allow-Origin: *");

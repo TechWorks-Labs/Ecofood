@@ -10,18 +10,22 @@ export default function Products() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const response = await fetch(`${hostname}/product/fruit`);
+      const response = await fetch(`${hostname}/products`);
       const productsData = await response.json();
-      // console.log(data);
       setProducts(productsData);
     };
     fetchProducts();
   }, []);
 
+  async function deleteProduct(id) {
+    await fetch(`${hostname}/products/${id}`, { method: 'DELETE' })
+      .then(response => console.log(response));
+  };
+
   return (
     <div className="container ml-4">
       <h1 className="py-4">Produits</h1>
-      <div className="w-3/6 my-8 flex justify-between items-center">
+      <div className="lg:w-3/6 my-8 flex justify-between items-center">
         <div>
           <label htmlFor="limit">Limite</label>
           <input type="text" defaultValue={5} className="w-5 ml-2"/>
@@ -34,7 +38,7 @@ export default function Products() {
           <option value="">Hors ligne</option>
         </select>
         <input type="text" placeholder="Rechercher" />
-        <a href="/product/new"><button className="m-2 p-2 rounded bg-green-400 hover:bg-green-500 ml-auto">+ Nouveau produit</button></a>
+        <a href="/product/new"><button className="p-2 rounded bg-green-400 hover:bg-green-500 mx-auto">+ <span className="sm:hidden inline">Nouveau produit</span></button></a>
       </div>
 
       <table className="table-auto w-full">
@@ -67,7 +71,7 @@ export default function Products() {
                     <img src="/src/assets/pen.svg" alt="Pen icon for editing product" className="w-7"/>
                   </Link>
                   <Link to={`#`}>
-                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-7"/>
+                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-7" onClick={() => deleteProduct(fruit.id_product)}/>
                   </Link>
                 </div>
               </td>

@@ -57,4 +57,12 @@ class ProductController
         $product = $Product->getProductFromId($id);
         $Product->sendJSON($product);
     }
+
+    public function delete(int $id)
+    {
+        $this->setHeaders();
+        $Product = new ProductModel();
+        // $Product->delete('product', $id);
+        $Product->sendJSON(['id' => $id]);
+    }
 }

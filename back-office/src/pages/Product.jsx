@@ -12,7 +12,7 @@ export default function Product() {
   useEffect(() => {
     if (id) {
       async function fetchProduct() {
-        const response = await fetch(`${ hostname }/product/${id}`);
+        const response = await fetch(`${ hostname }/products/${id}`);
         const productData = await response.json();
         setProduct(productData);
       };
