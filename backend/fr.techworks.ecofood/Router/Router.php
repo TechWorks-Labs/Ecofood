@@ -28,10 +28,6 @@ class Router
 
     public function run()
     {
-        // echo '<pre>';
-        //     print_r($this->routes);
-        // echo '</pre>';
-
         if (!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
             throw new RouterException('REQUEST_METHOD does not exist');
         }
@@ -41,7 +37,7 @@ class Router
                 return $route->call();
             }
         }
-
+        
         throw new RouterException('No matching routes');
     }
 }

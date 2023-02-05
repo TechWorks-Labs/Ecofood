@@ -25,7 +25,7 @@ $router->post('/product', 'product.create');
 $router->get('/brands', 'api.getAllBrand')
     ->prefix('api');
 
-$router->post('/account/signup', 'user.setUserIdentifiers');
-$router->post('/account/login', 'user.loginAuthentification');
+$router->post('/account/sendUserIdentifiers', 'user.setUserIdentifiers');
+$router->post('/account/loginAuthentification', 'user.authenticateUser');
 
 $router->run();
