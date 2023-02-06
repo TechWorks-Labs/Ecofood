@@ -5,12 +5,14 @@ export default function FiltersContents(props){
     const handleModifyStatus = (event) => {
         event.target.classList.toggle("bg-slate-700")
         event.target.classList.toggle("text-white")
+        // console.log(event.target.dataset.id)
+        props.filter(event.target.dataset.id)
     }
 
 
     const MyFilterContent = () => {
         return FilterContent.map((filter, key)=> {
-            return <li data-id={props.content[key]} key={key} className="list-none hover:bg-slate-400 p-1" onClick={(e)=>handleModifyStatus(e)}>{props.content[key]}</li>
+            return <li data-id={props.content[key].id_brand} key={key} className="list-none hover:bg-slate-400 p-1" onClick={(e)=>handleModifyStatus(e)}>{props.content[key].name}</li>
         })
     }
 

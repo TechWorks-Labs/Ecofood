@@ -18,6 +18,11 @@ export const myContext = createContext();
       maxProduct: 16
     });
 
+    const [parameterFilter,setParameterFilter] = useState({
+      brand : [],
+      origin :[]
+    })
+
     const getProducts = async (type, count) => {
       await fetch(`${hostname}/product/products/${type}/${count}`)
         .then(response => response.json())
@@ -52,7 +57,7 @@ export const myContext = createContext();
     }, []);
 
     return(
-      <myContext.Provider value={{state, setState, getProducts, setProducts, products}}>
+      <myContext.Provider value={{state, setState, getProducts, setProducts, products, parameterFilter, setParameterFilter}}>
         {props.children}
       </myContext.Provider>
     )
