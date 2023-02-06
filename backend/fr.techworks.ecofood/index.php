@@ -8,10 +8,9 @@ define('DS', DIRECTORY_SEPARATOR);
 
 require('Autoload/Autoloader.php');
 Autoloader::register();
-
 $router = new Router($_GET['url']);
 
-$router->get('/', function() {echo 'index';});
+$router->get('/', function() {include '';});
 
 $router->get('/products/:id', 'product.getProductFromId')
     ->with('id', '[0-9]');

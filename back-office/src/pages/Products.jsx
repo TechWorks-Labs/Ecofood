@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import DeleteModal from '../components/Modal/DeleteModal';
 
 const hostname = 'http://localhost:9000';
 // const hostname = 'https://ecofood.techworks.fr';
@@ -7,6 +8,7 @@ const hostname = 'http://localhost:9000';
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -23,9 +25,10 @@ export default function Products() {
   };
 
   return (
-    <div className="container ml-4">
+    <div className="w-full px-8">
+      { isOpen && <DeleteModal setIsOpen={setIsOpen} /> }
       <h1 className="py-4">Produits</h1>
-      <div className="lg:w-3/6 my-8 flex justify-between items-center">
+      <div className="w-2/4 my-8 flex justify-between items-center">
         <div>
           <label htmlFor="limit">Limite</label>
           <input type="text" defaultValue={5} className="w-5 ml-2"/>
@@ -71,7 +74,7 @@ export default function Products() {
                     <img src="/src/assets/pen.svg" alt="Pen icon for editing product" className="w-7"/>
                   </Link>
                   <Link to={`#`}>
-                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-7" onClick={() => deleteProduct(fruit.id_product)}/>
+                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-7" onClick={() => setIsOpen(true)}/>
                   </Link>
                 </div>
               </td>
