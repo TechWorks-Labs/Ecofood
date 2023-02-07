@@ -1,12 +1,31 @@
 import { useRef } from "react";
+import { useContext } from "react";
+import { myContext } from "../../../../context/MyApiContextProvider";
 
 export default function ProductCategoryBanner(){
+
+    const {setParameterFilter} = useContext(myContext);
+    const {parameterFilter} = useContext(myContext);
     const containerCategoryRef = useRef();
+
+    const handleSetProductType = (pType) => {
+        setParameterFilter({
+            ...parameterFilter,
+            type: [pType],
+          });
+        console.log(parameterFilter);
+    }
+    
 
     const handleCategory = (event) => {
         const target = event.target;
+        if(target.classList[0] == "productCategoryIsNotToggle"){
+            handleSetProductType(event.target.dataset.type)
+        }
+
         target.classList.remove("productCategoryIsNotToggle");
         target.classList.add("productCategoryIsToggle");
+        
 
         Array.from(containerCategoryRef.current.children).forEach((child) => {
             if(child != target){

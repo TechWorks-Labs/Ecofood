@@ -16,7 +16,7 @@ export default function ProductList(props){
     }
 
     useEffect(()=>{
-        console.log(products)
+        // console.log(products)
     })
 
 

@@ -19,6 +19,7 @@ export const myContext = createContext();
     });
 
     const [parameterFilter,setParameterFilter] = useState({
+      type : [],
       brand : [],
       origin :[]
     })
@@ -50,7 +51,6 @@ export const myContext = createContext();
           meat, 
           brand 
         });
-
       };
       
       loadData();

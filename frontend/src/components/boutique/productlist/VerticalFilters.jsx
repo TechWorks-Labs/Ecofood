@@ -7,22 +7,28 @@ export default function VerticalFilters(){
     const {setParameterFilter} = useContext(myContext);
     const {parameterFilter} = useContext(myContext);
 
-    const setParameterFilterInComponent = (param) => {
-        if(!parameterFilter.brand.includes(param)){
-            setParameterFilter({
-                ...parameterFilter,
-                brand: [...parameterFilter.brand, ...param],
-              });
-            console.log(parameterFilter);
-        } else {console.log("existe deja")}
+    // const setBrandFilter = (param) => {
+    //     if(!parameterFilter.brand.includes(param)){
+    //         setParameterFilter({
+    //             ...parameterFilter,
+    //             brand: [...parameterFilter.brand, ...param],
+    //           });
+    //     } 
+    //     console.log(parameterFilter)
+    // }
 
-    }
-
+    // const setBrandFilter = (param) => {
+    //     setParameterFilter({
+    //         ...parameterFilter,
+    //         brand:4,
+    //         });
+    //     console.log(parameterFilter)
+    // }
+    
 
     return(
         <div className="w-[300px] border border-1 border-slate-300 flex flex-col">
-            <FilterContent title={"Marques"} content={brand} filter={setParameterFilterInComponent}/>
-            <FilterContent title={"Marques"} content={brand} filter={setParameterFilterInComponent}/>
+            <FilterContent title={"Marques"} content={brand} filter={parameterFilter} setFilter={setParameterFilter}/>
         </div>
     )
 }
