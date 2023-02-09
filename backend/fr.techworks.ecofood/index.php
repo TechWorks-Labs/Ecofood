@@ -8,10 +8,12 @@ define('DS', DIRECTORY_SEPARATOR);
 
 require('Autoload/Autoloader.php');
 Autoloader::register();
+// var_dump($_SERVER);
+// die();
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: OPTIONS, DELETE");
+    header("Access-Control-Allow-Methods: OPTIONS, DELETE, UPDATE");
     header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
     die();
 }

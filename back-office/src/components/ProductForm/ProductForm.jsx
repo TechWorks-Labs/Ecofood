@@ -23,7 +23,8 @@ export default function ProductForm({ productData, update }) {
         weight: productData.weight,
         nutrition: productData.nutrition,
         price: productData.price,
-        origin: productData.origin
+        origin: productData.origin,
+        id: productData.id_product
       });
     }
   }, [productData]);
@@ -44,17 +45,25 @@ export default function ProductForm({ productData, update }) {
       onSubmit={async values => {
         const formData = valuesToFormdata(values);
         if (update) {
-
+          await fetch(`${hostname}/product/${product.id}`, {
+            method: 'UPDATE', 
+            body: JSON.stringify(values)
+          })
+          .then(res => {
+            if (res.status == 200) {
+              window.location.href = `/product/${product.id}`;
+            }  
+          });
         } else {
           await fetch(`${hostname}/product/create`, {
             method: 'POST',
             body: formData,
           })
-            .then(res => {
-              if (res.status == 200) {
-                window.location.href = '/products';
-              }  
-            });
+          .then(res => {
+            if (res.status == 200) {
+              window.location.href = '/products';
+            }  
+          });
         }
       }}
     >

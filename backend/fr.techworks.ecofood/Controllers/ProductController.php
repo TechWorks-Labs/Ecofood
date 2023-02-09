@@ -62,7 +62,43 @@ class ProductController
     public function update(int $id)
     {
         $this->setHeaders();
-        $Product = new ProductModel();
+        $product = json_decode(file_get_contents('php://input'));
+
+        try {
+            $data_product = [
+                'name'          => $product->productName ?? null,
+                'type'          => $product->type ?? 1,
+                'brand_id'      => $product->brand ?? 1,
+                'image'         => $product->image ?? '/public/images/products/blank.jpg',
+                'weight'        => $product->weight ?? '0',
+                'composition'   => $product->composition ?? "",
+                'nutrition'     => $product->nutrition ?? "",
+                'price'         => $product->price ?? 0,
+                'sku'           => $product->sku ?? null,
+                'origin'        => $product->origin ?? 'france',
+                'status'        => $product->status ?? 0
+            ];
+    
+            $filters = array(
+                'name' => FILTER_SANITIZE_SPECIAL_CHARS,
+                'type' => FILTER_SANITIZE_NUMBER_INT,
+                'brand_id' => FILTER_SANITIZE_NUMBER_INT,
+                'image' => FILTER_SANITIZE_URL,
+                'weight' => FILTER_SANITIZE_NUMBER_INT,
+                'composition' => FILTER_SANITIZE_SPECIAL_CHARS,
+                'nutrition' => FILTER_SANITIZE_SPECIAL_CHARS,
+                'price' => FILTER_SANITIZE_NUMBER_INT,
+                'sku' => FILTER_SANITIZE_ENCODED,
+                'origin' => FILTER_SANITIZE_SPECIAL_CHARS,
+                'status' => FILTER_SANITIZE_NUMBER_INT
+            );
+    
+            $updated_product = filter_var_array($data_product, $filters);
+            $Product = new ProductModel();
+            $Product->update('product', $updated_product, ['id_product', $id]);
+        } catch (\Exception $error) {
+            echo $error->getMessage();
+        }
     }
 
     public function delete(int $id)

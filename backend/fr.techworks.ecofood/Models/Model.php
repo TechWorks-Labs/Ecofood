@@ -56,11 +56,39 @@ abstract class Model
     {
         try {
             $bdd = self::getBdd();
-            // $bdd->beginTransaction();
+            $bdd->beginTransaction();
             $req = "DELETE FROM $table WHERE id_product = $id;";
             $stmt = $bdd->prepare($req);
             $stmt->execute();
-            // $bdd->commit();
+            $bdd->commit();
+        } catch (\PDOException $error) {
+            echo $error->getMessage();
+        }
+    }
+
+    public function update(string $table, array $params, array $idParams)
+    {
+        try {
+            $fields = [];
+            $id = $idParams[0];
+            $idValue = $idParams[1];
+
+            foreach ($params as $key => $value) {
+                $field = $key . " = '" . $value . "'";
+                array_push($fields, $field);
+            }
+
+            $values = implode(', ', $fields);
+            
+            $bdd = self::getBdd();
+            $bdd->beginTransaction();
+
+            $sql = "UPDATE $table SET $values WHERE $id = $idValue";
+            $stmt = $bdd->prepare($sql);
+            
+            $stmt->execute();
+            $bdd->commit();
+
         } catch (\PDOException $error) {
             echo $error->getMessage();
         }
