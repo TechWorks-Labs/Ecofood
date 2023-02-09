@@ -16,33 +16,34 @@ class ProductController
     public function create()
     {
         $this->setHeaders();
+        $product = json_decode(file_get_contents('php://input'));
 
         $data_product = [
-            'name' => $_POST['productName'],
-            'type' => 1,
-            'brand' => null,
-            'image' => '/public/images/products/blank.jpg',
-            'weight' => 0,
-            'composition' => null,
-            'nutrition' => null,
-            'price' => 12,
-            'sku' => null,
-            'origin' => 'france',
-            'status' => 0
+            'name'          => $product->productName ?? null,
+            'type'          => $product->type ?? 1,
+            'brand_id'      => $product->brand ?? 1,
+            'image'         => $product->image ?? '/public/images/products/blank.jpg',
+            'weight'        => $product->weight ?? '0',
+            'composition'   => $product->composition ?? "",
+            'nutrition'     => $product->nutrition ?? "",
+            'price'         => $product->price ?? 0,
+            'sku'           => $product->sku ?? null,
+            'origin'        => $product->origin ?? 'france',
+            'status'        => $product->status ?? 0
         ];
 
         $filters = array(
-            'name' => FILTER_SANITIZE_ENCODED,
-            'type' => FILTER_SANITIZE_NUMBER_INT,
-            'brand_id' => FILTER_SANITIZE_NUMBER_INT,
-            'image' => FILTER_SANITIZE_URL,
-            'weight' => FILTER_SANITIZE_NUMBER_INT,
-            'composition' => FILTER_SANITIZE_ENCODED,
-            'nutrition' => FILTER_SANITIZE_ENCODED,
-            'price' => FILTER_SANITIZE_NUMBER_INT,
-            'sku' => FILTER_SANITIZE_ENCODED,
-            'origin' => FILTER_SANITIZE_ENCODED,
-            'status' => FILTER_SANITIZE_NUMBER_INT
+            'name'          => FILTER_SANITIZE_SPECIAL_CHARS,
+            'type'          => FILTER_SANITIZE_NUMBER_INT,
+            'brand_id'      => FILTER_SANITIZE_NUMBER_INT,
+            'image'         => FILTER_SANITIZE_URL,
+            'weight'        => FILTER_SANITIZE_NUMBER_INT,
+            'composition'   => FILTER_SANITIZE_SPECIAL_CHARS,
+            'nutrition'     => FILTER_SANITIZE_SPECIAL_CHARS,
+            'price'         => FILTER_SANITIZE_NUMBER_INT,
+            'sku'           => FILTER_SANITIZE_ENCODED,
+            'origin'        => FILTER_SANITIZE_SPECIAL_CHARS,
+            'status'        => FILTER_SANITIZE_NUMBER_INT
         );
        
         $new_product = filter_var_array($data_product, $filters);
@@ -80,17 +81,17 @@ class ProductController
             ];
     
             $filters = array(
-                'name' => FILTER_SANITIZE_SPECIAL_CHARS,
-                'type' => FILTER_SANITIZE_NUMBER_INT,
-                'brand_id' => FILTER_SANITIZE_NUMBER_INT,
-                'image' => FILTER_SANITIZE_URL,
-                'weight' => FILTER_SANITIZE_NUMBER_INT,
-                'composition' => FILTER_SANITIZE_SPECIAL_CHARS,
-                'nutrition' => FILTER_SANITIZE_SPECIAL_CHARS,
-                'price' => FILTER_SANITIZE_NUMBER_INT,
-                'sku' => FILTER_SANITIZE_ENCODED,
-                'origin' => FILTER_SANITIZE_SPECIAL_CHARS,
-                'status' => FILTER_SANITIZE_NUMBER_INT
+                'name'          => FILTER_SANITIZE_SPECIAL_CHARS,
+                'type'          => FILTER_SANITIZE_NUMBER_INT,
+                'brand_id'      => FILTER_SANITIZE_NUMBER_INT,
+                'image'         => FILTER_SANITIZE_URL,
+                'weight'        => FILTER_SANITIZE_NUMBER_INT,
+                'composition'   => FILTER_SANITIZE_SPECIAL_CHARS,
+                'nutrition'     => FILTER_SANITIZE_SPECIAL_CHARS,
+                'price'         => FILTER_SANITIZE_NUMBER_INT,
+                'sku'           => FILTER_SANITIZE_ENCODED,
+                'origin'        => FILTER_SANITIZE_SPECIAL_CHARS,
+                'status'        => FILTER_SANITIZE_NUMBER_INT
             );
     
             $updated_product = filter_var_array($data_product, $filters);

@@ -43,7 +43,6 @@ export default function ProductForm({ productData, update }) {
       //   productName: Yup.string().max(20, 'Must be 20 characters or less').required
       // })}
       onSubmit={async values => {
-        const formData = valuesToFormdata(values);
         if (update) {
           await fetch(`${hostname}/product/${product.id}`, {
             method: 'UPDATE', 
@@ -57,7 +56,7 @@ export default function ProductForm({ productData, update }) {
         } else {
           await fetch(`${hostname}/product/create`, {
             method: 'POST',
-            body: formData,
+            body: JSON.stringify(values)
           })
           .then(res => {
             if (res.status == 200) {
