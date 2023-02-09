@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function DeleteModal({ setIsOpen }) {
+export default function DeleteModal({ setIsOpen, callback, id }) {
   return (
     <div>
       <div className="w-full h-full fixed left-0 top-0 z-0 bg-black/50" onClick={() => setIsOpen(false)}></div>
@@ -8,7 +8,7 @@ export default function DeleteModal({ setIsOpen }) {
         <p>Êtes vous sûr de vouloir supprimer cet élément ?</p>
         <div className="flex justify-center pt-4">
           <button className="bg-red-400 hover:bg-red-500 w-32 p-2 m-2 rounded-sm" onClick={() => setIsOpen(false)}>Annuler</button>
-          <button className="bg-green-400 hover:bg-green-500 w-32 p-2 m-2 rounded-sm">Confirmer</button>
+          <button className="bg-green-400 hover:bg-green-500 w-32 p-2 m-2 rounded-sm" onClick={() => callback(id)}>Confirmer</button>
         </div>
       </div>
     </div>

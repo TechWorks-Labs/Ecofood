@@ -47,19 +47,23 @@ abstract class Model
 
             $stmt->execute();
             $bdd->commit();
-        } catch (PDOException $error) {
+        } catch (\PDOException $error) {
             echo $error->getMessage();
         }
     }
 
     public static function delete(string $table, int $id)
     {
-        $bdd = self::getBdd();
-        $bdd->beginTransaction();
-        $req = "DELETE FROM $table WHERE id = $id;";
-        $stmt = $bdd->prepare($req);
-        $stmt->execute();
-        $bdd->commit();
+        try {
+            $bdd = self::getBdd();
+            // $bdd->beginTransaction();
+            $req = "DELETE FROM $table WHERE id_product = $id;";
+            $stmt = $bdd->prepare($req);
+            $stmt->execute();
+            // $bdd->commit();
+        } catch (\PDOException $error) {
+            echo $error->getMessage();
+        }
     }
 
     public static function sendJSON($info)

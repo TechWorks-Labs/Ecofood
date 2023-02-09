@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Navigate } from "react-router-dom";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -50,8 +51,8 @@ export default function ProductForm({ productData, update }) {
             body: formData,
           })
             .then(res => {
-              if (res.status === 200) {
-
+              if (res.status == 200) {
+                window.location.href = '/products';
               }  
             });
         }

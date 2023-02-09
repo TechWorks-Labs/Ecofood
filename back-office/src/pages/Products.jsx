@@ -9,24 +9,42 @@ export default function Products() {
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [idProduct, setIdProduct] = useState(null);
+  const [productDeleted, setProductDeleted] = useState(null);
 
   useEffect(() => {
     async function fetchProducts() {
       const response = await fetch(`${hostname}/products`);
       const productsData = await response.json();
       setProducts(productsData);
+      setProductDeleted(false);
     };
     fetchProducts();
-  }, []);
+  }, [productDeleted]);
 
   async function deleteProduct(id) {
-    await fetch(`${hostname}/products/${id}`, { method: 'DELETE' })
-      .then(response => console.log(response));
+    try {
+      await fetch(`${hostname}/products/${id}`, { method: 'delete' })
+        .then(response => {
+          if (response.status == 200) {
+            setProductDeleted(true);
+            setIsOpen(false);
+          }
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  function deleteClick(id) {
+    setIdProduct(id);
+    setIsOpen(true);
+    console.log(idProduct);
+  }
 
   return (
     <div className="w-full px-8">
-      { isOpen && <DeleteModal setIsOpen={setIsOpen} /> }
+      { isOpen && <DeleteModal setIsOpen={setIsOpen} callback={deleteProduct} id={idProduct} /> }
       <h1 className="py-4">Produits</h1>
       <div className="w-2/4 my-8 flex justify-between items-center">
         <div>
@@ -74,7 +92,7 @@ export default function Products() {
                     <img src="/src/assets/pen.svg" alt="Pen icon for editing product" className="w-7"/>
                   </Link>
                   <Link to={`#`}>
-                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-7" onClick={() => setIsOpen(true)}/>
+                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-7" onClick={() => deleteClick(fruit.id_product)} /> 
                   </Link>
                 </div>
               </td>

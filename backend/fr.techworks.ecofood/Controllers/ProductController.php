@@ -53,16 +53,26 @@ class ProductController
 
     public function getProductFromId(int $id)
     {
+        $this->setHeaders();
         $Product = new ProductModel();
         $product = $Product->getProductFromId($id);
         $Product->sendJSON($product);
     }
 
-    public function delete(int $id)
+    public function update(int $id)
     {
         $this->setHeaders();
         $Product = new ProductModel();
-        // $Product->delete('product', $id);
-        $Product->sendJSON(['id' => $id]);
+    }
+
+    public function delete(int $id)
+    {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: OPTIONS, DELETE");
+        header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
+
+        $Product = new ProductModel();
+        $Product::delete('product', $id);
+        $Product->sendJSON(['product' => $Product]);
     }
 }
