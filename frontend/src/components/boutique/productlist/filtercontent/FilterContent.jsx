@@ -2,32 +2,35 @@ import { useMemo } from "react";
 export default function FiltersContents(props){
     const FilterContent = props.content;
 
-    const handleModifyStatus = (event) => {
+    const toggleClass = (event) => {
         event.target.classList.toggle("bg-slate-700");
         event.target.classList.toggle("text-white");
-        console.log("id "+event.target.dataset.id);
-        if(!props.filter.brand.includes(event.target.dataset.id)){
-            const newBrand = [...props.filter.brand, event.target.dataset.id];
-            props.setFilter({ ...props.filter, brand: newBrand });
+    };
+    
+    const addFilter = (event, { filter, setFilter }, filterName) => {
+        const newFilter = [...filter[filterName], event.target.dataset.id];
+        setFilter({ ...filter, [filterName]: newFilter });
+    };
+    
+    const removeFilter = (event, {filter, setFilter}, filterName) => {
+        const newFilter = filter[filterName].filter(element => element !== event.target.dataset.id);
+        setFilter({ ...filter, [filterName]: newFilter});
+    }
+
+    
+    const handleModifyStatus = (event) => {
+        toggleClass(event);
+        if (!props.filter[props.filterName].includes(event.target.dataset.id)) {
+            addFilter(event, props, props.filterName);
         } else {
-            // supprimer la clef déjà contenu dans le brand
-            const newBrand = [];
-            props.filter.brand.forEach(element => {
-                if(element !== event.target.dataset.id){
-                    console.log(element+' est différent, donc je push');
-                    newBrand.push(element);
-                    console.log("new "+newBrand);
-                }
-            });
-            props.setFilter({ ...props.filter, brand: newBrand });
+            removeFilter(event, props, props.filterName);
         }
-        console.log(props.filter)
     };
     
 
     const MyFilterContent = useMemo(() => {
         return FilterContent.map((filter, key)=> {
-            return <li data-id={props.content[key].id_brand} key={key} className="list-none hover:bg-slate-400 p-1" onClick={(e) => handleModifyStatus(e)}>{props.content[key].name}</li>
+            return <li data-id={props.content[key][props.filterId]} key={key} className="list-none hover:bg-slate-400 p-1" onClick={(e) => handleModifyStatus(e)}>{props.content[key].name}</li>
         });})
     
 

@@ -32,9 +32,30 @@ class ApiController
         Model::sendJSON($products);
     }
 
-    public function getAllBrand()
+    public function getBrandNames()
     {
         $brand = $this->api_manager->getBrandNames();
         Model::sendJSON($brand);
     }
+    
+    public function getOriginNames()
+    {
+        $origins = $this->api_manager->getOriginNames();
+        Model::sendJson($origins);
+    }
+
+    public function getProductsByFilter()
+    {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
+        $filter = json_decode(file_get_contents('php://input'), true);
+        $type = $filter['type'] ?? [];
+        $brand = $filter['brand'] ?? [];
+        $origin = $filter['origin'] ?? [];
+        $maxProduct = $filter['maxProduct'] ?? [];
+        $products = $this->api_manager->getProductsByFilter($type, $brand, $origin, $maxProduct);
+        Model::sendJSON($products);
+    }
+    
 }

@@ -11,6 +11,7 @@ export const myContext = createContext();
       vegetables: [],
       meat: [],
       brand: [],
+      origin: []
     });
 
     const [products, setProducts] = useState({
@@ -24,6 +25,7 @@ export const myContext = createContext();
       origin :[]
     })
 
+
     const getProducts = async (type, count) => {
       await fetch(`${hostname}/product/products/${type}/${count}`)
         .then(response => response.json())
@@ -31,6 +33,22 @@ export const myContext = createContext();
         .catch(error => console.log(error));
     };
 
+    const getProductsByFilter = async (parameterFilter, maxProduct) => {
+      const parameter = {...parameterFilter, maxProduct};
+      await fetch(`${hostname}/product/filter`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(parameter)
+      })
+        .then(response => response.json())
+        .then(data => setProducts({... products, product: data}))
+        .catch(error => console.error(error));
+    };
+    
+    
+    
 
     useEffect(() => {
 
@@ -43,18 +61,24 @@ export const myContext = createContext();
           .then(response => response.json());
         const brand = await fetch('http://localhost:9000/product/brand')
           .then(response => response.json());
+        const origin = await fetch(`${hostname}/product/origin`)
+          .then(response => response.json());
+        
     
         setState({ 
           ...state, 
           fruits, 
           vegetables, 
           meat, 
-          brand 
+          brand, 
+          origin
         });
       };
       
       loadData();
-    }, []);
+      getProductsByFilter(parameterFilter,products.maxProduct);
+
+    }, [parameterFilter]);
 
     return(
       <myContext.Provider value={{state, setState, getProducts, setProducts, products, parameterFilter, setParameterFilter}}>

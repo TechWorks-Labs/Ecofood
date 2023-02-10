@@ -38,7 +38,10 @@ try {
                         $api_controller->getProductByType(3);
                         break;
                     case "brand":
-                        $api_controller->getAllBrand();
+                        $api_controller->getBrandNames();
+                        break;
+                    case "origin":
+                        $api_controller->getOriginNames();
                         break;
                     case "create":
                         $product_controller->create();
@@ -49,6 +52,9 @@ try {
                         } else {
                             throw new Exception("url doesn't exist");
                         }
+                        break;
+                    case "filter":
+                            $api_controller->getProductsByFilter();
                         break;
                     default:
                     throw new Exception("url doesn't exist");

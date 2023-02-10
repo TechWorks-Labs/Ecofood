@@ -45,4 +45,45 @@ class ApiManager extends Model
         $stmt->closeCursor();
         return $brand;
     }
+
+    public function getOriginNames()
+    {
+        $req = 'SELECT * FROM origin_product';
+        $stmt= $this->getBdd()->prepare($req);
+        $stmt->execute();
+        $origins = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $origins;
+    }
+
+    public function getProductsByFilter($type, $brand, $origin, $maxProduct)
+    {
+        $req = 'SELECT * FROM product WHERE 1=1 ';
+
+        if (!empty($type)) {
+            $req .= 'AND type = :type ';
+        } else {
+            $req .= 'AND type = "1"';
+        }
+    
+        if (!empty($brand)) {
+            $req .= 'AND brand_id IN ('.implode(',', $brand).') ';
+        }
+        
+        if (!empty($origin)){
+            $req .= 'AND origin_id IN ('.implode(',', $origin).')';
+        }
+
+        $stmt = $this->getBdd()->prepare($req);
+        if (!empty($type)) {
+            $stmt->bindValue(':type', $type[0], \PDO::PARAM_INT);
+        }
+
+        $stmt->execute();
+        $products = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $products;
+    }
+    
+    
 }

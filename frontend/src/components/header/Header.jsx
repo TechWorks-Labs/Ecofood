@@ -16,7 +16,7 @@ import SidebarRayons from "./sidebar/SidebarRayons";
 import { myContext } from "../../context/MyApiContextProvider";
 
 function Header(props){
-    const {getProducts} = useContext(myContext);
+    const {setParameterFilter, parameterFilter} = useContext(myContext);
 
     useEffect(()=>{
  
@@ -136,13 +136,13 @@ function Header(props){
                         </div>
 
                         <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-6 text-white">
-                            <li onClick={()=>getProducts(1,16)}>
+                            <li onClick={()=>setParameterFilter({... parameterFilter, type : "1"})}>
                                 <Link to="/boutique">FRUITS</Link>
                             </li>
-                            <li onClick={()=>getProducts(2,16)}>
+                            <li onClick={()=>setParameterFilter({... parameterFilter, type : "2"})}>
                                 <Link to="/boutique">LEGUMES</Link>
                             </li>
-                            <li onClick={()=>getProducts(3,16)}>
+                            <li onClick={()=>setParameterFilter({... parameterFilter, type : "3"})}>
                                 <Link to="/boutique">VIANDES</Link>
                             </li>
                         </ul>
