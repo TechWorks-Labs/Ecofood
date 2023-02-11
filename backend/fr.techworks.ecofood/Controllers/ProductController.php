@@ -51,6 +51,8 @@ class ProductController
     public function create()
     {
         $this->setHeaders();
+        print_r($_FILES);
+        die();
         $product = json_decode(file_get_contents('php://input'));
         try {
             $new_product = $this->sanitizeInputData($product);
@@ -73,7 +75,8 @@ class ProductController
     {
         $this->setHeaders();
         $product = json_decode(file_get_contents('php://input'));
-
+        print_r($_FILES);
+        die();
         try {
             $updated_product = $this->sanitizeInputData($product);
             $Product = new ProductModel();
