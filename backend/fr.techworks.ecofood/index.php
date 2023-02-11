@@ -29,11 +29,10 @@ $router->get('/products/type/:type/count/:count', 'api.getProductsByTypeAndCount
     ->with('count', '[0-9]')
     ->prefix('api');
 
-$router->get('/products/origin', 'api.getOriginNames');
-$router->get('/products/brand', 'api.getBrandNames');
+$router->post('/products/filter', 'api.getProductsByFilter')
+    ->prefix('api');
 
-$router->get('/products/:id', 'product.getProductFromId')
-    ->with('id', '[0-9]');
+
 
 $router->get('/products', 'api.getAllProduct')
     ->prefix('api');
@@ -42,11 +41,14 @@ $router->get('/products/type/:type', 'api.getProductByType')
     ->prefix('api')
     ->with('type', '[0-9]');
 
-$router->get('/products/brands', 'api.getAllBrands')
+$router->get('/products/origin', 'api.getOriginNames')
     ->prefix('api');
 
-$router->post('/products/filter', 'api.getProductsByFilter')
+$router->get('/products/brands', 'api.getBrandNames')
     ->prefix('api');
+
+$router->get('/products/:id', 'product.getProductFromId')
+    ->with('id', '[0-9]');
 
 // BACK-OFFICE
 $router->post('/product/create', 'product.create');
