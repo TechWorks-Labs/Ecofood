@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 export default function VerticalBar() {
   return (
-    <div className="w-1/6 h-full p-4 border-r border-slate-200">
+    <div className="w-64 h-full p-4 border-r border-slate-200">
       <div className="flex items-center mb-8 px-2">
         <div className="w-10 h-10 mr-4 bg-red-500 rounded-full"></div>
         <span>Victorien Lambert</span>

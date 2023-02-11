@@ -7,6 +7,7 @@ class ProductModel extends Model
     public function getProductFromId($id)
     {
         $req = 'SELECT 
+        p.id_product,
         p.name,
         p.brand,
         p.image,
