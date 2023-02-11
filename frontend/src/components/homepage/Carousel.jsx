@@ -45,13 +45,13 @@ export default function Carousel(props) {
         if (key<8){
           return (
             <li key={key} style={{width: `${width}px`}} className={`hidden md:inline-flex list-none transition-transform duration-150 ease-in-out border bg-red-400`} ref={itemsRef[key]}>
-              <Item origin={item.origin} weight={item.weight} name={item.name} />
+              <Item origin={item.origin} weight={item.weight} name={item.name} id_product = {item.id_product} product={item}/>
             </li>
           )
         } else {
           return (
             <li key={key} style={{width: `${width}px`}} className={`list-none border transition-transform duration-150 ease-in-out bg-red-400`} ref={itemsRef[key]}>
-              <Item origin={item.origin} weight={item.weight} name={item.name} />
+              <Item origin={item.origin} weight={item.weight} name={item.name} id_product = {item.id_product} product={item}/>
             </li>
           )
         }
@@ -75,7 +75,6 @@ export default function Carousel(props) {
     // initialisation items width
     // updateItemsWidth();
     // update carousel useState
-    console.log(itemsRef[0].current);
     window.addEventListener('resize', updateCarouselWidthOnResize);
     
     // stop eventListener after work

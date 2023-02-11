@@ -22,9 +22,13 @@ export const myContext = createContext();
     const [parameterFilter,setParameterFilter] = useState({
       type : [],
       brand : [],
-      origin :[]
+      origin :[],
+      price : []
     })
 
+    const [shoppingList, setShoppingList] = useState({
+      products : []
+    })
 
     const getProducts = async (type, count) => {
       await fetch(`${hostname}/product/products/${type}/${count}`)
@@ -74,14 +78,13 @@ export const myContext = createContext();
           origin
         });
       };
-      
       loadData();
       getProductsByFilter(parameterFilter,products.maxProduct);
-
+      console.log(shoppingList);
     }, [parameterFilter]);
 
     return(
-      <myContext.Provider value={{state, setState, getProducts, setProducts, products, parameterFilter, setParameterFilter}}>
+      <myContext.Provider value={{state, setState, getProducts, setProducts, products, parameterFilter, setParameterFilter, shoppingList, setShoppingList}}>
         {props.children}
       </myContext.Provider>
     )

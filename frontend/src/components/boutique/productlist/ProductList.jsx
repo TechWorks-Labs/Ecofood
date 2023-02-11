@@ -20,7 +20,7 @@ export default function ProductList(props){
             if(key < products.maxProduct){
             return (
                 <div key={key} className="bg-blue-600 h-[350px] border border-1 border-slate-100">
-                        <Item origin={product.origin} weight={product.weight} name={product.name} />
+                    <Item origin={product.origin} weight={product.weight} name={product.name} product={product} id_product = {product.id_product}/>
                 </div>
                 )
             }
