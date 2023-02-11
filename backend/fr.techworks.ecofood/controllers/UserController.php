@@ -27,7 +27,6 @@ use Models\UserManager;
             $user = json_decode(file_get_contents('php://input'));
             $password = $user->password;
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            // echo json_encode($user->email);
             $this->user_controller->register($user, $passwordHash);
         }
 
@@ -37,7 +36,7 @@ use Models\UserManager;
             header("Access-Control-Allow-Origin: *");
             header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
             header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
-        
+            
             // Get login data from front-end
             $loginData = json_decode(file_get_contents('php://input'));
             $email = $loginData->email;

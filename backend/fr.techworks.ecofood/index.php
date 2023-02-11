@@ -1,9 +1,7 @@
 <?php
 
 use Autoload\Autoloader;
-use Controllers\Api\ApiController;
-use Controllers\ProductController;
-use Controllers\UserController;
+use Router\Router;
 
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('DS', DIRECTORY_SEPARATOR);
@@ -11,66 +9,39 @@ define('DS', DIRECTORY_SEPARATOR);
 require('Autoload/Autoloader.php');
 Autoloader::register();
 
-$api_controller = new ApiController();
-$product_controller = new ProductController();
-$user_controller = new UserController();
+$router = new Router($_GET['url']);
 
-$url = explode('?', $_SERVER['REQUEST_URI'])[0];
-$data = explode('/', $url);
-$page = $data[1];
+$router->get('/', function() {echo 'index';});
 
+$router->get('/products/type/:type/count/:count', 'api.getProductsByTypeAndCount')
+    ->with('type', '[0-9]')
+    ->with('count', '[0-9]')
+    ->prefix('api');
 
-try {
-    if (empty($_GET['page'])) {
-        throw new Exception("url doesn't exist");
-    } else {
-        $url = explode("/", filter_var($_GET['page'], FILTER_SANITIZE_URL));
-        switch ($url[0]) {
-            case "product":
-                switch ($url[1]) {
-                    case "fruit":
-                        $api_controller->getProductByType(1);
-                        break;
-                    case "vegetable":
-                        $api_controller->getProductByType(2);
-                        break;
-                    case "meat":
-                        $api_controller->getProductByType(3);
-                        break;
-                    case "brand":
-                        $api_controller->getBrandNames();
-                        break;
-                    case "origin":
-                        $api_controller->getOriginNames();
-                        break;
-                    case "create":
-                        $product_controller->create();
-                        break;
-                    case "products":
-                        if (isset($url[2]) && isset($url[3])) {
-                            $api_controller->getProductsByTypeAndCount($url[2], $url[3]);
-                        } else {
-                            throw new Exception("url doesn't exist");
-                        }
-                        break;
-                    case "filter":
-                            $api_controller->getProductsByFilter();
-                        break;
-                    default:
-                    throw new Exception("url doesn't exist");
-                }
-            case  "account":
-                switch ($url[1]) {
-                    case "sendUserIdentifiers":
-                        $user_controller->setUserIdentifiers();
-                        break;
-                    case "loginAuthentification":
-                        $user_controller->authenticateUser();
-                        break;
-                    default:
-                        throw new Exception("url doesn't exist");
-                }
-        }
-    }
-} catch (Exception $e) {
-}
+$router->get('/product/origin', 'api.getOriginNames');
+$router->get('/product/brand', 'api.getBrandNames');
+
+$router->get('/product/:id', 'product.getProductFromId')
+    ->with('id', '[0-9]');
+$router->get('/products', 'api.getAllProduct')
+    ->prefix('api');
+
+// fruit - 1, vege - 2, meat - 3
+$router->get('/product/type/:type', 'api.getProductByType')
+    ->with('type', '[0-9]')
+    ->prefix('api');
+
+$router->get('/brands', 'api.getAllBrand')
+    ->prefix('api');
+
+$router->get('/product/filter', 'api.getProductsByFilter')
+    ->prefix('api');
+
+// BACK-OFFICE
+$router->post('/product', 'product.create');
+
+// ACCOUNT
+$router->post('/account/sendUserIdentifiers', 'user.setUserIdentifiers');
+$router->post('/account/loginAuthentification', 'user.authenticateUser');
+
+$router->run();
