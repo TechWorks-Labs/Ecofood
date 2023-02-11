@@ -31,7 +31,7 @@ export const myContext = createContext();
     })
 
     const getProducts = async (type, count) => {
-      await fetch(`${hostname}/product/products/${type}/${count}`)
+      await fetch(`${hostname}/products/type/${type}/count/${count}`)
         .then(response => response.json())
         .then(data => setProducts({...products, product: data}))
         .catch(error => console.log(error));
@@ -39,7 +39,7 @@ export const myContext = createContext();
 
     const getProductsByFilter = async (parameterFilter, maxProduct) => {
       const parameter = {...parameterFilter, maxProduct};
-      await fetch(`${hostname}/product/filter`, {
+      await fetch(`${hostname}/products/filter`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -51,21 +51,18 @@ export const myContext = createContext();
         .catch(error => console.error(error));
     };
     
-    
-    
-
     useEffect(() => {
 
       const loadData = async() => {
-        const fruits = await fetch(`${hostname}/product/fruit`)
+        const fruits = await fetch(`${hostname}/products/type/1`)
           .then(response => response.json());
-        const vegetables = await fetch(`${hostname}/product/vegetable`)
+        const vegetables = await fetch(`${hostname}/products/type/2`)
           .then(response => response.json());
-        const meat = await fetch(`${hostname}/product/meat`)
+        const meat = await fetch(`${hostname}/products/type/3`)
           .then(response => response.json());
-        const brand = await fetch('http://localhost:9000/product/brand')
+        const brand = await fetch(`${hostname}/products/brand`)
           .then(response => response.json());
-        const origin = await fetch(`${hostname}/product/origin`)
+        const origin = await fetch(`${hostname}/products/origin`)
           .then(response => response.json());
         
     

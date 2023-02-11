@@ -11,37 +11,40 @@ Autoloader::register();
 
 $router = new Router($_GET['url']);
 
+// INDEX
 $router->get('/', function() {echo 'index';});
 
+// FILTRES
 $router->get('/products/type/:type/count/:count', 'api.getProductsByTypeAndCount')
     ->with('type', '[0-9]')
     ->with('count', '[0-9]')
     ->prefix('api');
 
-$router->get('/product/origin', 'api.getOriginNames');
-$router->get('/product/brand', 'api.getBrandNames');
+$router->get('/products/origin', 'api.getOriginNames');
+$router->get('/products/brand', 'api.getBrandNames');
 
-$router->get('/product/:id', 'product.getProductFromId')
+$router->get('/products/:id', 'product.getProductFromId')
     ->with('id', '[0-9]');
+
 $router->get('/products', 'api.getAllProduct')
     ->prefix('api');
 
-// fruit - 1, vege - 2, meat - 3
-$router->get('/product/type/:type', 'api.getProductByType')
-    ->with('type', '[0-9]')
+$router->get('/products/type/:type', 'api.getProductByType')
+    ->prefix('api')
+    ->with('type', '[0-9]');
+
+$router->get('/products/brands', 'api.getAllBrands')
     ->prefix('api');
 
-$router->get('/brands', 'api.getAllBrand')
-    ->prefix('api');
-
-$router->get('/product/filter', 'api.getProductsByFilter')
+$router->post('/products/filter', 'api.getProductsByFilter')
     ->prefix('api');
 
 // BACK-OFFICE
 $router->post('/product', 'product.create');
 
 // ACCOUNT
-$router->post('/account/sendUserIdentifiers', 'user.setUserIdentifiers');
-$router->post('/account/loginAuthentification', 'user.authenticateUser');
+$router->post('/account/register', 'user.setUserIdentifiers');
+$router->post('/account/login', 'user.authenticateUser');
+$router->post('/account/token/verification', 'user.validateTokenSignature');
 
 $router->run();

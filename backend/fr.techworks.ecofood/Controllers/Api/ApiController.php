@@ -20,9 +20,9 @@ class ApiController
         Model::sendJSON($all_products);
     }
 
-    public function getProductByType($value)
+    public function getProductByType($type)
     {
-        $product = $this->api_manager->getProductByType($value);
+        $product = $this->api_manager->getProductByType($type);
         Model::sendJSON($product);
     }
 
