@@ -59,7 +59,14 @@ export default function Products() {
           <option value="">Hors ligne</option>
         </select>
         <input type="text" placeholder="Rechercher" />
-        <a href="/product/new"><button className="p-2 rounded bg-green-400 hover:bg-green-500 mx-auto">+ <span className="sm:hidden inline">Nouveau produit</span></button></a>
+
+        <a href="/product/new">
+          <button className="p-2 rounded bg-green-400 hover:bg-green-500 mx-auto">
+            + 
+            <span className="hidden sm:inline-block">Nouveau produit</span>
+          </button>
+        </a>
+
       </div>
 
       <table className="table-auto w-full">

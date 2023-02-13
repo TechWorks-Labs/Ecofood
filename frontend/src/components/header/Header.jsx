@@ -12,8 +12,8 @@ import { myUserContext } from "../../context/MyUserContextProvider";
 import { Link } from 'react-router-dom';
 import { useRef } from "react";
 import { useEffect } from "react";
-import SidebarRayons from "./sidebar/SidebarRayons";
 import { myContext } from "../../context/MyApiContextProvider";
+import Panier from "../panier/Panier";
 
 function Header(props){
     const {setParameterFilter, parameterFilter} = useContext(myContext);
@@ -56,6 +56,7 @@ function Header(props){
     const panierToggle = (event) => {
         if(panierIconRef.current.contains(event.target)){
             setPanierIsToggle(!panierIsToggle);
+            document.body.style.overflow = "hidden";
         }
     }
 
@@ -66,7 +67,7 @@ function Header(props){
 
     function ProfilToggle(){
         if(user.valid){
-            if(profilIsToggle){
+            if(profilIsToggle && !panierIsToggle){
                 document.body.style.overflow = "scroll";
             } else {
                 document.body.style.overflow = "hidden";
@@ -85,23 +86,8 @@ function Header(props){
 
     return(
         <div className="w-full h-full sticky top-0 z-50">
-            {/* sidebar rayons in left side */}
-            <SidebarRayons isToggle={rayonsIsToggle}/>
+            <Panier panierSlideRef = {panierSlideRef} panierIsToggle = {panierIsToggle} panierToggle={panierToggle}/>
 
-            {/* sidebar panier in right side */}
-            <div ref={panierSlideRef} className={panierIsToggle ?
-             "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 h-screen bg-slate-200 w-[300px] p-2 flex flex-col items-center"
-            :
-            "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 translate-x-[100%] h-screen bg-slate-200 w-[300px] p-2 flex flex-col items-center"
-            }>
-                <a href="" className="absolute right-0" onClick={panierToggle}>
-                    <svg width="24" height="24" viewBox="0 0 24 24">
-                         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="black"/>
-                    </svg>
-                </a>
-                <img src={emptypanier} className="w-[180px] mt-[80px]"/>
-                <p className="text-2xl font-bold mt-4">Votre panier est vide</p>
-            </div>
             <div className="z-20 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
                     <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2 relative">
                     {/* vertical toolbar user detail */}
@@ -126,9 +112,9 @@ function Header(props){
                         <button onClick={handleLogout} className="flex justify-center items-center bg-[#EC3434] w-[140px] h-[40px] text-[0.9rem] p-2 rounded-lg text-white mt-5 text-lg">Déconnexion</button>
                     </div>
                         <div className="flex flex-row items-center justify-center gap-x-4">
-                            <button onClick={handleRayonIsToggle} className="bg-white w-[100px] h-[40px] p-1 rounded-2xl font-semibold text-md flex flex-row justify-center items-center gap-x-1">
+                            <button onClick={handleRayonIsToggle} className="bg-white w-[110px] h-[40px] p-1 rounded-2xl font-semibold text-md flex flex-row justify-center items-center gap-x-1">
                             <img src={rayon} className="w-[25px] border border-[1.3px] bg-slate-800 border-white rounded-full p-1"/> 
-                                Rayons
+                                Boutique
                             </button>
                             <Link to="/">
                                 <h1 className="text-white font-semibold text-xl">ECOFOOD</h1>

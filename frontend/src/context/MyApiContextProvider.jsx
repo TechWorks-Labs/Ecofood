@@ -26,9 +26,9 @@ export const myContext = createContext();
       price : []
     })
 
-    const [shoppingList, setShoppingList] = useState({
-      products : []
-    })
+    const [shoppingList, setShoppingList] = useState(
+      JSON.parse(localStorage.getItem("shoppingList")) || { products: [] }
+    );
 
     const getProducts = async (type, count) => {
       await fetch(`${hostname}/products/type/${type}/count/${count}`)
@@ -50,7 +50,11 @@ export const myContext = createContext();
         .then(data => setProducts({... products, product: data}))
         .catch(error => console.error(error));
     };
-    
+
+    useEffect(()=>{
+      localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+    },[shoppingList]);
+
     useEffect(() => {
 
       const loadData = async() => {
@@ -77,7 +81,6 @@ export const myContext = createContext();
       };
       loadData();
       getProductsByFilter(parameterFilter,products.maxProduct);
-      console.log(shoppingList);
     }, [parameterFilter]);
 
     return(
