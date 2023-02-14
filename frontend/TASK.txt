@@ -2,3 +2,6 @@ Ajouter la fonctionnalité profil menu déroulant dans le homepage en absolute e
 sinon reconduire l'utilisateur sur le login pour générer un nouveau token.
 
 menu panier lateral sur le coté droit -> inspiration intermarché
+
+Panier lateral = possibilité de mettre deux fois l'article dans le panier avec l'indication X2/x3 et tout supprimer d'un coup
+Sinon bug et suppresion de tous les articles du panier.

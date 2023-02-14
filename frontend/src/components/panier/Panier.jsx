@@ -29,13 +29,11 @@ export default function Panier(props){
     
     const handleRemoveProduct = (event) => {
         let removeID = parseInt(event.target.dataset.id);
-        console.log("remove id "+removeID);
         setShoppingList(prevProducts => {
             return {
                 products: prevProducts.products.filter(product => product.id_product !== removeID)
             }
         })
-      console.log(shoppingList);
     }
 
     useEffect(()=>{
@@ -43,17 +41,38 @@ export default function Panier(props){
         setItemsInPanier(numberItemsInPanier());
     });
 
+    const verifyDoubleProductInPanier = (panier) => {
+        let groupProducts = {};
+
+        panier.forEach((product) => {
+            if (product.id_product in groupProducts) {
+                groupProducts[product.id_product].quantity += 1;
+            } else {
+                groupProducts[product.id_product] = {
+                    ...product,
+                    quantity: 1
+                };
+            }
+        });   
+        return groupProducts;
+    }
+
     const Products = () => {
+        let groupProducts = verifyDoubleProductInPanier(panier.products);
+
         if(panier.products.length>0)
         {
-            return panier.products.map((product,key)=>{
+            return Object.values(groupProducts).map((product,key)=>{
                 return (
                 <div key={key} className="flex flex-col w-full border border-b-1 border-t-0 border-l-0 border-r-0 border-slate-300">
                     
                     <div className="flex flex-row items-center justify-center gap-x-3 p-5">
                         <img src={banane} className="w-[30px] h-[30px]"/>
                         <div className="flex flex-col">
-                            <span className="font-bold">{product.name}</span>
+                            <div className="flex flex-row items-center">
+                                { product.quantity>1 &&
+                                <span className="font-bold text-xl text-red-600">x{product.quantity}</span>}<span className="font-bold ml-1">{product.name}</span>
+                            </div>
                             <span>{product.description}</span>
                         </div>
                     </div>
@@ -88,15 +107,18 @@ export default function Panier(props){
                     </svg>
                 </a>
             </div>
-            <div className="overflow-auto">
+            <div className="grow overflow-auto">
 
                 {panier.products.length>0 ? 
                 <div className="p-3">
                     <span className="font-bold text-lg">Votre panier Ecofood est de {totalPricePanier} euros</span>
+                    <Products />
                 </div> 
                 :
-                <span>Votre panier est vide</span>}
-                <Products />
+                <div className="mt-10">
+                    <span className="font-semibold text-xl">Votre panier est vide</span>
+                </div>}
+                
             </div>
     
             <div className=" bg-slate-200 w-[275px] h-[150px] flex flex-col justify-center border border-slate-300 border-t-2 border-b-0 border-r-0 border-l-0">
