@@ -19,7 +19,7 @@ class ProductController
             'name'          => $product->productName ?? null,
             'type'          => $product->type ?? 1,
             'brand_id'      => $product->brand ?? 1,
-            'image'         => $product->image ?? '/public/images/products/blank.jpg',
+            'image'         => $product->image !== "" ? $product->image : '/public/images/products/blank.jpg',
             'weight'        => $product->weight ?? '0',
             'composition'   => $product->composition ?? "",
             'nutrition'     => $product->nutrition ?? "",
@@ -48,13 +48,44 @@ class ProductController
         return filter_var_array($data, $filters);
     }
 
+    private function validateAndUploadImageFile($image_file) 
+    {
+        $name = $image_file['name'];
+        $type_mime = $image_file['type'];
+        $size = $image_file['size'];
+        $temp_file = $image_file['tmp_name'];
+        $error_code = $image_file['error'];
+        $size_limit = 3145728;
+        $mime_approved = ['image/jpeg', 'image/png', 'image/webp'];
+        
+        switch ($error_code) {
+            case UPLOAD_ERR_OK:
+                if (in_array($type_mime, $mime_approved) && $size < $size_limit) {
+                    $unique_id = uniqid();
+                    $unique_name = $unique_id . "-" . $name;
+                    $image_url = "/public/images/products/$unique_name";
+                    $destination = "./public/images/products/$unique_name";
+
+                    move_uploaded_file($temp_file, $destination);
+                    return $image_url;
+                }
+        } 
+        return false;
+    }
+
     public function create()
     {
         $this->setHeaders();
-        print_r($_FILES);
-        die();
-        $product = json_decode(file_get_contents('php://input'));
+        $product = (object)$_POST;
+        
         try {
+            if (!empty($_FILES)) {
+                $image = $this->validateAndUploadImageFile($_FILES['image']);
+                if ($image) {
+                    $product->image = $image;
+                }
+            }
+
             $new_product = $this->sanitizeInputData($product);
             $Product = new ProductModel();
             $Product->create('product', $new_product);
@@ -71,13 +102,27 @@ class ProductController
         $Product->sendJSON($product);
     }
 
+    public function getAllProducts()
+    {
+        $this->setHeaders();
+        $Product = new ProductModel();
+        $products = $Product->getAllProducts();
+        $Product->sendJSON($products);
+    }
+
     public function update(int $id)
     {
         $this->setHeaders();
-        $product = json_decode(file_get_contents('php://input'));
-        print_r($_FILES);
-        die();
+        $product = (object)$_POST;
+        
         try {
+            if (!empty($_FILES)) {
+                $image = $this->validateAndUploadImageFile($_FILES['image']);
+                if ($image) {
+                    $product->image = $image;
+                }
+            }
+
             $updated_product = $this->sanitizeInputData($product);
             $Product = new ProductModel();
             $Product->update('product', $updated_product, ['id_product', $id]);

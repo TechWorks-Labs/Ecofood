@@ -61,22 +61,21 @@ export default function ProductForm({ productData, update }) {
         origin: Yup.string().required()
       })}
       onSubmit={async values => {
-        console.log(values);
         const formData = valuesToFormdata(values)
+        
         if (update) {
           await fetch(`${hostname}/product/${product.id}`, {
-            method: 'UPDATE', 
+            method: 'POST', 
             body: formData
           })
           .then(res => {
             if (res.status == 200) {
-              // window.location.href = `/product/${product.id}`;
+              window.location.href = `/product/${product.id}`;
             }  
           });
         } else {
           await fetch(`${hostname}/product/create`, {
             method: 'POST',
-            header: {},
             body: formData
           })
           .then(res => {
@@ -88,7 +87,7 @@ export default function ProductForm({ productData, update }) {
       }}
     >
       {formik => (
-        <form onSubmit={formik.handleSubmit} className="flex flex-col">
+        <form onSubmit={formik.handleSubmit} enctype="multipart/form-data" className="flex flex-col">
           {formik.errors.productName && formik.touched.productName ? <label className='text-red-600' htmlFor="productName">Nom requis</label> : <label htmlFor="productName">Nom</label>}
           <input
             id="productName"
@@ -154,7 +153,8 @@ export default function ProductForm({ productData, update }) {
             {...formik.getFieldProps('image')}
             className="pl-2"
           /> */}
-
+          <input type="hidden" name="MAX_FILE_SIZE" value="3145728" />
+          <label htmlFor="file">3mo maximum (jpeg/png,webp)</label>
           <input id="file" name="file" type="file" onChange={handleFileChange} />
 
           {!update

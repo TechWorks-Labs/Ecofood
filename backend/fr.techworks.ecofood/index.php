@@ -13,7 +13,7 @@ Autoloader::register();
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: OPTIONS, DELETE, UPDATE");
+    header("Access-Control-Allow-Methods: OPTIONS, DELETE, PUT");
     header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
     die();
 }
@@ -34,8 +34,7 @@ $router->post('/products/filter', 'api.getProductsByFilter')
 
 
 
-$router->get('/products', 'api.getAllProduct')
-    ->prefix('api');
+$router->get('/products', 'product.getAllProducts');
 
 $router->get('/products/type/:type', 'api.getProductByType')
     ->prefix('api')
@@ -52,7 +51,7 @@ $router->get('/products/:id', 'product.getProductFromId')
 
 // BACK-OFFICE
 $router->post('/product/create', 'product.create');
-$router->update('/product/:id', 'product.update')
+$router->post('/product/:id', 'product.update')
     ->with('id', '[0-9]');
 $router->delete('/products/:id', 'product.delete')
     ->with('id', '[0-9]');
