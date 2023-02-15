@@ -87,7 +87,12 @@ export default function ProductForm({ productData, update }) {
       }}
     >
       {formik => (
-        <form onSubmit={formik.handleSubmit} enctype="multipart/form-data" className="flex flex-col">
+        <form onSubmit={formik.handleSubmit} enctype="multipart/form-data" className="flex flex-col justify-between">
+            <input type="hidden" name="MAX_FILE_SIZE" value="3145728" />
+            <label htmlFor="file">3mo maximum (jpeg/png,webp)</label>
+            <input id="file" name="file" type="file" onChange={handleFileChange} />
+          
+          
           {formik.errors.productName && formik.touched.productName ? <label className='text-red-600' htmlFor="productName">Nom requis</label> : <label htmlFor="productName">Nom</label>}
           <input
             id="productName"
@@ -144,18 +149,6 @@ export default function ProductForm({ productData, update }) {
             {...formik.getFieldProps('origin')}
             className="pl-2"
           />
-
-          {/* {formik.errors.image && formik.touched.image ? <label className='text-red-600' htmlFor="image">Origine requis</label> : <label htmlFor="image">Image</label>}
-          <input
-            id="image"
-            name="image"
-            type="file"
-            {...formik.getFieldProps('image')}
-            className="pl-2"
-          /> */}
-          <input type="hidden" name="MAX_FILE_SIZE" value="3145728" />
-          <label htmlFor="file">3mo maximum (jpeg/png,webp)</label>
-          <input id="file" name="file" type="file" onChange={handleFileChange} />
 
           {!update
             ? <button type="submit" className="self-start bg-green-400 hover:bg-green-500 p-2 mt-2 rounded-md">Valider</button>

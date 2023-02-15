@@ -23,8 +23,10 @@ export default function Product() {
   return (
     <div className="container ml-4">
       <h1 className="py-4">Produit { id }</h1>
-        <img src={`${hostname}${ product.image }`} alt="" className="w-36" />
-        { id ? <ProductForm productData={product} update={true} /> : <ProductForm update={false} /> }
+        <div className="flex space-x-8 h-[500px]">
+          <img src={`${hostname}${ product.image }`} alt="" className="h-full self-center" />
+          { id ? <ProductForm productData={product} update={true} /> : <ProductForm update={false} /> }
+        </div>
     </div>
   )
 }

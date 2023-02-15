@@ -68,7 +68,7 @@ export default function Products() {
       </div>
 
       <table className="table-auto w-full ">
-        <thead className="border-b border-black sticky top-0 bg-white">
+        <thead className="border-b border-black sticky top-0 bg-white shadow-ysm">
           <tr>
             <th></th>
             <th className="text-left pb-3">ID</th>
