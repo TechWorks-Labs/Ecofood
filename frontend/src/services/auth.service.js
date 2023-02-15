@@ -7,7 +7,7 @@ const hostname = 'http://localhost:9000';
 
 const login = (value) => {
     if(Object.keys(value).length !== 0){
-        axios.post(`${hostname}/account/register`,value)
+        axios.post(`${hostname}/account/login`,value)
         .then(token => {
             if(Boolean(token.data)){
                 sessionStorage.setItem("user",token.data)
@@ -25,7 +25,7 @@ const logout = () => {
 
 const signup = (value) => {
     if(value.postal_code !== "" && value.postal_code !== undefined){
-        axios.post(`${hostname}/account/login`, value)
+        axios.post(`${hostname}/account/register`, value)
             .then(reponse => {
             console.log(reponse)
         })
