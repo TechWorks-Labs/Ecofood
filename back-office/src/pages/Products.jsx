@@ -46,7 +46,7 @@ export default function Products() {
     <div className="w-full px-8">
       { isOpen && <DeleteModal setIsOpen={setIsOpen} callback={deleteProduct} id={idProduct} /> }
       <h1 className="py-4">Produits</h1>
-      <div className="my-8 flex justify-between items-center">
+      <div className="xl:w-1/2 lg:w-full my-8 flex justify-between items-center">
         <div>
           <label htmlFor="limit">Limite</label>
           <input type="text" defaultValue={5} className="w-5 ml-2"/>
