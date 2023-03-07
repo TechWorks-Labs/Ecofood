@@ -16,73 +16,59 @@ import { myContext } from "../../context/MyApiContextProvider";
 import Panier from "../panier/Panier";
 import ProfilSidebar from "./profilSidebar/ProfilSideBar";
 
-function Header(props){
-    const {setParameterFilter, parameterFilter} = useContext(myContext);
+function Header(props) {
 
-    useEffect(()=>{
-        document.addEventListener("mousedown", handleOutPanierSlide);
-        document.addEventListener("mousedown", handleOutProfilIcon);
-    })
-
+    const { setParameterFilter, parameterFilter } = useContext(myContext);
+    const { user, setUser } = useContext(myUserContext);
+  
     const [hamburgerIsToggle, setHamburgerIsToggle] = useState(false);
     const [profilIsToggle, setProfilIsToggle] = useState(false);
     const [panierIsToggle, setPanierIsToggle] = useState(false);
-    const [rayonsIsToggle, setRayonIsToggle] = useState(false);
-    const {user, setUser} = useContext(myUserContext);
 
     const panierSlideRef = useRef();
     const panierIconRef = useRef();
-    const profilRef = useRef();
+    const profilIconRef = useRef();
+    const profilSidebarRef = useRef();
 
-    const handleRayonIsToggle = () => {
-        setRayonIsToggle(!rayonsIsToggle);
-        console.log(rayonsIsToggle)
+    const handleOutSidebars = (event) => {
+      // onclick inside the sidebars
+      if(profilSidebarRef.current.contains(event.target) || panierSlideRef.current.contains(event.target)){
+      } else {
+        // onclick outside the sidebars
+        setProfilIsToggle(false);
+        setPanierIsToggle(false);
+        document.body.style.overflow = "scroll"
+      }
     }
-
-    const handleOutPanierSlide = event => {
-        // if(!panierSlideRef.current.contains(event.target) && !panierIconRef.current.contains(event.target)) {
-        //     setPanierIsToggle(false);
-        //     document.body.style.overflow = "scroll";
-        // }
-    }
-    
-    const handleOutProfilIcon = event => {
-        // if(!profilRef.current.contains(event.target)) {        
-        //     setProfilIsToggle(false);
-        //     document.body.style.overflow = "scroll";
-        // }
-    }
-
+  
     const panierToggle = (event) => {
-        if(panierIconRef.current.contains(event.target)){
-            setPanierIsToggle(!panierIsToggle);
-            document.body.style.overflow = "hidden";
-        }
+        document.body.style.overflow = "hidden";
+        setPanierIsToggle(!panierIsToggle);
+    };
+  
+    function HamburgerToggle() {
+      setHamburgerIsToggle(!hamburgerIsToggle);
     }
-
-    function HamburgerToggle(){
-        setHamburgerIsToggle(!hamburgerIsToggle);
-        console.log(hamburgerIsToggle);
+  
+    function profilToggle() {
+      if(user.valid){
+        document.body.style.overflow = "hidden";
+        setProfilIsToggle(!profilIsToggle);
+      }
     }
-
-    function ProfilToggle(){
-        if(user.valid){
-            if(profilIsToggle && !panierIsToggle){
-                // document.body.style.overflow = "scroll";
-            } else {
-                // document.body.style.overflow = "hidden";
-            }
-            setProfilIsToggle(!profilIsToggle);
-        } else {
-            setUser({...user,
-            valid : false});
-        };
-    } 
-
+  
     const handleLogout = () => {
-        authService.logout();
-        // window.location.reload();
-    }
+      authService.logout();
+      window.location.reload();
+    };
+  
+    useEffect(() => {
+      document.addEventListener("mousedown", handleOutSidebars);
+  
+      return () => {
+        document.removeEventListener("mousedown", handleOutSidebars);
+      };
+    }, []);
 
     return(
         <div className="w-full h-full sticky top-0 z-50">
@@ -91,10 +77,10 @@ function Header(props){
             <div className="z-20 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
                     <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2 relative">
                     {/* vertical toolbar user detail */}
-                    <ProfilSidebar profilIsToggle={profilIsToggle} setProfilIsToggle={setProfilIsToggle} user={user} handleLogout={handleLogout}/> 
+                    <ProfilSidebar profilSidebarRef={profilSidebarRef} profilIsToggle={profilIsToggle} setProfilIsToggle={setProfilIsToggle} user={user} handleLogout={handleLogout}/> 
 
                         <div className="flex flex-row items-center justify-center gap-x-4">
-                            <button onClick={handleRayonIsToggle} className="bg-white w-[110px] h-[40px] p-1 rounded-2xl font-semibold text-md flex flex-row justify-center items-center gap-x-1">
+                            <button className="bg-white w-[110px] h-[40px] p-1 rounded-2xl font-semibold text-md flex flex-row justify-center items-center gap-x-1">
                             <img src={rayon} className="w-[25px] border border-[1.3px] bg-slate-800 border-white rounded-full p-1"/> 
                                 Boutique
                             </button>
@@ -118,10 +104,10 @@ function Header(props){
                         <div  className="flex flex-row items-center justify-center ">
                             <div  className="flex flex-row justify-around items-center min-w-[180px] p-2 md:min-w-[110px]">
                                 {!user.valid ? <Link to ="/signin">
-                                    <img ref={profilRef} src={profil} className="w-[35px]"  onClick={ProfilToggle}></img>
+                                    <img ref={profilIconRef} src={profil} className="w-[35px]"  onClick={profilToggle}></img>
                                 </Link> 
                                 :
-                                <img ref={profilRef} src={profil} className="w-[35px]" onClick={ProfilToggle}></img>}
+                                <img ref={profilIconRef} src={profil} className="w-[35px]" onClick={profilToggle}></img>}
                                 <img src={shop} onClick={panierToggle} ref={panierIconRef} className="w-[35px]"></img>
                                 <button onClick={HamburgerToggle} className="p-2 rounded-lg md:hidden">
                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="white">

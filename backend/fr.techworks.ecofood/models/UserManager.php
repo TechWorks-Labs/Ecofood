@@ -59,4 +59,51 @@
             $smtp->closeCursor();
             return $user;
         }
+
+        public function setUserInformations($user)
+        {
+            $req = 'UPDATE user_data SET 
+            civility = :civility,
+            name = :name,
+            lastname = :lastname,
+            birth_day = :birth_day,
+            birth_month = :birth_month,
+            birth_year = :birth_year
+            WHERE id_user = :id_user';
+
+            $bdd = $this->getBdd();
+            $smtp = $bdd->prepare($req);
+            $smtp->bindValue(":id_user", $user->userId);
+            $smtp->bindValue(":civility", $user->civility);
+            $smtp->bindValue(":name", $user->name);
+            $smtp->bindValue(":lastname", $user->lastname);
+            $smtp->bindValue(":birth_day", intval($user->day));
+            $smtp->bindValue(":birth_month", intval($user->month));
+            $smtp->bindValue(":birth_year", intval($user->year));
+            $smtp->execute();
+            $smtp->closeCursor();
+        }
+
+        public function setEmail($email, $id_user)
+        {
+            $req = 'UPDATE user SET email = :email WHERE id_user = :id_user';
+            $bdd = $this->getBdd();
+            $smtp = $bdd->prepare($req);
+            $smtp->bindValue(":email", $email);
+            $smtp->bindValue(":id_user", $id_user);
+            $smtp->execute();
+            $smtp->closeCursor();
+        }
+        
+        public function setPassword($password, $id_user)
+        {
+            $req = 'UPDATE user SET password = :password WHERE id_user = :id_user';
+            $bdd = $this->getBdd();
+            $smtp = $bdd->prepare($req);
+            $smtp->bindValue(":password", $password);
+            $smtp->bindValue(":id_user", $id_user);
+            $smtp->execute();
+            $smtp->closeCursor();
+        }
+
     }   

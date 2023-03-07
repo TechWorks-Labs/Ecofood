@@ -6,9 +6,8 @@ import SignIn from './signInPage/SignInPage';
 import MyUserContextProvider from '../context/MyUserContextProvider';
 import Header from '../components/header/Header';
 import Boutique from './boutique/Boutique';
-import Profil from './profil/Profil';
-import ProfilSidebar from '../components/header/profilSidebar/ProfilSideBar';
-
+import Account from './account/Account';
+import MyProfil from './account/myProfil/MyProfil';
 class Site extends Component {
     render() {
         return (
@@ -19,7 +18,8 @@ class Site extends Component {
                     <Route path="/boutique" exact element={<Boutique />} />
                     <Route path="/signin" exact element={<SignIn/>} />
                     <Route path="/mon-compte/creer-mon-compte" exact element={<SignUp />} />
-                    <Route path="/profil" exact element={<Profil />} />
+                    <Route path="/account" exact element={<Account />} />
+                    <Route path="/account/profil" exact element={<MyProfil />} />
                     <Route path="*" element={<span>ERROR 404</span>} />   
                 </Routes>
             </MyUserContextProvider>

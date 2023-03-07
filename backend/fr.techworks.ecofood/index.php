@@ -32,8 +32,6 @@ $router->get('/products/type/:type/count/:count', 'api.getProductsByTypeAndCount
 $router->post('/products/filter', 'api.getProductsByFilter')
     ->prefix('api');
 
-
-
 $router->get('/products', 'api.getAllProduct')
     ->prefix('api');
 
@@ -58,8 +56,10 @@ $router->delete('/products/:id', 'product.delete')
     ->with('id', '[0-9]');
 
 // ACCOUNT
+$router->get('/account/profil/:email','user.getUserDatasFromEmail')
+    ->with('email', '^[^\s@]+@[^\s@]+\.[^\s@]+$');
 $router->post('/account/register', 'user.setUserIdentifiers');
 $router->post('/account/login', 'user.authenticateUser');
 $router->post('/account/token/verification', 'user.validateTokenSignature');
-
+$router->post('/account/update/profil','user.updateUserAccount');
 $router->run();

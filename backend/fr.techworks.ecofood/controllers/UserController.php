@@ -18,11 +18,16 @@ use Models\UserManager;
             $this->user_controller = new UserManager();
         }
 
-        public function setUserIdentifiers()
+        public function CorsHeader()
         {
             header("Access-Control-Allow-Origin: *");
             header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
             header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
+        }
+
+        public function setUserIdentifiers()
+        {
+            $this->CorsHeader();
 
             $user = json_decode(file_get_contents('php://input'));
             $password = $user->password;
@@ -33,9 +38,7 @@ use Models\UserManager;
         public function authenticateUser()
         {
             // Set CORS headers
-            header("Access-Control-Allow-Origin: *");
-            header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
-            header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
+            $this->CorsHeader();
             
             // Get login data from front-end
             $loginData = json_decode(file_get_contents('php://input'));
@@ -73,9 +76,7 @@ use Models\UserManager;
         public function validateTokenSignature () 
         {
             try {
-                header("Access-Control-Allow-Origin: *");
-                header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
-                header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
+                $this->CorsHeader();
     
                 // token decode for the verification timestamp
                 $user = json_decode(file_get_contents('php://input'));
@@ -101,7 +102,61 @@ use Models\UserManager;
                     // Code to handle the exception
                     http_response_code(400);
                 }
+        }
 
+        public function getUserDatasFromEmail($email)
+        {
+            $this->CorsHeader();
+            $user = $this->user_controller->getUser($email);
+            echo json_encode($user);
+        }
+
+        public function updateUserAccount()
+        {
+            $this->CorsHeader();
+            // récupère les données du formulaire
+            $user = json_decode(file_get_contents('php://input'));
+            $email = $user->email;
+            $password = $user->password;
+            $user_id = $user->userId;
+
+            // update user password
+            $this->setUserPassword($password, $user_id);
+            // update user email
+            $this->setEmailFromUserID($email, $user_id);
+            // update informations
+            $this->user_controller->setUserInformations($user);
+        }
+
+        public function setUserPassword($password, $id_user){
+            if($this->isPasswordNotEmpty($password)){
+                $passwordHash = $this->passwordHash($password);
+                $this->user_controller->setPassword($passwordHash, $id_user);
+            }
+            return;
+        }
+
+        public function isPasswordNotEmpty($password)
+        {
+           return (isset($password) and !empty($password)) ? true : false;
+        }
+
+        public function isEmailNotEmpty($email)
+        {
+            return (isset($email) and !empty($email)) ? true : false;
+        }
+
+        public function setEmailFromUserID($email, $user_id)
+        {
+            if($this->isEmailNotEmpty($email)){
+                $this->user_controller->setEmail($email, $user_id);
+            } 
+            return;
+        }
+
+        public function passwordHash($password)
+        {
+            return password_hash($password, PASSWORD_DEFAULT);
         }
 
     }
