@@ -5,12 +5,15 @@ import { useEffect } from 'react';
 import MyContextProvider from './MyApiContextProvider';
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
+import { AES } from 'crypto-js';
+import CryptoJS from 'crypto-js';
+
 
 export const myUserContext = createContext();
 
 function MyUserContextProvider(props) {
-  const hostname = 'http://localhost:9000';
 
+  const hostname = 'http://localhost:9000';
   const [profil, setProfil] = useState({
     // civility: "",
     // name: "",
@@ -55,27 +58,46 @@ function MyUserContextProvider(props) {
   const getUserDatas = (email) => {
     axios.get(`${hostname}/account/profil/${email}`)
       .then(response => {
-        setProfil({
-          ...profil,
-          civility: response.data[0].civility,
-          name: response.data[0].name,
-          lastname: response.data[0].lastname,
-          day: response.data[0].birth_day,
-          month: response.data[0].birth_month,
-          year: response.data[0].birth_year,
-          email: response.data[0].email
-        })
-        console.log(response)
+        const profil = response.data[0];
+        localStorageSetEncryptAESItem('profil', profil);
       })
       .catch(error => { console.log(error) });
   }
+  
+  const localStorageSetEncryptAESItem = ( key, value ) => {
+    const hasEncrypt = JSON.stringify(value);
+    console.log(hasEncrypt);
+    const secretKey = (import.meta.env.VITE_REACT_APP_SECURE_LOCAL_STORAGE_HASH_KEY);
+    const encrypt = AES.encrypt(hasEncrypt, secretKey).toString();
+    localStorage.setItem(key, encrypt);
+  }
+
+  const localStorageGetEncryptAESItem = (key) => {
+    const toDecrypt = localStorage.getItem(key);
+    if (toDecrypt){
+      const bytes = AES.decrypt(toDecrypt, import.meta.env.VITE_REACT_APP_SECURE_LOCAL_STORAGE_HASH_KEY);
+      const decrypt = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      return decrypt;
+    }
+  }
+
+  useEffect(() => {
+    // setUser(localStorageGetEncryptAESItem('user'));
+    // setProfil(localStorageGetEncryptAESItem('profil'));
+    setUser(localStorageGetEncryptAESItem('user'));
+    setProfil(localStorageGetEncryptAESItem('profil'));
+    // localStorageSetEncryptAESItem('profil', profil);
+    // localStorageGetEncryptAESItem('profil');
+    // localStorage.setItem('user', JSON.stringify(user));
+    // localStorage.setItem('profil', JSON.stringify(profil));
+  }, []);
 
   useEffect(() => {
     setUserIsTokenAuth();
   }, [])
 
   return (
-    <myUserContext.Provider value={{ user, setUser, profil, setProfil, getUserDatas }}>
+    <myUserContext.Provider value={{ user, setUser, profil, setProfil, getUserDatas, setUserIsTokenAuth, localStorageSetEncryptAESItem}}>
       <MyContextProvider>
         {props.children}
       </MyContextProvider>

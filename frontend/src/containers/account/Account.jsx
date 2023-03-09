@@ -10,8 +10,8 @@ export default function Account(){
             <h2 className="font-bold text-4xl text-slate-600">Mon espace personnel</h2>
             <div className="w-[800px] mx-auto">
                 <div className="grow grid grid-cols-3 gap-3 mt-10">
-                    <ProfilCard image={profilSVG} name="Mon profil" path="/account/profil"/>
-                    <ProfilCard image={mapFilled} name="Mon addresse"/>
+                    <ProfilCard image={profilSVG} name="Mon profil" path="/account/myprofil"/>
+                    <ProfilCard image={mapFilled} name="Mon addresse" path="/account/myaddress"/>
                     <ProfilCard image={brand} name="Stripe"/>
                     <ProfilCard image={shopping} name="Mon panier"/>
                     <ProfilCard image={receipt} name="Mes commandes"/>

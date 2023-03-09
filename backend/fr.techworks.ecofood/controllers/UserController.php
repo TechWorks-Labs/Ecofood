@@ -128,7 +128,7 @@ use Models\UserManager;
             $this->user_controller->setUserInformations($user);
         }
 
-        public function setUserPassword($password, $id_user){
+        private function setUserPassword($password, $id_user){
             if($this->isPasswordNotEmpty($password)){
                 $passwordHash = $this->passwordHash($password);
                 $this->user_controller->setPassword($passwordHash, $id_user);
@@ -136,25 +136,24 @@ use Models\UserManager;
             return;
         }
 
-        public function isPasswordNotEmpty($password)
+        private function isPasswordNotEmpty(string $password): bool
         {
            return (isset($password) and !empty($password)) ? true : false;
         }
 
-        public function isEmailNotEmpty($email)
+        private function isEmailNotEmpty(string $email)
         {
             return (isset($email) and !empty($email)) ? true : false;
         }
 
-        public function setEmailFromUserID($email, $user_id)
+        private function setEmailFromUserID(string $email, int $user_id)
         {
             if($this->isEmailNotEmpty($email)){
                 $this->user_controller->setEmail($email, $user_id);
             } 
-            return;
         }
 
-        public function passwordHash($password)
+        private function passwordHash($password)
         {
             return password_hash($password, PASSWORD_DEFAULT);
         }

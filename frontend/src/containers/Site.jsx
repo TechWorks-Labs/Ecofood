@@ -8,6 +8,8 @@ import Header from '../components/header/Header';
 import Boutique from './boutique/Boutique';
 import Account from './account/Account';
 import MyProfil from './account/myProfil/MyProfil';
+import MyAddress from './account/myAddress/MyAddress';
+
 class Site extends Component {
     render() {
         return (
@@ -19,7 +21,8 @@ class Site extends Component {
                     <Route path="/signin" exact element={<SignIn/>} />
                     <Route path="/mon-compte/creer-mon-compte" exact element={<SignUp />} />
                     <Route path="/account" exact element={<Account />} />
-                    <Route path="/account/profil" exact element={<MyProfil />} />
+                    <Route path="/account/myprofil" exact element={<MyProfil />} />
+                    <Route path="/account/myaddress" exact element={<MyAddress />} />
                     <Route path="*" element={<span>ERROR 404</span>} />   
                 </Routes>
             </MyUserContextProvider>
