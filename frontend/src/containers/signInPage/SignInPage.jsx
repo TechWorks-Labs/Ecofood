@@ -18,7 +18,7 @@ const {user, setUser, getUserDatas, localStorageSetEncryptAESItem} = useContext(
     }
 
     const setUserIsTokenAuth = () => {
-        // authService.validateTokenSignature();
+        authService.validateTokenSignature();
         
         if(authService.TokenUserIsExist()){  
           const token = authService.getTokenInSessionStorage();

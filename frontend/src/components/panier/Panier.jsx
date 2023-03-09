@@ -95,9 +95,9 @@ export default function Panier(props){
 
     return(
         <div ref={panierSlideRef} className={panierIsToggle ?
-            "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 h-screen bg-slate-200 w-[300px] flex flex-col items-center"
+            "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 h-screen bg-white w-[300px] flex flex-col items-center"
             :
-            "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 h-screen translate-x-[100%]  bg-slate-200 w-[300px] flex flex-col items-center"
+            "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 h-screen translate-x-[100%]  bg-white w-[300px] flex flex-col items-center"
             }>
             <div className="w-full h-[200px] shadow-lg flex flow flex-row justify-center items-center">
                 <span className="font-bold text-2xl">Mon panier</span>
@@ -121,7 +121,7 @@ export default function Panier(props){
                 
             </div>
     
-            <div className=" bg-slate-200 w-[275px] h-[150px] flex flex-col justify-center border border-slate-300 border-t-2 border-b-0 border-r-0 border-l-0">
+            <div className=" bg-white w-[275px] h-[150px] flex flex-col justify-center border border-slate-200 border-t-1 border-b-0 border-r-0 border-l-0">
                 <span className="float-left mt-5">Total commande : <span className="font-bold">{totalPricePanier} $</span></span>
                 <span className="float-left">Produits: {ItemsInPanier}</span>
                 <button className="mt-5 bg-red-600 p-2 w-full h-[50px] rounded-lg text-white font-bold mb-4">Payer</button>

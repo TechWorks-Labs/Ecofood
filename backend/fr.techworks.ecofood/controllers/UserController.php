@@ -111,7 +111,15 @@ use Models\UserManager;
             echo json_encode($user);
         }
 
-        public function updateUserAccount()
+        public function setUserAddress()
+        {
+            $this->CorsHeader();
+            $user = json_decode(file_get_contents('php://input'));
+            $this->user_controller->setAddress($user);
+            echo json_encode($user);
+        }
+
+        public function setUserProfil()
         {
             $this->CorsHeader();
             // récupère les données du formulaire

@@ -4,7 +4,7 @@ import {Field, withFormik} from "formik";
 import * as Yup from 'yup';
 import { useEffect } from "react";
 import { myUserContext } from "../../../context/MyUserContextProvider";
-
+import { Link } from "react-router-dom";
 function ProfilForm(props){
 
     const [isEmailRequired, SetisEmailRequired] = useState(false);
@@ -16,6 +16,7 @@ function ProfilForm(props){
     const handleSetPassword = () => {
         setPassword(!password);
     }
+
 
     return(
             <form className="w-full flex flex-col justify-around items-center p-3 mt-10">    
@@ -112,7 +113,7 @@ function ProfilForm(props){
                                 onBlur = {props.handleBlur}/>
                             </div>
                             :
-                            <label className="flex justify-center items-center border border-1 border-slate-300 text-sm text-slate-800 rounded-lg w-[200px] p-1 h-[40px] font-semibold mt-2 hover:cursor-pointer">
+                            <label className="flex justify-center items-center border border-1 border-slate-300 text-sm text-slate-800 rounded-lg w-[200px] p-1 h-[40px] font-semibold mt-2 hover:cursor-pointer hover:duration-300 hover:bg-slate-800 hover:text-white">
                             <Field type="radio" name="isemailrequired" className="hidden" value={!isEmailRequired} onClick={handleSetEmail}/>
                             Changer mon email
                             </label>
@@ -141,7 +142,7 @@ function ProfilForm(props){
                                 onBlur = {props.handleBlur}/>
                             </div>
                             :
-                            <label className="flex justify-center items-center border border-1 border-slate-300 text-sm text-slate-800 rounded-lg w-[200px] p-1 h-[40px] font-semibold mt-2 hover:cursor-pointer">
+                            <label className="flex justify-center items-center border border-1 border-slate-300 text-sm text-slate-800 rounded-lg w-[200px] p-1 h-[40px] font-semibold mt-2 hover:cursor-pointer hover:duration-300 hover:bg-slate-800 hover:text-white">
                             <Field type="radio" name="ispasswordrequired" className="hidden" value={!password} onClick={handleSetPassword}/>
                             Changer mon mot de passe
                             </label>
@@ -158,8 +159,10 @@ function ProfilForm(props){
                     <div className="w-full flex flex-row justify-between items-center p-3">
                         <span>* Champs obligatoires</span>
                         <div className="flex flex-row justify-center items-center gap-x-2">
-                            <button type='submit' className="w-full h-[45px] mt-3 sm:mt-0 sm:w-[90px] sm:h-[35px] flex justify-center items-center bg-white p-1 rounded-md text-black font-medium">Retour</button>
-                            <button type='submit' onClick={props.handleSubmit} className="w-full h-[45px] mt-3 sm:mt-0 sm:w-[90px] sm:h-[35px] flex justify-center items-center bg-slate-800 p-1 rounded-md text-white font-medium">Suivant</button>
+                        <Link to={'/account'}>
+                            <button className="w-full h-[45px] mt-3 sm:mt-0 sm:w-[90px] sm:h-[35px] flex justify-center items-center bg-white p-1 rounded-md text-black font-medium border border-1 border-slate-400 hover:duration-300 hover:bg-slate-800 hover:text-white">Retour</button>
+                        </Link>
+                            <button type='submit' onClick={props.handleSubmit} className="w-full h-[45px] mt-3 sm:mt-0 sm:w-[90px] sm:h-[35px] flex justify-center items-center bg-white p-1 rounded-md text-slate-800  border border-1 border-slate-400 font-medium hover:duration-300 hover:bg-slate-800 hover:text-white">Suivant</button>
                         </div>
                     </div>    
                 </form>  

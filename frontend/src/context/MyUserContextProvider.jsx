@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 import axios from 'axios';
 import { AES } from 'crypto-js';
 import CryptoJS from 'crypto-js';
-
+import update from '../services/update.account';
 
 export const myUserContext = createContext();
 
@@ -82,14 +82,8 @@ function MyUserContextProvider(props) {
   }
 
   useEffect(() => {
-    // setUser(localStorageGetEncryptAESItem('user'));
-    // setProfil(localStorageGetEncryptAESItem('profil'));
     setUser(localStorageGetEncryptAESItem('user'));
     setProfil(localStorageGetEncryptAESItem('profil'));
-    // localStorageSetEncryptAESItem('profil', profil);
-    // localStorageGetEncryptAESItem('profil');
-    // localStorage.setItem('user', JSON.stringify(user));
-    // localStorage.setItem('profil', JSON.stringify(profil));
   }, []);
 
   useEffect(() => {

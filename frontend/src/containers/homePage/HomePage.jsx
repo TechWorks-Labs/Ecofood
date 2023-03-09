@@ -7,6 +7,8 @@ import MyApiContextProvider from '../../context/MyApiContextProvider';
 import authService from '../../services/auth.service';
 import { useContext } from 'react';
 import { myUserContext } from '../../context/MyUserContextProvider';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function HomePage(){
 
@@ -15,6 +17,18 @@ export default function HomePage(){
                 <Presentation />
                 <CarouselsContainer />
                 <Footer />
+
+                <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                theme="colored"
+                />
+
              </MyApiContextProvider> 
         )
 }

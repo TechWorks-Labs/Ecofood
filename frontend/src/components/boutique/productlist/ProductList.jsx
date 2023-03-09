@@ -3,6 +3,8 @@ import VerticalFilters from "./VerticalFilters"
 import { useEffect } from "react"
 import { useContext } from "react"
 import { myContext } from "../../../context/MyApiContextProvider"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ProductList(props){
     const {setProducts} = useContext(myContext); 
@@ -36,6 +38,18 @@ export default function ProductList(props){
                     </div>
                     <button onClick={handleMoreProduct} className="w-[200px] h-[45px] mt-5 self-center bg-[#EC3434] rounded-lg p-1 text-white font-semibold">Voir plus de produits</button>
                 </div>
+
+                <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                theme="colored"
+                />
+                
             </div>
     )
 }

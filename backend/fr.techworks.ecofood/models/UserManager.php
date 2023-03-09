@@ -84,6 +84,20 @@
             $smtp->closeCursor();
         }
 
+        public function setAddress($user)
+        {
+            $req = 'UPDATE user_data SET address = :address, postal_code = :postal_code, city = :city, state = :state WHERE id_user = :id_user';
+            $bdd = $this->getBdd();
+            $smtp = $bdd->prepare($req);
+            $smtp->bindValue(":id_user", $user->id_user);
+            $smtp->bindValue(":address", $user->address);
+            $smtp->bindValue(":postal_code", $user->postal_code);
+            $smtp->bindValue(":city", $user->city);
+            $smtp->bindValue(":state", $user->state);
+            $smtp->execute();
+            $smtp->closeCursor();
+        }
+
         public function setEmail($email, $id_user)
         {
             $req = 'UPDATE user SET email = :email WHERE id_user = :id_user';
@@ -105,5 +119,4 @@
             $smtp->execute();
             $smtp->closeCursor();
         }
-
     }   

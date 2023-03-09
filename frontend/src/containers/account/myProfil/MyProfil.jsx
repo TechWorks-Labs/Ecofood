@@ -9,37 +9,40 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyProfil(props){
     const { user, getUserDatas, profil, setProfil }  = useContext(myUserContext)
-    console.log(profil);
 
-    const handleProfilSubmit = (value) => {
-        setProfil({
-        ...setProfil, 
-        userId: user.id_user,
-        civility: value.civility,
-        name: value.name,
-        lastname : value.lastname,
-        day : value.day,
-        month : value.month, 
-        year : value.year,
-        email : value.email,
-        emailConfirmation : value.emailConfirmation,
-        password : value.password,
-        passwordConfirmation : value.passwordConfirmation,
-        isemailrequired: value.isemailrequired,
-        ispasswordrequired: value.ispasswordrequired
-        });
-        toast("Le formulaire est valide !");
-    }
-
-    useEffect(()=>{
-        // update.profil(profil);
-    });
+    const handleProfilSubmit = async (value) => {
+        const updatedProfil = {
+          userId: user.id_user,
+          civility: value.civility,
+          name: value.name,
+          lastname: value.lastname,
+          day: value.day,
+          month: value.month,
+          year: value.year,
+          email: value.email,
+          emailConfirmation: value.emailConfirmation,
+          password: value.password,
+          passwordConfirmation: value.passwordConfirmation,
+          isemailrequired: value.isemailrequired,
+          ispasswordrequired: value.ispasswordrequired,
+        };
+      
+        try {
+          await update.profil(updatedProfil);
+          setProfil(updatedProfil);
+          toast("Le formulaire est valide !");
+        } catch (error) {
+          console.log(error);
+          toast("Une erreur est survenue lors de la mise à jour du profil.");
+        }
+      };
 
     
     return(
         <div className="max-w-4xl h-screen mx-auto bg-slate-100 p-10">
             <div className="w-full  bg-white border border-1 border-slate-200 shadow-lg">
                 <ProfilForm submit={handleProfilSubmit} profil={profil}/>
+
                 <ToastContainer
                 position="top-center"
                 autoClose={3000}
@@ -50,6 +53,7 @@ export default function MyProfil(props){
                 pauseOnFocusLoss
                 theme="colored"
                 />
+                
             </div>
         </div>
     )

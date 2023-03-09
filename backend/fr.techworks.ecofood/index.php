@@ -61,5 +61,6 @@ $router->get('/account/profil/:email','user.getUserDatasFromEmail')
 $router->post('/account/register', 'user.setUserIdentifiers');
 $router->post('/account/login', 'user.authenticateUser');
 $router->post('/account/token/verification', 'user.validateTokenSignature');
-$router->post('/account/update/profil','user.updateUserAccount');
+$router->post('/account/profil','user.setUserProfil');
+$router->post('/account/address','user.setUserAddress');
 $router->run();
