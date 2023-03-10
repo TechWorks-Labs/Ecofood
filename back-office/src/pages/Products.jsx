@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DeleteModal from '../components/Modal/DeleteModal';
+import ProductFilter from '../components/Filter/ProductFilter';
 
 const hostname = 'http://localhost:9000';
 // const hostname = 'https://ecofood.techworks.fr';
@@ -46,31 +47,23 @@ export default function Products() {
     <div className="w-full px-8">
       { isOpen && <DeleteModal setIsOpen={setIsOpen} callback={deleteProduct} id={idProduct} /> }
       <h1 className="py-4">Produits</h1>
-      <div className="w-2/4 my-8 flex justify-between items-center">
+      <div className="xl:w-1/2 lg:w-full my-8 flex justify-between items-center">
         <div>
           <label htmlFor="limit">Limite</label>
           <input type="text" defaultValue={5} className="w-5 ml-2"/>
         </div>
-        <select name="filter" id="filrer">
-          <option value="">Filtrer</option>
-          <option value="">Fruits</option>
-          <option value="">Légumes</option>
-          <option value="">En ligne</option>
-          <option value="">Hors ligne</option>
-        </select>
+        <ProductFilter />
         <input type="text" placeholder="Rechercher" />
-
         <a href="/product/new">
-          <button className="p-2 rounded bg-green-400 hover:bg-green-500 mx-auto">
+          <button className="p-2 rounded bg-green-400 hover:bg-green-500 mx-auto border-t-2 border-green-300 drop-shadow-md">
             + 
-            <span className="hidden sm:inline-block">Nouveau produit</span>
+          <span className="hidden md:inline"> Nouveau produit</span>
           </button>
         </a>
-
       </div>
 
-      <table className="table-auto w-full">
-        <thead className="border-b border-black">
+      <table className="table-auto w-full ">
+        <thead className="border-b border-black sticky top-0 bg-white shadow-ysm">
           <tr>
             <th></th>
             <th className="text-left pb-3">ID</th>
@@ -96,10 +89,10 @@ export default function Products() {
               <td>
                 <div className="flex justify-center items-center">
                   <Link to={`/product/${fruit.id_product}`} className="mr-4">
-                    <img src="/src/assets/pen.svg" alt="Pen icon for editing product" className="w-7"/>
+                    <img src="/src/assets/pen.svg" alt="Pen icon for editing product" className="w-6"/>
                   </Link>
                   <Link to={`#`}>
-                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-7" onClick={() => deleteClick(fruit.id_product)} /> 
+                    <img src="/src/assets/trash.svg" alt="Trash icon for delete product" className="w-6" onClick={() => deleteClick(fruit.id_product)} /> 
                   </Link>
                 </div>
               </td>
