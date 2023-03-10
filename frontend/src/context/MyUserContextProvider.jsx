@@ -7,33 +7,15 @@ import jwt_decode from "jwt-decode";
 import axios from 'axios';
 import { AES } from 'crypto-js';
 import CryptoJS from 'crypto-js';
-import update from '../services/update.account';
 
 export const myUserContext = createContext();
 
 function MyUserContextProvider(props) {
 
   const hostname = 'http://localhost:9000';
-  const [profil, setProfil] = useState({
-    // civility: "",
-    // name: "",
-    // lastname: "",
-    // day: "",
-    // month: "",
-    // year: "",
-    // email: "",
-    // emaiConfirmation: "",
-    // password: "",
-    // passwordConfirmation: ""
-  });
+  const [profil, setProfil] = useState({});
 
-  const [user, setUser] = useState({
-    id_user: "",
-    email: "",
-    exp: "",
-    name: "",
-    valid: false,
-  });
+  const [user, setUser] = useState({});
 
 
   const setUserIsTokenAuth = () => {
@@ -81,9 +63,28 @@ function MyUserContextProvider(props) {
     }
   }
 
+  const IsNotEmpty = (key) => {
+    const storage = localStorageGetEncryptAESItem(key);
+    if (storage !== undefined){
+      return true;
+    }
+    return false;
+  }
+
+  const getUserLocalStorageInUseState = (key) => {
+    if(IsNotEmpty(key)){
+      setUser(localStorageGetEncryptAESItem('user'));
+    }
+  }
+  const getProfilLocalStorageInUseState = (key) => {
+    if(IsNotEmpty(key)){
+      setProfil(localStorageGetEncryptAESItem('profil'));
+    }
+  }
+
   useEffect(() => {
-    // setUser(localStorageGetEncryptAESItem('user'));
-    // setProfil(localStorageGetEncryptAESItem('profil'));
+    getUserLocalStorageInUseState('user');
+    getProfilLocalStorageInUseState('profil');
   }, []);
 
   useEffect(() => {
