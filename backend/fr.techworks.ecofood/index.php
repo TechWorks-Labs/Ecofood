@@ -7,15 +7,13 @@ define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('DS', DIRECTORY_SEPARATOR);
 
 require('Autoload/Autoloader.php');
+require(ROOT . '/vendor/autoload.php');
 Autoloader::register();
-// var_dump($_SERVER);
-// die();
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: OPTIONS, DELETE, PUT");
     header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
-    die();
 }
 
 $router = new Router($_GET['url']);
@@ -64,4 +62,8 @@ $router->post('/account/login', 'user.authenticateUser');
 $router->post('/account/token/verification', 'user.validateTokenSignature');
 $router->post('/account/profil','user.setUserProfil');
 $router->post('/account/address','user.setUserAddress');
+
+// STRIPE
+$router->get('/stripe/test', 'stripe.createPrice');
+
 $router->run();
