@@ -82,8 +82,8 @@ function MyUserContextProvider(props) {
   }
 
   useEffect(() => {
-    setUser(localStorageGetEncryptAESItem('user'));
-    setProfil(localStorageGetEncryptAESItem('profil'));
+    // setUser(localStorageGetEncryptAESItem('user'));
+    // setProfil(localStorageGetEncryptAESItem('profil'));
   }, []);
 
   useEffect(() => {
