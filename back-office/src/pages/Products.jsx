@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DeleteModal from '../components/Modal/DeleteModal';
+import ProductFilter from '../components/Filter/ProductFilter';
 
 const hostname = 'http://localhost:9000';
 // const hostname = 'https://ecofood.techworks.fr';
@@ -51,13 +52,7 @@ export default function Products() {
           <label htmlFor="limit">Limite</label>
           <input type="text" defaultValue={5} className="w-5 ml-2"/>
         </div>
-        <select name="filter" id="filrer">
-          <option value="">Filtrer</option>
-          <option value="">Fruits</option>
-          <option value="">Légumes</option>
-          <option value="">En ligne</option>
-          <option value="">Hors ligne</option>
-        </select>
+        <ProductFilter />
         <input type="text" placeholder="Rechercher" />
         <a href="/product/new">
           <button className="p-2 rounded bg-green-400 hover:bg-green-500 mx-auto border-t-2 border-green-300 drop-shadow-md">

@@ -10,7 +10,7 @@ export default function VerticalBar() {
       <ul>
         <li className="my-1">
           <a href="/">
-            <div className="w-32 p-2 hover:bg-slate-100 flex items-center">
+            <div className="p-2 hover:bg-slate-100 flex items-center">
               <img src="/src/assets/home.svg" className="w-8 mr-4"/>
               <span>Acceuil</span>
             </div>
@@ -18,7 +18,7 @@ export default function VerticalBar() {
         </li>
         <li className="my-1">
           <a href="/products" >
-            <div className="w-32 p-2 hover:bg-slate-100 flex items-center">
+            <div className="p-2 hover:bg-slate-100 flex items-center">
               <img src="/src/assets/market.svg" className="w-8 mr-4"/>
               <span>Produits</span>
             </div>
@@ -26,7 +26,7 @@ export default function VerticalBar() {
         </li>
         <li className="my-1">
           <a href="#" >
-            <div className="w-32 p-2 hover:bg-slate-100 flex items-center">
+            <div className="p-2 hover:bg-slate-100 flex items-center">
               <img src="/src/assets/order.svg" className="w-8 mr-4"/>
               <span>Commandes</span>
             </div>
@@ -34,9 +34,17 @@ export default function VerticalBar() {
         </li>
         <li className="my-1">
           <a href="#" >
-            <div className="w-32 p-2 hover:bg-slate-100 flex items-center">
+            <div className="p-2 hover:bg-slate-100 flex items-center">
               <img src="/src/assets/stats.svg" className="w-8 mr-4"/>
               <span>Statistiques</span>
+            </div>
+          </a>
+        </li>
+        <li className="my-1">
+          <a href="#" >
+            <div className="p-2 hover:bg-slate-100 flex items-center">
+              <img src="/src/assets/users.svg" className="w-8 mr-4"/>
+              <span>Employés</span>
             </div>
           </a>
         </li>
