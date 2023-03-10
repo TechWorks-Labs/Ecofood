@@ -30,8 +30,6 @@ $router->get('/products/type/:type/count/:count', 'api.getProductsByTypeAndCount
 $router->post('/products/filter', 'api.getProductsByFilter')
     ->prefix('api');
 
-
-
 $router->get('/products', 'product.getAllProducts');
 
 $router->get('/products/type/:type', 'api.getProductByType')
@@ -48,6 +46,7 @@ $router->get('/products/:id', 'product.getProductFromId')
     ->with('id', '[0-9]');
 
 // BACK-OFFICE
+$router->get('/employees', 'employee.getAllEmployees');
 $router->post('/product/create', 'product.create');
 $router->post('/product/:id', 'product.update')
     ->with('id', '[0-9]');

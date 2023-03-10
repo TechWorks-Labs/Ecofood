@@ -76,9 +76,9 @@ export default function Products() {
         </thead>
         <tbody>
           {products.map((fruit) =>
-            <tr key={fruit.id_product} className="hover:bg-slate-100 h-6">
-              <td className="p-2">
-                <img src={`${hostname}${ fruit.image }`} alt="" className="w-8" />
+            <tr key={ fruit.id_product } className="hover:bg-slate-100 h-8">
+              <td>
+                <img src={`${hostname}${ fruit.image }`} alt="" className="h-8"/>
               </td>
 
               <td className="text-left">{ fruit.id_product }</td>

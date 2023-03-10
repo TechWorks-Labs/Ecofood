@@ -41,7 +41,7 @@ export default function VerticalBar() {
           </a>
         </li>
         <li className="my-1">
-          <a href="#" >
+          <a href="/employees" >
             <div className="p-2 hover:bg-slate-100 flex items-center">
               <img src="/src/assets/users.svg" className="w-8 mr-4"/>
               <span>Employés</span>
