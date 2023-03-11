@@ -13,7 +13,7 @@ export default function Account(){
                     <ProfilCard image={profilSVG} name="Mon profil" path="/account/myprofil"/>
                     <ProfilCard image={mapFilled} name="Mon addresse" path="/account/myaddress"/>
                     <ProfilCard image={brand} name="Stripe"/>
-                    <ProfilCard image={shopping} name="Mon panier"/>
+                    <ProfilCard image={shopping} name="Mon panier" path="/account/myCart"/>
                     <ProfilCard image={receipt} name="Mes commandes"/>
                 </div>
             </div>
