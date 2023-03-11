@@ -13,6 +13,7 @@ export default function ButtonShop(props){
             ... prevShoppingList, 
             products : [... prevShoppingList.products, props.product]
         }));
+
         const article = props.product.name;
         toast("L'article "+article+" est dans ton panier !");
     }
