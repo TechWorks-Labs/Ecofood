@@ -21,7 +21,7 @@ $router = new Router($_GET['url']);
 // INDEX
 $router->get('/', function() {echo 'index';});
 
-// FILTRES
+// FILTRES / PRODUITS
 $router->get('/products/type/:type/count/:count', 'api.getProductsByTypeAndCount')
     ->with('type', '[0-9]')
     ->with('count', '[0-9]')
