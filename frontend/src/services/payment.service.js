@@ -2,7 +2,7 @@ import axios from "axios";
 const hostname = 'http://localhost:9000';
 
 
-const validCart = (value, user_id) => {
+const validCart = (user_id, value) => {
     const cart = {
         user_id: user_id,
         products: [value]
