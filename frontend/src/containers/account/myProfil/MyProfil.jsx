@@ -3,12 +3,12 @@ import { useState } from "react";
 import ProfilForm from "../../../components/profil/form/ProfilForm";
 import { useEffect } from "react";
 import update from "../../../services/update.account";
-import { myUserContext } from "../../../context/MyUserContextProvider";
+import { userContext } from "../../../context/UserProvider";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyProfil(props){
-    const { user, getUserDatas, profil, setProfil }  = useContext(myUserContext)
+    const { user, getUserDatas, profil, setProfil }  = useContext(userContext)
 
     const handleProfilSubmit = async (value) => {
         const updatedProfil = {

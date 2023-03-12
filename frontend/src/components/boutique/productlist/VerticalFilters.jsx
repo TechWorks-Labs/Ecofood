@@ -1,12 +1,12 @@
 import FilterContent from "./filtercontent/FilterContent"
 import { useContext } from "react";
-import { myContext } from "../../../context/MyApiContextProvider";
+import { productsContext } from "../../../context/ProductsProvider";
 
 export default function VerticalFilters(){
-    const {state: {brand}} = useContext(myContext);
-    const {state: {origin}} = useContext(myContext);
-    const {setParameterFilter} = useContext(myContext);
-    const {parameterFilter} = useContext(myContext);
+    const {state: {brand}} = useContext(productsContext);
+    const {state: {origin}} = useContext(productsContext);
+    const {setParameterFilter} = useContext(productsContext);
+    const {parameterFilter} = useContext(productsContext);
 
     return(
         <div className="w-[300px] border border-1 border-slate-300 flex flex-col">

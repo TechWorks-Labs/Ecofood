@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react"
 import AddressForm from "../../../components/profil/form/addressForm/AddressForm"
-import { myUserContext } from "../../../context/MyUserContextProvider"
+import { userContext } from "../../../context/UserProvider"
 import update from "../../../services/update.account";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function MyAddress() {
-    const { profil, setProfil, user } = useContext(myUserContext);
+    const { profil, setProfil, user } = useContext(userContext);
 
     const handleAddressValide = async (value) => {
         const updateProfil = {

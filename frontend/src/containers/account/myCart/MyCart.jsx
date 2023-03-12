@@ -1,29 +1,25 @@
-import Checkout from "./Checkout"
-import { myContext } from "../../../context/MyApiContextProvider"
-import { useContext } from "react"
+import CartInfos from "./CartInfos";
+import CardProduct from "../../../components/panier/cardProduct.jsx/CardProduct";
+import { cartContext } from "../../../context/CartProvider";
+import { useContext, useState } from "react";
 
-export default function MyCart(){
+export default function MyCart() {
 
-    const { shoppingList } = useContext(myContext);
+    const { shoppingList } = useContext(cartContext)
 
-    const MyProductsCart = () => {
-        return shoppingList.products.map((product, index)=>{
-            console.log(product)
-            return(
-                <span>{product.name}</span>
-            )
-        })
-    }
-
-    return(
+    return (
         <div className="max-w-7xl flex flex-row mx-auto mt-[50px] h-screen">
-            <div className="flex-1 bg-red-400">
+            <div className="flex-1 p-10">
                 <div className="flex flex-col">
-                    <MyProductsCart />
+                    {shoppingList.products.length == 0 ?
+                        <span className="font-bold text-xl mx-auto">Vous n'avez rien dans votre panier :(</span>
+                        :
+                        <CardProduct />}
+
                 </div>
             </div>
             <div className="bg-slate-100">
-                <Checkout buttonTitle="Valider mon panier" />
+                <CartInfos buttonTitle="Valider mon panier" />
             </div>
         </div>
     )

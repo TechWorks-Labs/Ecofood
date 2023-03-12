@@ -2,15 +2,15 @@ import React, { createContext } from 'react';
 import { useState } from 'react';
 import authService from '../services/auth.service';
 import { useEffect } from 'react';
-import MyContextProvider from './MyApiContextProvider';
+import ProductsProvider from './ProductsProvider';
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
 import { AES } from 'crypto-js';
 import CryptoJS from 'crypto-js';
 
-export const myUserContext = createContext();
+export const userContext = createContext();
 
-function MyUserContextProvider(props) {
+function UserProvider(props) {
 
   const hostname = 'http://localhost:9000';
   const [profil, setProfil] = useState({});
@@ -92,13 +92,13 @@ function MyUserContextProvider(props) {
   }, [])
 
   return (
-    <myUserContext.Provider value={{ user, setUser, profil, setProfil, getUserDatas, setUserIsTokenAuth, localStorageSetEncryptAESItem}}>
-      <MyContextProvider>
+    <userContext.Provider value={{ user, setUser, profil, setProfil, getUserDatas, setUserIsTokenAuth, localStorageSetEncryptAESItem}}>
+      <ProductsProvider>
         {props.children}
-      </MyContextProvider>
-    </myUserContext.Provider>
+      </ProductsProvider>
+    </userContext.Provider>
   );
 }
 
 
-export default MyUserContextProvider;
+export default UserProvider;

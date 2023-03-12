@@ -1,19 +1,14 @@
-import { Component } from 'react'
-import Header from '../../components/header/Header';
 import Presentation from '../../components/homepage/Presentation';
 import CarouselsContainer from '../../components/homepage/CarouselsContainer';
 import Footer from '../../components/footer/footer';
-import MyApiContextProvider from '../../context/MyApiContextProvider';
-import authService from '../../services/auth.service';
-import { useContext } from 'react';
-import { myUserContext } from '../../context/MyUserContextProvider';
+import ProductsProvider from '../../context/ProductsProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function HomePage(){
 
         return (
-             <MyApiContextProvider>
+             <ProductsProvider>
                 <Presentation />
                 <CarouselsContainer />
                 <Footer />
@@ -29,6 +24,6 @@ export default function HomePage(){
                 theme="colored"
                 />
 
-             </MyApiContextProvider> 
+             </ProductsProvider> 
         )
 }

@@ -1,8 +1,8 @@
 import React, { createContext, Component, useState, useEffect } from 'react';
 import axios from 'axios';
-export const myContext = createContext();
+export const productsContext = createContext();
 
-  function MyContextProvider(props){
+  function ProductsProvider(props){
     
    const hostname = 'http://localhost:9000';
 
@@ -26,10 +26,6 @@ export const myContext = createContext();
       price : []
     })
 
-    const [shoppingList, setShoppingList] = useState(
-      JSON.parse(localStorage.getItem("shoppingList")) || { products: [] }
-    );
-
     const getProducts = async (type, count) => {
       await fetch(`${hostname}/products/type/${type}/count/${count}`)
         .then(response => response.json())
@@ -51,9 +47,6 @@ export const myContext = createContext();
         .catch(error => console.error(error));
     };
 
-    useEffect(()=>{
-      localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
-    },[shoppingList]);
 
     useEffect(() => {
 
@@ -84,10 +77,10 @@ export const myContext = createContext();
     }, [parameterFilter]);
 
     return(
-      <myContext.Provider value={{state, setState, getProducts, setProducts, products, parameterFilter, setParameterFilter, shoppingList, setShoppingList}}>
+      <productsContext.Provider value={{state, setState, getProducts, setProducts, products, parameterFilter, setParameterFilter}}>
         {props.children}
-      </myContext.Provider>
+      </productsContext.Provider>
     )
   }
 
-  export default MyContextProvider;
+  export default ProductsProvider;

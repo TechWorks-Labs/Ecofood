@@ -4,19 +4,19 @@ import profil from "/src/assets/images/icons/profil.svg";
 import rayon from "/src/assets/images/icons/hamburger.svg";
 import authService from "../../services/auth.service";
 import { useContext } from "react";
-import { myUserContext } from "../../context/MyUserContextProvider";
+import { userContext } from "../../context/UserProvider";
 import { Link } from 'react-router-dom';
 import { useRef } from "react";
 import { useEffect } from "react";
-import { myContext } from "../../context/MyApiContextProvider";
+import { productsContext } from "../../context/ProductsProvider";
 import Panier from "../panier/Panier";
 import ProfilSidebar from "./profilSidebar/ProfilSideBar";
 import PanierIcon from "./icons/PanierIcon";
 
 function Header(props) {
 
-    const { setParameterFilter, parameterFilter } = useContext(myContext);
-    const { user, setUser } = useContext(myUserContext);
+    const { setParameterFilter, parameterFilter } = useContext(productsContext);
+    const { user, setUser } = useContext(userContext);
   
     const [hamburgerIsToggle, setHamburgerIsToggle] = useState(false);
     const [profilIsToggle, setProfilIsToggle] = useState(false);
