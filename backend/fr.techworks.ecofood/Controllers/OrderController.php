@@ -14,8 +14,16 @@ class OrderController
         $this->model = new OrderModel();
     }
 
+    private function setHeaders() 
+    {
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
+    }
+
     public function newOrder()
     {
+        $this->setHeaders();
         $cart = json_decode(file_get_contents('php://input'));
         $products = $cart->products;
         
