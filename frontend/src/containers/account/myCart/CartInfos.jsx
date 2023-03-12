@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from "react"
-import { myContext } from "../../../context/MyApiContextProvider"
+import { productsContext } from "../../../context/ProductsProvider"
+import { cartContext } from "../../../context/CartProvider";
+import paymentService from "../../../services/payment.service";
+import { userContext } from "../../../context/UserProvider";
 
-export default function Checkout(props){
+export default function CartInfos(props){
     
     const priceCart = (shoppingList) => {
         let priceCart = null;
@@ -11,7 +14,8 @@ export default function Checkout(props){
         return priceCart;
     }
 
-    const { shoppingList } = useContext(myContext);
+    const {user} = useContext(userContext);
+    const { shoppingList } = useContext(cartContext);
     const countInCart = Object.keys(shoppingList.products).length;
     const [ totalPriceCart, setTotalPriceCart ] = useState(priceCart(shoppingList));
 
@@ -20,7 +24,7 @@ export default function Checkout(props){
     },[shoppingList]);
 
     return(
-        <form className="max-w-xl flex flex-col justify-center p-5 gap-y-3">
+        <div className="max-w-xl flex flex-col justify-center p-5 gap-y-3">
             <div className="flex flex-row items-center gap-x-5">
                 <span>Articles ({countInCart})</span>
                 <div className="flex-1 h-[1px] w-full border border-1 border-dotted border-slate-300"></div>
@@ -31,7 +35,7 @@ export default function Checkout(props){
                 <div className=" flex-1 h-[1px] w-full border border-1 border-dotted border-slate-300"></div>
                 <span className="font-bold text-xl">{totalPriceCart}$</span>
             </div>
-            <button type='submit' className="w-[200px] bg-red-500 text-white font-semibold rounded-xl p-2">Valider mon panier</button>
-        </form>
+            <button onClick={paymentService.validCart(user.id_user,shoppingList.products)} className="w-[200px] bg-red-500 text-white font-semibold rounded-xl p-2">Valider mon panier</button>
+        </div>
     )
 }

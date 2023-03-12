@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react"
-import { myUserContext } from "../../../../context/MyUserContextProvider"
+import { userContext } from "../../../../context/UserProvider"
 import CurrentAddress from "./CurrentAddress";
 import { Field, withFormik } from "formik";
 import * as Yup from 'yup';
 
 function AddressForm(props) {
-    const { profil, user } = useContext(myUserContext)
+    const { profil, user } = useContext(userContext)
     const [profilIsLoading, setProfilIsLoading] = useState(false);
     const [modifyAddress, setModifyAddress] = useState(false);
 

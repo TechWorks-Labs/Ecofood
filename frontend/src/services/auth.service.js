@@ -1,6 +1,4 @@
 import axios from "axios";
-import jwt_decode from "jwt-decode";
-import { createPath } from "react-router-dom";
 
 // const hostname = 'https://ecofood.techworks.fr/api';
 const hostname = 'http://localhost:9000';
