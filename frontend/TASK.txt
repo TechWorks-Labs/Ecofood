@@ -2,3 +2,70 @@ Ajouter la fonctionnalité profil menu déroulant dans le homepage en absolute e
 sinon reconduire l'utilisateur sur le login pour générer un nouveau token.
 
 menu panier lateral sur le coté droit -> inspiration intermarché
+
+Panier lateral = possibilité de mettre deux fois l'article dans le panier avec l'indication X2/x3 et tout supprimer d'un coup
+Sinon bug et suppresion de tous les articles du panier.
+export default withFormik({
+    mapPropsToValues : (props) => ({
+        civility : "",
+        name: "",
+        lastname : "",
+        day : "",
+        month : "", 
+        year : "",
+        email : "",
+        emailConfirmation : "",
+        password : "",
+        passwordConfirmation : "",
+        isEmailRequired : false
+    }),
+    validationSchema : Yup.object().shape({
+        // civility : Yup.string()
+        // .required('Le champs est obligatoire'),
+        // name : Yup.string()
+        // .max(32, "Le mot de passe doit comporter moins de 32 caracères")
+        // .matches(/^[\w-]+$/)
+        // .required("Le nom est obligatoire."),
+        // lastname : Yup.string()
+        // .max(32, "Le mot de passe doit comporter moins de 32 caracères")
+        // .matches(/^[\w-]+$/)
+        // .required("Le prénom est obligatoire."),
+        // day : Yup.string()
+        // .max(2, "Vous devez mettre deux chiffres maximum")
+        // .required('Le jour est obligatoire'),
+        // month : Yup.string()
+        // .max(2, "Vous devez mettre deux chiffres maximum")
+        // .required('Le mois est obligatoire'),
+        // year : Yup.string()
+        // .min(4, "Vous devez mettre 4 chiffres à lannée.")
+        // .max(4, "Vous devez mettre 4 chiffres maximum")
+        // .required('Le mois est obligatoire'),
+        // .matches(/[A-Z]/, "Le mot de passe doit comporter au moins une majuscule")
+        // .matches(/[a-z]/, "Le mot de passe doit comporter au moins une minuscule")
+        // .matches(/[0-9]/, "Le mot de passe doit comporter au moins un chiffre")
+        // .matches(/[@!&]/, "Le mot de passe doit comporter au moins un caractère spécial (@,!,&)")
+        // .required('Le mot de passe est obligatoire'),
+        // passwordConfirmation : Yup.string()
+        // .oneOf([Yup.ref('password')],"Le mot de passe n'est pas identique")
+        // .required("Vous devez confirmer votre mot de passe"),        
+    }),
+
+    
+      
+    handleSubmit : (values,{props}) => {
+        const profilInformations = {
+            civility : values.civility,
+            name: values.name,
+            lastname : values.lastname,
+            day : values.day,
+            month : values.month,
+            year : values.year,
+            email : values.email,
+            emailConfirmation : values.emailConfirmation,
+            password : values.password,
+            passwordConfirmation : values.passwordConfirmation,         
+            isEmailRequired : values.isEmailRequired
+        }
+        props.submit(profilInformations);
+    }
+})(ProfilForm);

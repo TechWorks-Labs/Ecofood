@@ -13,6 +13,4 @@ COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY fr.techworks.ecofood .
 
-RUN composer install
-
 CMD ["sh", "-c", "composer install; apache2-foreground"]

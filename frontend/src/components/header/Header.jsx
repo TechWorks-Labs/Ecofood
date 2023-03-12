@@ -1,155 +1,112 @@
 import React from "react";
 import { useState } from "react";
-import background from "/src/assets/images/background/backgroundEcofood.png";
 import profil from "/src/assets/images/icons/profil.svg";
-import shop from "/src/assets/images/icons/shopping-bag-header.svg";
-import close from "/src/assets/images/icons/close.svg";
-import emptypanier from "/src/assets/images/icons/emptypanier.png";
 import rayon from "/src/assets/images/icons/hamburger.svg";
 import authService from "../../services/auth.service";
 import { useContext } from "react";
-import { myUserContext } from "../../context/MyUserContextProvider";
+import { userContext } from "../../context/UserProvider";
 import { Link } from 'react-router-dom';
 import { useRef } from "react";
 import { useEffect } from "react";
-import SidebarRayons from "./sidebar/SidebarRayons";
+import { productsContext } from "../../context/ProductsProvider";
+import Panier from "../panier/Panier";
+import ProfilSidebar from "./profilSidebar/ProfilSideBar";
+import PanierIcon from "./icons/PanierIcon";
 
-function Header(props){
-    useEffect(()=>{
- 
-        document.addEventListener("mousedown", handleOutPanierSlide);
-        document.addEventListener("mousedown", handleOutProfilIcon);
-    })
+function Header(props) {
 
+    const { setParameterFilter, parameterFilter } = useContext(productsContext);
+    const { user, setUser } = useContext(userContext);
+  
     const [hamburgerIsToggle, setHamburgerIsToggle] = useState(false);
     const [profilIsToggle, setProfilIsToggle] = useState(false);
     const [panierIsToggle, setPanierIsToggle] = useState(false);
-    const [rayonsIsToggle, setRayonIsToggle] = useState(false);
-    const {user, setUser} = useContext(myUserContext);
 
     const panierSlideRef = useRef();
     const panierIconRef = useRef();
-    const profilRef = useRef();
+    const profilIconRef = useRef();
+    const profilSidebarRef = useRef();
 
-    const handleRayonIsToggle = () => {
-        setRayonIsToggle(!rayonsIsToggle);
-        console.log(rayonsIsToggle)
+    const handleOutSidebars = (event) => {
+      // onclick inside the sidebars
+      if(profilSidebarRef.current.contains(event.target) || panierSlideRef.current.contains(event.target)){
+      } else {
+        // onclick outside the sidebars
+        setProfilIsToggle(false);
+        setPanierIsToggle(false);
+        document.body.style.overflow = "scroll"
+      }
     }
-
-    const handleOutPanierSlide = event => {
-        if(!panierSlideRef.current.contains(event.target) && !panierIconRef.current.contains(event.target)) {
-            setPanierIsToggle(false);
-            document.body.style.overflow = "scroll";
-        }
-    }
-    
-    const handleOutProfilIcon = event => {
-        if(!profilRef.current.contains(event.target)) {        
-            setProfilIsToggle(false);
-            document.body.style.overflow = "scroll";
-        }
-    }
-
+  
     const panierToggle = (event) => {
-        if(panierIconRef.current.contains(event.target)){
-            setPanierIsToggle(!panierIsToggle);
-        }
+        document.body.style.overflow = "hidden";
+        setPanierIsToggle(!panierIsToggle);
+        console.log(panierIsToggle);
+    };
+  
+    function HamburgerToggle() {
+      setHamburgerIsToggle(!hamburgerIsToggle);
     }
-
-    function HamburgerToggle(){
-        setHamburgerIsToggle(!hamburgerIsToggle);
-        console.log(hamburgerIsToggle);
+  
+    function profilToggle() {
+      if(user.valid){
+        document.body.style.overflow = "hidden";
+        setProfilIsToggle(!profilIsToggle);
+      }
     }
-
-    function ProfilToggle(){
-        if(user.valid){
-            if(profilIsToggle){
-                document.body.style.overflow = "scroll";
-            } else {
-                document.body.style.overflow = "hidden";
-            }
-            setProfilIsToggle(!profilIsToggle);
-        } else {
-            setUser({...user,
-            valid : false});
-        };
-    } 
-
+  
     const handleLogout = () => {
-        authService.logout();
-        window.location.reload();
-    }
+      authService.logout();
+      window.location.reload();
+    };
+  
+    useEffect(() => {
+      document.addEventListener("mousedown", handleOutSidebars);
+  
+      return () => {
+        document.removeEventListener("mousedown", handleOutSidebars);
+      };
+    }, []);
 
     return(
         <div className="w-full h-full sticky top-0 z-50">
-            {/* sidebar rayons in left side */}
-            <SidebarRayons isToggle={rayonsIsToggle}/>
+            <Panier panierSlideRef = {panierSlideRef} panierIsToggle = {panierIsToggle} panierToggle={panierToggle}/>
 
-            {/* sidebar panier in right side */}
-            <div ref={panierSlideRef} className={panierIsToggle ?
-             "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 h-screen bg-slate-200 w-[300px] p-2 flex flex-col items-center"
-            :
-            "transition-all duration-300 ease-in-out z-50 absolute top-0 right-0 translate-x-[100%] h-screen bg-slate-200 w-[300px] p-2 flex flex-col items-center"
-            }>
-                <a href="" className="absolute right-0" onClick={panierToggle}>
-                    <svg width="24" height="24" viewBox="0 0 24 24">
-                         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="black"/>
-                    </svg>
-                </a>
-                <img src={emptypanier} className="w-[180px] mt-[80px]"/>
-                <p className="text-2xl font-bold mt-4">Votre panier est vide</p>
-            </div>
             <div className="z-20 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
                     <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2 relative">
                     {/* vertical toolbar user detail */}
-                    <div className={profilIsToggle ? 
-                    "transition-all duration-300 ease-in-out absolute z-20 min-w-[300px] w-[300px] h-[350px] top-[300px] right-[50%] translate-x-[50%] rounded-lg md:absolute md:top-[67px] md:right-0 md:translate-x-0 md:w-[280px] md:h-[300px] md:rounded-b-xl md:rounded-t-none bg-white border border-1 border-slate-300 shadow-md  flex flex-col justify-around items-center pt-3 pb-2 overflow-hidden"
-                    : 
-                    "transition-all duration-200 ease-in absolute z-20 top-[67px] border border-1 border-slate-300 shadow-md w-[280px] h-[0px] right-0 rounded-b-xl flex flex-col justify-around items-center p-0 overflow-hidden"
-                    }>
+                    <ProfilSidebar profilSidebarRef={profilSidebarRef} profilIsToggle={profilIsToggle} setProfilIsToggle={setProfilIsToggle} user={user} handleLogout={handleLogout}/> 
 
-                        <p className="font-bold text-xl text-black underline underline-offset-4">Bonjour {user.lastname}</p>
-                    
-                        <div className="flex flex-col justify-around w-full">
-                            <div className="flex items-center justify-center border border-t-0 border-l-0 border-r-0 border-b-[1.4px] border-slate-200 w-full p-5  hover:bg-slate-400">
-                                <a href="" className="font-semibold text-xl text-black">Mes commandes</a>
-                            </div>
-
-                            <div className="flex items-center justify-center border border-t-0 border-l-0 border-r-0 border-b-[1.4px] border-slate-200 w-full p-5 hover:bg-slate-400">
-                                <a href="" className="font-semibold text-xl text-black">Mes informations</a>
-                            </div>
-                        </div>
-
-                        <button onClick={handleLogout} className="flex justify-center items-center bg-[#EC3434] w-[140px] h-[40px] text-[0.9rem] p-2 rounded-lg text-white mt-5 text-lg">Déconnexion</button>
-                    </div>
                         <div className="flex flex-row items-center justify-center gap-x-4">
-                            <button onClick={handleRayonIsToggle} className="bg-white w-[100px] h-[40px] p-1 rounded-2xl font-semibold text-md flex flex-row justify-center items-center gap-x-1">
+                            <button className="bg-white w-[110px] h-[40px] p-1 rounded-2xl font-semibold text-md flex flex-row justify-center items-center gap-x-1">
                             <img src={rayon} className="w-[25px] border border-[1.3px] bg-slate-800 border-white rounded-full p-1"/> 
-                                Rayons
+                                Boutique
                             </button>
-                            <h1 className="text-white font-semibold text-xl">ECOFOOD</h1>
+                            <Link to="/">
+                                <h1 className="text-white font-semibold text-xl">ECOFOOD</h1>
+                            </Link>
                         </div>
 
                         <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-6 text-white">
-                            <li>
-                                <Link to="/rayon">FRUITS</Link>
+                            <li onClick={()=>setParameterFilter({... parameterFilter, type : "1"})}>
+                                <Link to="/boutique">FRUITS</Link>
                             </li>
-                            <li>
-                                <Link to="/rayon">LEGUMES</Link>
+                            <li onClick={()=>setParameterFilter({... parameterFilter, type : "2"})}>
+                                <Link to="/boutique">LEGUMES</Link>
                             </li>
-                            <li>
-                                <Link to="/rayon">VIANDES</Link>
+                            <li onClick={()=>setParameterFilter({... parameterFilter, type : "3"})}>
+                                <Link to="/boutique">VIANDES</Link>
                             </li>
                         </ul>
 
                         <div  className="flex flex-row items-center justify-center ">
                             <div  className="flex flex-row justify-around items-center min-w-[180px] p-2 md:min-w-[110px]">
                                 {!user.valid ? <Link to ="/signin">
-                                    <img ref={profilRef} src={profil} className="w-[35px]"  onClick={ProfilToggle}></img>
+                                    <img ref={profilIconRef} src={profil} className="w-[35px]"  onClick={profilToggle}></img>
                                 </Link> 
                                 :
-                                <img ref={profilRef} src={profil} className="w-[35px]" onClick={ProfilToggle}></img>}
-                                <img src={shop} onClick={panierToggle} ref={panierIconRef} className="w-[35px]"></img>
+                                <img ref={profilIconRef} src={profil} className="w-[35px]" onClick={profilToggle}></img>}
+                                <PanierIcon panierToggle={panierToggle} panierIconRef={panierIconRef} />
                                 <button onClick={HamburgerToggle} className="p-2 rounded-lg md:hidden">
                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
                                         <rect x="6" y="8" width="20" height="2"/>

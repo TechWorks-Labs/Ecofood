@@ -1,10 +1,13 @@
 import React from "react";
 import Carousel from "./Carousel";
 import { useContext } from "react";
-import { myContext } from "../../context/MyApiContextProvider";
+import { productsContext } from "../../context/ProductsProvider";
 
 export default function CarouselsContainer(props){
-    const { fruits, vegetable, meat } = useContext(myContext);
+    const { state } = useContext(productsContext);
+    const fruits = state.fruits;
+    const vegetable = state.fruits;
+    const meat = state.fruits;
     return(
         <div>
             <div className="w-full bg-[#F7F7F7] mb-[60px] p-5">

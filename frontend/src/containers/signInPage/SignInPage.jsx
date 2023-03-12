@@ -6,12 +6,12 @@ import { object } from 'yup';
 import axios from 'axios';
 import authService from '../../services/auth.service';
 import jwt_decode from "jwt-decode";
-import { myUserContext } from '../../context/MyUserContextProvider';
+import { userContext } from '../../context/UserProvider';
 import { useContext } from 'react';
 
 export default function SignInPage (){
     
-const {user, setUser} = useContext(myUserContext);
+const {user, setUser, getUserDatas, localStorageSetEncryptAESItem} = useContext(userContext);
 
     const handleLoginForm = (values) => {
          authService.login(values);
@@ -23,28 +23,32 @@ const {user, setUser} = useContext(myUserContext);
         if(authService.TokenUserIsExist()){  
           const token = authService.getTokenInSessionStorage();
           const tokenDecoded = jwt_decode(token);
-          
           setUser({
             ...user,
-            id_user : token.id_user,
-            email : token.email,
-            exp : token.exp,
+            id_user : tokenDecoded.id_user,
+            email : tokenDecoded.email,
+            exp : tokenDecoded.exp,
             valid : true,
           });
+          localStorageSetEncryptAESItem('user', user);
+          getUserDatas(tokenDecoded.email);
         } else {
             console.log('le token n\'existe pas');
         }
     }
 
     useEffect(()=>{
-        // setUserIsTokenAuth();
-
+        setUserIsTokenAuth();
     },[])
 
     return(
             <>
                 {user.valid ?
-                 <span>{user.email}</span> 
+                <div>
+                    <span>{user.email}</span> 
+                    <span>{user.lastname}</span> 
+                    <span>{user.exp}</span> 
+                </div>
                  :
                  <SignInForm submit={handleLoginForm} />}
                

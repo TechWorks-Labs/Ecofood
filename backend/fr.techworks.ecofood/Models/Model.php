@@ -35,14 +35,60 @@ abstract class Model
                 return ':' . $key;
             }, array_keys($data)));
 
-            self::setBdd();
+            $bdd = self::getBdd();
 
-            $stmt = self::$pdo->prepare("INSERT INTO $table ($keys) VALUES ($placeholders)");
+            $req = "INSERT INTO `$table` ($keys) VALUES ($placeholders)";
+            $stmt = $bdd->prepare($req);
+
             foreach ($data as $key => $value) {
                 $stmt->bindValue(':' . $key, $value);
             }
             $stmt->execute();
-        } catch (PDOException $error) {
+            
+            return $bdd->lastInsertId();
+        } catch (\PDOException $error) {
+            echo $error->getMessage();
+        }
+    }
+
+    public static function delete(string $table, int $id)
+    {
+        try {
+            $bdd = self::getBdd();
+            $bdd->beginTransaction();
+            $req = "DELETE FROM $table WHERE id_product = $id;";
+            $stmt = $bdd->prepare($req);
+            $stmt->execute();
+            $bdd->commit();
+        } catch (\PDOException $error) {
+            echo $error->getMessage();
+        }
+    }
+
+    public function update(string $table, array $params, array $idParams)
+    {
+        try {
+            $fields = [];
+            $id = $idParams[0];
+            $idValue = $idParams[1];
+
+            foreach ($params as $key => $value) {
+                $field = $key . " = '" . $value . "'";
+                array_push($fields, $field);
+            }
+
+            $values = implode(', ', $fields);
+            
+            $bdd = self::getBdd();
+            $bdd->beginTransaction();
+
+            $sql = "UPDATE $table SET $values WHERE $id = $idValue";
+            $stmt = $bdd->prepare($sql);
+            
+            $stmt->execute();
+            $bdd->commit();
+
+        } catch (\PDOException $error) {
             echo $error->getMessage();
         }
     }

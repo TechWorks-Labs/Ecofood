@@ -6,6 +6,10 @@
     input {
         border: 1px solid black;
     }
+
+    input[type="file"] {
+        border: none;
+    }
     
     h1 {
         font-size: 2rem;

@@ -27,5 +27,7 @@ class Autoloader
                 return require_once($file);
             }
         }
+
+        return false;
     }
 }

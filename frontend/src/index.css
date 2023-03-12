@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+.productCategoryIsToggle {
+display: flex;
+justify-content: center;
+align-items: center;
+border: solid;
+border-width: 1px;
+border-color: #DC2626;
+padding: 10px;
+color: #DC2626;
+}
+
+.productCategoryIsNotToggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-width: 1px;
+    border-color: #CBD5E1;
+    padding: 10px;
+}
 
 .carousel {
 display: flex;

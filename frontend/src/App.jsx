@@ -5,7 +5,6 @@ import Site from './containers/Site';
 
 export default function App() {
 
-
     return (
       <div className="App">
          <BrowserRouter basename='/'>
