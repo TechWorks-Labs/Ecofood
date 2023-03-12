@@ -35,7 +35,11 @@ export default function CartInfos(props){
                 <div className=" flex-1 h-[1px] w-full border border-1 border-dotted border-slate-300"></div>
                 <span className="font-bold text-xl">{totalPriceCart}$</span>
             </div>
+<<<<<<< HEAD
             <button onClick={()=>paymentService.validCart(user.id_user,shoppingList.products)} className="w-[200px] bg-red-500 text-white font-semibold rounded-xl p-2">Valider mon panier</button>
+=======
+            <button onClick={paymentService.validCart(user.id_user,shoppingList.products)} className="w-[200px] bg-red-500 text-white font-semibold rounded-xl p-2">Valider mon panier</button>
+>>>>>>> e64045b19a199400bf5ffa65360f9b1adc024c6e
         </div>
     )
 }
