@@ -5,6 +5,7 @@ use Router\Router;
 
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('DS', DIRECTORY_SEPARATOR);
+define('DOMAIN', 'http://localhost:9000');
 
 require('Autoload/Autoloader.php');
 require(ROOT . '/vendor/autoload.php');
@@ -53,6 +54,11 @@ $router->post('/product/:id', 'product.update')
 $router->delete('/products/:id', 'product.delete')
     ->with('id', '[0-9]');
 
+// COMMANDES
+$router->post('/order/new', 'order.newOrder');
+// STRIPE
+$router->get('/order/checkout', 'order.checkout');
+
 // ACCOUNT
 $router->get('/account/profil/:email','user.getUserDatasFromEmail')
     ->with('email', '^[^\s@]+@[^\s@]+\.[^\s@]+$');
@@ -61,8 +67,5 @@ $router->post('/account/login', 'user.authenticateUser');
 $router->post('/account/token/verification', 'user.validateTokenSignature');
 $router->post('/account/profil','user.setUserProfil');
 $router->post('/account/address','user.setUserAddress');
-
-// STRIPE
-$router->get('/stripe/test', 'stripe.createPrice');
 
 $router->run();

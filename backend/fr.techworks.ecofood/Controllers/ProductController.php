@@ -29,7 +29,7 @@ class ProductController
             'status'        => $product->status ?? 0
         ];
 
-        $filters = array(
+        $filters = [
             'name'          => FILTER_SANITIZE_SPECIAL_CHARS,
             'type'          => FILTER_SANITIZE_NUMBER_INT,
             'brand_id'      => FILTER_SANITIZE_NUMBER_INT,
@@ -43,7 +43,7 @@ class ProductController
             'sku'           => FILTER_SANITIZE_ENCODED,
             'origin'        => FILTER_SANITIZE_SPECIAL_CHARS,
             'status'        => FILTER_SANITIZE_NUMBER_INT
-        );
+        ];
 
         return filter_var_array($data, $filters);
     }
@@ -69,7 +69,7 @@ class ProductController
                     move_uploaded_file($temp_file, $destination);
                     return $image_url;
                 }
-        } 
+        }
         return false;
     }
 
@@ -136,7 +136,7 @@ class ProductController
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: OPTIONS, DELETE");
         header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
-
+    
         $Product = new ProductModel();
         $Product::delete('product', $id);
         $Product->sendJSON(['product' => $Product]);

@@ -36,17 +36,16 @@ abstract class Model
             }, array_keys($data)));
 
             $bdd = self::getBdd();
-            $bdd->beginTransaction();
 
-            $req = "INSERT INTO $table ($keys) VALUES ($placeholders)";
+            $req = "INSERT INTO `$table` ($keys) VALUES ($placeholders)";
             $stmt = $bdd->prepare($req);
 
             foreach ($data as $key => $value) {
                 $stmt->bindValue(':' . $key, $value);
             }
-
             $stmt->execute();
-            $bdd->commit();
+            
+            return $bdd->lastInsertId();
         } catch (\PDOException $error) {
             echo $error->getMessage();
         }
