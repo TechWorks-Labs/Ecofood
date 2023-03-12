@@ -3,7 +3,7 @@ import { useState } from "react";
 import {Field, withFormik} from "formik";
 import * as Yup from 'yup';
 import { useEffect } from "react";
-import { myUserContext } from "../../../context/MyUserContextProvider";
+import { userContext } from "../../../context/UserProvider";
 import { Link } from "react-router-dom";
 function ProfilForm(props){
 

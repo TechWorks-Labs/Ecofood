@@ -6,12 +6,12 @@ import { object } from 'yup';
 import axios from 'axios';
 import authService from '../../services/auth.service';
 import jwt_decode from "jwt-decode";
-import { myUserContext } from '../../context/MyUserContextProvider';
+import { userContext } from '../../context/UserProvider';
 import { useContext } from 'react';
 
 export default function SignInPage (){
     
-const {user, setUser, getUserDatas, localStorageSetEncryptAESItem} = useContext(myUserContext);
+const {user, setUser, getUserDatas, localStorageSetEncryptAESItem} = useContext(userContext);
 
     const handleLoginForm = (values) => {
          authService.login(values);

@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import { useContext } from "react";
-import { myContext } from "../../../../context/MyApiContextProvider";
+import { productsContext } from "../../../../context/ProductsProvider";
 
 export default function ProductCategoryBanner(){
 
-    const {setParameterFilter} = useContext(myContext);
-    const {parameterFilter} = useContext(myContext);
+    const {setParameterFilter} = useContext(productsContext);
+    const {parameterFilter} = useContext(productsContext);
     const containerCategoryRef = useRef();
 
     const handleSetProductType = (pType) => {

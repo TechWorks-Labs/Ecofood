@@ -1,25 +1,22 @@
 import React from "react";
 import { useState } from "react";
-import background from "/src/assets/images/background/backgroundEcofood.png";
 import profil from "/src/assets/images/icons/profil.svg";
-import shop from "/src/assets/images/icons/shopping-bag-header.svg";
-import close from "/src/assets/images/icons/close.svg";
-import emptypanier from "/src/assets/images/icons/emptypanier.png";
 import rayon from "/src/assets/images/icons/hamburger.svg";
 import authService from "../../services/auth.service";
 import { useContext } from "react";
-import { myUserContext } from "../../context/MyUserContextProvider";
+import { userContext } from "../../context/UserProvider";
 import { Link } from 'react-router-dom';
 import { useRef } from "react";
 import { useEffect } from "react";
-import { myContext } from "../../context/MyApiContextProvider";
+import { productsContext } from "../../context/ProductsProvider";
 import Panier from "../panier/Panier";
 import ProfilSidebar from "./profilSidebar/ProfilSideBar";
+import PanierIcon from "./icons/PanierIcon";
 
 function Header(props) {
 
-    const { setParameterFilter, parameterFilter } = useContext(myContext);
-    const { user, setUser } = useContext(myUserContext);
+    const { setParameterFilter, parameterFilter } = useContext(productsContext);
+    const { user, setUser } = useContext(userContext);
   
     const [hamburgerIsToggle, setHamburgerIsToggle] = useState(false);
     const [profilIsToggle, setProfilIsToggle] = useState(false);
@@ -44,6 +41,7 @@ function Header(props) {
     const panierToggle = (event) => {
         document.body.style.overflow = "hidden";
         setPanierIsToggle(!panierIsToggle);
+        console.log(panierIsToggle);
     };
   
     function HamburgerToggle() {
@@ -108,7 +106,7 @@ function Header(props) {
                                 </Link> 
                                 :
                                 <img ref={profilIconRef} src={profil} className="w-[35px]" onClick={profilToggle}></img>}
-                                <img src={shop} onClick={panierToggle} ref={panierIconRef} className="w-[35px]"></img>
+                                <PanierIcon panierToggle={panierToggle} panierIconRef={panierIconRef} />
                                 <button onClick={HamburgerToggle} className="p-2 rounded-lg md:hidden">
                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
                                         <rect x="6" y="8" width="20" height="2"/>
