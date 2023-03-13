@@ -1,4 +1,4 @@
-import CartInfos from "./CartInfos";
+import CartInfos from "../../../components/account/myCart/CartInfos";
 import CardProduct from "../../../components/panier/cardProduct.jsx/CardProduct";
 import { cartContext } from "../../../context/CartProvider";
 import { useContext, useState } from "react";

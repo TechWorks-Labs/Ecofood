@@ -10,6 +10,7 @@ import Account from './account/Account';
 import MyProfil from './account/myProfil/MyProfil';
 import MyAddress from './account/myAddress/MyAddress';
 import MyCart from './account/myCart/MyCart';
+import Checkout from './account/checkout/checkout';
 
 class Site extends Component {
     render() {
@@ -25,6 +26,7 @@ class Site extends Component {
                     <Route path="/account/myprofil" exact element={<MyProfil />} />
                     <Route path="/account/myaddress" exact element={<MyAddress />} />
                     <Route path="/account/myCart" exact element={<MyCart />} />
+                    <Route path="/checkout" exact element={<Checkout />} />
                     <Route path="*" element={<span>ERROR 404</span>} />   
                 </Routes>
             </AllProvider>
