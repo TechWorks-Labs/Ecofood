@@ -4,6 +4,7 @@ import Products from './Products';
 import Product from './Product';
 import Home from './Home';
 import Employees from './Employees';
+import Orders from './Orders';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/product/new" element={<Product />} />
         <Route path="/products" element={<Products />} />
         <Route path="/employees" element={<Employees />} />
+        <Route path="/orders" element={<Orders />} />
       </Routes>
     </div>
   )

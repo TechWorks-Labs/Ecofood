@@ -22,4 +22,24 @@ class OrderModel extends Model
         $smtp->closeCursor();
         return $OrderProducts;          
     }
+
+    public function getAllOrders()
+    {
+        $req = "SELECT
+        o.id_order,
+        o.status,
+        o.total_price,
+        u_d.name,
+        u_d.lastname
+        FROM `order` AS o
+        JOIN user_data AS u_d ON u_d.id_user = o.id_user
+        ;";
+
+        $bdd = $this->getBdd();
+        $smtp = $bdd->prepare($req);
+        $smtp->execute();
+        $orders = $smtp->fetchAll(\PDO::FETCH_ASSOC);
+        $smtp->closeCursor();
+        return $orders;         
+    }
 }

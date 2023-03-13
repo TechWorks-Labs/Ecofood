@@ -6,8 +6,8 @@ use Models\OrderModel;
 
 class OrderController
 {
-    private int $id_order;
-    private $model;
+    private int $id_order = 0;
+    private $model = null;
 
     public function __construct()
     {
@@ -99,5 +99,12 @@ class OrderController
             http_response_code(500);
             echo json_encode(['error' => $error->getMessage()]);
         }
+    }
+
+    public function getAllOrders()
+    {
+        $this->setHeaders();
+        $orders = $this->model->getAllOrders();
+        $this->model->sendJSON($orders);
     }
 }
