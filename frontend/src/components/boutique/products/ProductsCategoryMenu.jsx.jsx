@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useContext } from "react";
-import { productsContext } from "../../../../context/ProductsProvider";
+import { productsContext } from "../../../context/ProductsProvider";
 
-export default function ProductCategoryBanner(){
+export default function ProductsCategoryMenu(){
 
     const {setParameterFilter} = useContext(productsContext);
     const {parameterFilter} = useContext(productsContext);

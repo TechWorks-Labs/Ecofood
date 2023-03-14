@@ -1,12 +1,12 @@
-import Item from "../../homepage/Item"
-import VerticalFilters from "./VerticalFilters"
+import ProductCard from "../../product/ProductCard"
+import VerticalFilters from "./productsFilterMenu/ProductsFilterMenu"
 import { useEffect } from "react"
 import { useContext } from "react"
 import { productsContext } from "../../../context/ProductsProvider"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function ProductList(props) {
+export default function ProductsGrid(props) {
     const { setProducts, products } = useContext(productsContext);
 
     const handleMoreProduct = () => {
@@ -21,7 +21,7 @@ export default function ProductList(props) {
             if (key < products.maxProduct) {
                 return (
                     <div key={key} className="bg-blue-600 h-[350px] border border-1 border-slate-100">
-                        <Item origin={product.origin} weight={product.weight} name={product.name} product={product} id_product={product.id_product} />
+                        <ProductCard origin={product.origin} weight={product.weight} name={product.name} product={product} id_product={product.id_product} />
                     </div>
                 )
             }

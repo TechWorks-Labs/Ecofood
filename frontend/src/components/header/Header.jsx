@@ -2,22 +2,25 @@ import React from "react";
 import { useState } from "react";
 import profil from "/src/assets/images/icons/profil.svg";
 import rayon from "/src/assets/images/icons/hamburger.svg";
-import authService from "../../services/auth.service";
+import authService from "../../services/auth.token";
 import { useContext } from "react";
 import { userContext } from "../../context/UserProvider";
 import { Link } from 'react-router-dom';
 import { useRef } from "react";
 import { useEffect } from "react";
 import { productsContext } from "../../context/ProductsProvider";
-import Panier from "../panier/Panier";
-import ProfilSidebar from "./profilSidebar/ProfilSideBar";
+import CartSlideDrawer from "../CART/CartSlideDrawer";
+import AccountDropdown from "./accountDropdown/accountDropdown";
 import PanierIcon from "./icons/PanierIcon";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Header(props) {
-
+    const navigate = useNavigate();
+    
     const { setParameterFilter, parameterFilter } = useContext(productsContext);
-    const { user, setUser } = useContext(userContext);
-  
+    const { userToken, setUserToken } = useContext(userContext);
     const [hamburgerIsToggle, setHamburgerIsToggle] = useState(false);
     const [profilIsToggle, setProfilIsToggle] = useState(false);
     const [panierIsToggle, setPanierIsToggle] = useState(false);
@@ -49,14 +52,20 @@ function Header(props) {
     }
   
     function profilToggle() {
-      if(user.valid){
+      if(userToken.valid){
         document.body.style.overflow = "hidden";
         setProfilIsToggle(!profilIsToggle);
       }
     }
   
+    const removeUserDatasFromLocalStorage = () => {
+        localStorage.removeItem("userDatas");
+    }
+
     const handleLogout = () => {
+        console.log("logout");
       authService.logout();
+      removeUserDatasFromLocalStorage();
       window.location.reload();
     };
   
@@ -70,24 +79,20 @@ function Header(props) {
 
     return(
         <div className="w-full h-full sticky top-0 z-50">
-            <Panier panierSlideRef = {panierSlideRef} panierIsToggle = {panierIsToggle} panierToggle={panierToggle}/>
+            <CartSlideDrawer panierSlideRef = {panierSlideRef} panierIsToggle = {panierIsToggle} panierToggle={panierToggle}/>
 
             <div className="z-20 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
                     <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2 relative">
                     {/* vertical toolbar user detail */}
-                    <ProfilSidebar profilSidebarRef={profilSidebarRef} profilIsToggle={profilIsToggle} setProfilIsToggle={setProfilIsToggle} user={user} handleLogout={handleLogout}/> 
+                    <AccountDropdown profilSidebarRef={profilSidebarRef} profilIsToggle={profilIsToggle} setProfilIsToggle={setProfilIsToggle} user={userToken} handleLogout={handleLogout}/> 
 
                         <div className="flex flex-row items-center justify-center gap-x-4">
-                            <button className="bg-white w-[110px] h-[40px] p-1 rounded-2xl font-semibold text-md flex flex-row justify-center items-center gap-x-1">
-                            <img src={rayon} className="w-[25px] border border-[1.3px] bg-slate-800 border-white rounded-full p-1"/> 
-                                Boutique
-                            </button>
                             <Link to="/">
-                                <h1 className="text-white font-semibold text-xl">ECOFOOD</h1>
+                                <h1 className="text-white font-semibold text-2xl">ECOFOOD</h1>
                             </Link>
                         </div>
 
-                        <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-6 text-white">
+                        <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-10 text-white">
                             <li onClick={()=>setParameterFilter({... parameterFilter, type : "1"})}>
                                 <Link to="/boutique">FRUITS</Link>
                             </li>
@@ -101,11 +106,14 @@ function Header(props) {
 
                         <div  className="flex flex-row items-center justify-center ">
                             <div  className="flex flex-row justify-around items-center min-w-[180px] p-2 md:min-w-[110px]">
-                                {!user.valid ? <Link to ="/signin">
-                                    <img ref={profilIconRef} src={profil} className="w-[35px]"  onClick={profilToggle}></img>
+                                {!userToken.valid ?
+                                <Link to ="/signin">
+                                    <img ref={profilIconRef} src={profil} className="w-[35px]"></img>
                                 </Link> 
                                 :
-                                <img ref={profilIconRef} src={profil} className="w-[35px]" onClick={profilToggle}></img>}
+                                    <img ref={profilIconRef} src={profil} className="w-[35px]" onClick={profilToggle} />
+                                }
+
                                 <PanierIcon panierToggle={panierToggle} panierIconRef={panierIconRef} />
                                 <button onClick={HamburgerToggle} className="p-2 rounded-lg md:hidden">
                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="white">
