@@ -1,8 +1,8 @@
-import FilterContent from "./filtercontent/FilterContent"
+import FilterContent from "./FilterOptionMenu"
 import { useContext } from "react";
-import { productsContext } from "../../../context/ProductsProvider";
+import { productsContext } from "../../../../context/ProductsProvider";
 
-export default function VerticalFilters(){
+export default function ProductsFilerMenu(){
     const {state: {brand}} = useContext(productsContext);
     const {state: {origin}} = useContext(productsContext);
     const {setParameterFilter} = useContext(productsContext);

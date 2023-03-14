@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^2.0.0",
+    "@stripe/stripe-js": "^1.48.0",
     "axios": "^1.2.2",
     "crypto-js": "^4.1.1",
     "formik": "^2.2.9",

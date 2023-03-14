@@ -3,8 +3,10 @@ import { productsContext } from "../../../context/ProductsProvider"
 import { cartContext } from "../../../context/CartProvider";
 import paymentService from "../../../services/payment.service";
 import { userContext } from "../../../context/UserProvider";
+import { useNavigate } from 'react-router-dom';
 
 export default function CartInfos(props){
+    const navigate = useNavigate();
     
     const priceCart = (shoppingList) => {
         let priceCart = null;
@@ -35,7 +37,7 @@ export default function CartInfos(props){
                 <div className=" flex-1 h-[1px] w-full border border-1 border-dotted border-slate-300"></div>
                 <span className="font-bold text-xl">{totalPriceCart}$</span>
             </div>
-            <button onClick={paymentService.validCart(user.id_user,shoppingList.products)} className="w-[200px] bg-red-500 text-white font-semibold rounded-xl p-2">Valider mon panier</button>
+            <button onClick={()=>paymentService.validCart(user.id_user,shoppingList.products, navigate)} className="w-[200px] bg-red-500 text-white font-semibold rounded-xl p-2">Valider mon panier</button>
         </div>
     )
 }

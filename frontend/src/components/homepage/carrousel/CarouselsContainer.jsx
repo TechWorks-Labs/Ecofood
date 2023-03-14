@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "./Carousel";
 import { useContext } from "react";
-import { productsContext } from "../../context/ProductsProvider";
+import { productsContext } from "../../../context/ProductsProvider";
 
 export default function CarouselsContainer(props){
     const { state } = useContext(productsContext);
@@ -10,7 +10,7 @@ export default function CarouselsContainer(props){
     const meat = state.fruits;
     return(
         <div>
-            <div className="w-full bg-[#F7F7F7] mb-[60px] p-5">
+            <div className="w-full bg-[#E6EDF0] mb-[60px] p-5">
                 <div className=" mx-auto flex flex-col items-center justify-around min-w-[300px] max-w-7xl">
                     <Carousel itemsProduct={fruits} title={"FRUITS DE SAISON"} inputName={'carouselFruit'} />
                 </div>
@@ -20,7 +20,7 @@ export default function CarouselsContainer(props){
                 <Carousel itemsProduct={vegetable} title={"LEGUMES DU JARDIN"} inputName={'carouselVegetable'} />
                 </div>
             </div>
-            <div className="w-full bg-[#F7F7F7] p-5">
+            <div className="w-full bg-[#E6EDF0] p-5">
                 <div className=" mx-auto flex flex-col items-center justify-around min-w-[300px] max-w-7xl">
                     <Carousel itemsProduct={meat} title={"VIANDES LOCALES"} inputName={'carouselMeat'} />
                 </div>

@@ -1,6 +1,6 @@
-import HeaderBanner from "../../components/boutique/headerBanner/HeaderBanner"
-import ProductList from "../../components/boutique/productlist/ProductList"
-import ProductCategoryBanner from "../../components/boutique/productlist/productCategoryBanner/ProductCategoryBanner"
+import HeaderBanner from "../../components/boutique/heroBanner/HeroBanner"
+import ProductsGrid from "../../components/boutique/products/ProductsGrid"
+import ProductCategoryBanner from "../../components/boutique/products/ProductsCategoryMenu.jsx"
 import { useContext } from "react"
 import { productsContext } from "../../context/ProductsProvider"
 import { useEffect } from "react";
@@ -18,7 +18,7 @@ export default function Boutique(){
             <div className="max-w-7xl h-screen mx-auto">
                 <HeaderBanner />
                 <ProductCategoryBanner />
-                <ProductList products={product}/>
+                <ProductsGrid products={product}/>
             </div>
         )
 }

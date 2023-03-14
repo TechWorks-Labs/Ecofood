@@ -4,55 +4,38 @@ import Footer from '../../components/footer/footer';
 import { useState, useEffect } from 'react';
 import { object } from 'yup';
 import axios from 'axios';
-import authService from '../../services/auth.service';
+import auth from '../../services/auth.token';
 import jwt_decode from "jwt-decode";
 import { userContext } from '../../context/UserProvider';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function SignInPage (){
-    
-const {user, setUser, getUserDatas, localStorageSetEncryptAESItem} = useContext(userContext);
+export default function SignInPage() {
+    const navigate = useNavigate();
+    const { userToken, setUserFromLoginToken } = useContext(userContext);
 
-    const handleLoginForm = (values) => {
-         authService.login(values);
-    }
-
-    const setUserIsTokenAuth = () => {
-        authService.validateTokenSignature();
-        
-        if(authService.TokenUserIsExist()){  
-          const token = authService.getTokenInSessionStorage();
-          const tokenDecoded = jwt_decode(token);
-          setUser({
-            ...user,
-            id_user : tokenDecoded.id_user,
-            email : tokenDecoded.email,
-            exp : tokenDecoded.exp,
-            valid : true,
-          });
-          localStorageSetEncryptAESItem('user', user);
-          getUserDatas(tokenDecoded.email);
+    const handleLoginForm = async(credentials) => {
+        if (await auth.login(credentials)){
+            console.log("true");
+            setUserFromLoginToken();
+            navigate('/');
         } else {
-            console.log('le token n\'existe pas');
+            console.log("connexion échouée")
         }
     }
 
-    useEffect(()=>{
-        setUserIsTokenAuth();
-    },[])
-
-    return(
-            <>
-                {user.valid ?
+    return (
+        <>
+            {userToken.valid ?
                 <div>
-                    <span>{user.email}</span> 
-                    <span>{user.lastname}</span> 
-                    <span>{user.exp}</span> 
+                    <span>{userToken.email}</span>
+                    <span>{userToken.lastname}</span>
+                    <span>{userToken.exp}</span>
                 </div>
-                 :
-                 <SignInForm submit={handleLoginForm} />}
-               
-                <Footer css="absolute bottom-0" />
-            </>
+                :
+                <SignInForm submit={handleLoginForm} />}
+
+            <Footer css="absolute bottom-0" />
+        </>
     )
 }
