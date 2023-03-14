@@ -5,7 +5,7 @@ import { Field, withFormik } from "formik";
 import * as Yup from 'yup';
 
 function AddressForm(props) {
-    const { profil, user } = useContext(userContext)
+    const { userDatas, userToken } = useContext(userContext)
     const [profilIsLoading, setProfilIsLoading] = useState(false);
     const [modifyAddress, setModifyAddress] = useState(false);
 
@@ -15,16 +15,16 @@ function AddressForm(props) {
 
 
     useEffect(() => {
-        if (Object.keys(profil).length !== 0) {
+        if (Object.keys(userDatas).length !== 0) {
             setProfilIsLoading(true);
         }
-    }, [profil])
+    }, [userDatas])
 
     return (
         <div>
             <div className="p-10">
                 {profilIsLoading && !modifyAddress ?
-                    <CurrentAddress profil={profil} onClick={handleModifyAddress} />
+                    <CurrentAddress userDatas={userDatas} onClick={handleModifyAddress} />
                     :
                     <div className="w-full flex flex-col gap-y-4">
                         <h2 className="font-bold text-3xl">Adresse de facturation</h2>
@@ -81,10 +81,10 @@ function AddressForm(props) {
 export default withFormik({
     enableReinitialize: true,
     mapPropsToValues: (props) => ({
-        address: props.profil.address,
-        postal_code: props.profil.postal_code,
-        city: props.profil.city,
-        state: props.profil.state
+        address: props.userDatas.address,
+        postal_code: props.userDatas.postal_code,
+        city: props.userDatas.city,
+        state: props.userDatas.state
     }),
     validationSchema: Yup.object().shape({
 

@@ -2,6 +2,7 @@ import shop from "/src/assets/images/icons/shopping-bag-header.svg";
 import { useContext } from "react"
 import { productsContext } from "../../context/ProductsProvider";
 import { cartContext } from "../../context/CartProvider";
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function ButtonShop(props) {
@@ -36,6 +37,7 @@ export default function ButtonShop(props) {
        const numberProductsInCart = numberProductsInShoppingList(newCartSorted);
        const totalPriceInCart = priceCart(newCartSorted);
        setShoppingList({...shoppingList, priceCart: totalPriceInCart, numberProducts : numberProductsInCart,  products : newCartSorted});
+       toast("L'article est dans votre panier !", {position : "top-right"});
       };
       
 

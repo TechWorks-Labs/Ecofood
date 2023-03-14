@@ -1,7 +1,7 @@
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import { useLocation } from 'react-router-dom';
-import CheckoutForm from '../../../components/account/checkout/checkoutForm';
+import CheckoutForm from '../../../components/checkout/checkoutForm';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe('pk_test_51MbrU0IPtrTy84mI2qsmkNWQFu7vNxckq5SpWyM7176iu2UCKsGRmf8cSA3BODai54Q747gsoPAkQEmI7HDwZhIP000HspM04k');

@@ -1,8 +1,8 @@
 import React from "react";
-import Button from "../button/Button";
+import ButtonCartOfDay from "../button/ButtonCartOfDay";
 import background from "/src/assets/images/background/backgroundEcofood.png";
 
-export default function Presentation(props){
+export default function HeroBanner(props){
 
     return(
             <div className="min-w-[300px] max-w-6xl h-[600px] mx-auto flex flex-row justify-center items-center p-10">
@@ -15,7 +15,7 @@ export default function Presentation(props){
                     en toute simplicité.
                 </span>
                     
-                <Button css={"self-center md:self-start"}/>
+                <ButtonCartOfDay css={"self-center md:self-start"}/>
             </div>
 
             <img src={background} className="hidden md:inline-flex md:w-[450px] lg:w-[600px]"></img>

@@ -11,6 +11,8 @@ import MyProfil from './account/myProfil/MyProfil';
 import MyAddress from './account/myAddress/MyAddress';
 import MyCart from './account/myCart/MyCart';
 import Checkout from './account/checkout/checkout';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Site extends Component {
     render() {
@@ -25,10 +27,21 @@ class Site extends Component {
                     <Route path="/account" exact element={<Account />} />
                     <Route path="/account/myprofil" exact element={<MyProfil />} />
                     <Route path="/account/myaddress" exact element={<MyAddress />} />
-                    <Route path="/account/myCart" exact element={<MyCart />} />
+                    <Route path="/account/mycart" exact element={<MyCart />} />
                     <Route path="/checkout" exact element={<Checkout />} />
                     <Route path="*" element={<span>ERROR 404</span>} />   
                 </Routes>
+
+                    <ToastContainer
+                    position="top-center"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    theme="colored"
+                    />
             </AllProvider>
         )
     }

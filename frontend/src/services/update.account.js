@@ -2,8 +2,8 @@ import axios from "axios";
 
 const hostname = 'http://localhost:9000';
 
-const profil = (value) => {
-    axios.post(`${hostname}/account/profil`, value)
+const userDatas = (value) => {
+    axios.post(`${hostname}/account/userDatas`, value)
     .then(response => console.log(response))
     .catch(error => console.log(error));    
 } 
@@ -15,7 +15,7 @@ const address = (value) => {
 }
 
 const update = {
-    profil,
+    userDatas,
     address
 }
 export default update;

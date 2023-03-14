@@ -6,55 +6,47 @@ import update from "../../../services/update.account";
 import { userContext } from "../../../context/UserProvider";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ButtonAccount from "../../../components/button/ButtonAccount";
 
-export default function MyProfil(props){
-    const { user, getUserDatas, profil, setProfil }  = useContext(userContext)
+export default function MyProfil(props) {
+  const { userToken, getUserDatas, userDatas, setUserDatas } = useContext(userContext)
+  const handleProfilSubmit = async (value) => {
+    const updatedUserDatas = {
+      userId: userToken.id_user,
+      civility: value.civility,
+      name: value.name,
+      lastname: value.lastname,
+      day: value.day,
+      month: value.month,
+      year: value.year,
+      email: value.email,
+      emailConfirmation: value.emailConfirmation,
+      password: value.password,
+      passwordConfirmation: value.passwordConfirmation,
+      isemailrequired: value.isemailrequired,
+      ispasswordrequired: value.ispasswordrequired,
+    };
 
-    const handleProfilSubmit = async (value) => {
-        const updatedProfil = {
-          userId: user.id_user,
-          civility: value.civility,
-          name: value.name,
-          lastname: value.lastname,
-          day: value.day,
-          month: value.month,
-          year: value.year,
-          email: value.email,
-          emailConfirmation: value.emailConfirmation,
-          password: value.password,
-          passwordConfirmation: value.passwordConfirmation,
-          isemailrequired: value.isemailrequired,
-          ispasswordrequired: value.ispasswordrequired,
-        };
-      
-        try {
-          await update.profil(updatedProfil);
-          setProfil(updatedProfil);
-          toast("Le formulaire est valide !");
-        } catch (error) {
-          console.log(error);
-          toast("Une erreur est survenue lors de la mise à jour du profil.");
-        }
-      };
+    try {
+      await update.userDatas(updatedUserDatas);
+      setUserDatas(updatedUserDatas);
+      toast('Profil mis à jour !', {
+        position: 'top-right', hideProgressBar: true, autoClose: 1500
+      });
+    } catch (error) {
+      console.log(error);
+      toast.warn("Une erreur est survenue lors de la mise à jour du profil.", { position: "bottom-center", autoClose: 5000 });
+    }
+  };
 
-    
-    return(
-        <div className="max-w-4xl h-screen mx-auto bg-slate-100 p-10">
-            <div className="w-full  bg-white border border-1 border-slate-200 shadow-lg">
-                <ProfilForm submit={handleProfilSubmit} profil={profil}/>
 
-                <ToastContainer
-                position="top-center"
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                theme="colored"
-                />
-                
-            </div>
-        </div>
-    )
+  return (
+    <div className="max-w-4xl h-screen mx-auto bg-slate-100 p-10">
+      <div className="mb-3">
+      </div>
+      <div className="w-full  bg-white border border-1 border-slate-200 shadow-lg">
+        <ProfilForm submit={handleProfilSubmit} profil={userDatas} />
+      </div>
+    </div>
+  )
 };

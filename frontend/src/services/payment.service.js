@@ -1,6 +1,5 @@
 import axios from "axios";
 const hostname = 'http://localhost:9000';
-import { Link, useNavigate } from "react-router-dom";
 
 export const validCart = (user_id, value, navigate) => {
     const cart = {

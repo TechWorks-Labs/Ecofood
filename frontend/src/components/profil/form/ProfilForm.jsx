@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { useEffect } from "react";
 import { userContext } from "../../../context/UserProvider";
 import { Link } from "react-router-dom";
+import ButtonAccount from "../../button/ButtonAccount";
+
 function ProfilForm(props){
 
     const [isEmailRequired, SetisEmailRequired] = useState(false);
@@ -160,7 +162,7 @@ function ProfilForm(props){
                         <span>* Champs obligatoires</span>
                         <div className="flex flex-row justify-center items-center gap-x-2">
                         <Link to={'/account'}>
-                            <button className="w-full h-[45px] mt-3 sm:mt-0 sm:w-[90px] sm:h-[35px] flex justify-center items-center bg-white p-1 rounded-md text-black font-medium border border-1 border-slate-400 hover:duration-300 hover:bg-slate-800 hover:text-white">Retour</button>
+                            <ButtonAccount />
                         </Link>
                             <button type='submit' onClick={props.handleSubmit} className="w-full h-[45px] mt-3 sm:mt-0 sm:w-[90px] sm:h-[35px] flex justify-center items-center bg-white p-1 rounded-md text-slate-800  border border-1 border-slate-400 font-medium hover:duration-300 hover:bg-slate-800 hover:text-white">Suivant</button>
                         </div>

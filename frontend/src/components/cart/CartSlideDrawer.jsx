@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import { cartContext } from "../../context/CartProvider";
 import banane from "/src/assets/images/products/banane.png";
-import CardProduct from "./cardProduct.jsx/CardProduct";
+import CartProducts from "./CartProducts";
 
-export default function Panier(props) {
+export default function CartSlideDrawer(props) {
     const { shoppingList } = useContext(cartContext);
     const panierSlideRef = props.panierSlideRef;
     const panierIsToggle = props.panierIsToggle;
@@ -28,7 +28,7 @@ export default function Panier(props) {
                 {shoppingList.products.length > 0 ?
                     <div className="p-3">
                         <span className="font-bold text-lg">Votre panier Ecofood est de {shoppingList.priceCart} euros</span>
-                        <CardProduct />
+                        <CartProducts />
                     </div>
                     :
                     <div className="mt-10">

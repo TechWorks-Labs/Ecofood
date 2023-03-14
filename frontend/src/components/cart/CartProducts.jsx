@@ -1,8 +1,8 @@
-import { cartContext } from "../../../context/CartProvider"
+import { cartContext } from "../../context/CartProvider"
 import { useContext } from "react"
 import banane from "/src/assets/images/products/banane.png";
 
-export default function CardProduct() {
+export default function CartProducts() {
     const { shoppingList, removeProductFromCartByEvent } = useContext(cartContext);
 
     const Products = () => {
