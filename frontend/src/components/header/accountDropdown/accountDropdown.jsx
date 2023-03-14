@@ -42,7 +42,7 @@ export default function AccountDropdown(props){
                         {HandleLinkTo("/account/myorders", "Mes commandes")}
                     </div>
                 </div>
-                <ButtonCustom onClic={props.handleLogout} title="Déconnexion"/>
+                <ButtonCustom onClick={props.handleLogout} title="Déconnexion"/>
             </div>
     )
 }

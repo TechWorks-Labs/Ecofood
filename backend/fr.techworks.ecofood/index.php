@@ -60,12 +60,12 @@ $router->post('/order/new', 'order.newOrder');
 $router->get('/order/checkout', 'order.checkout');
 
 // ACCOUNT
-$router->get('/account/profil/:email','user.getUserDatasFromEmail')
+$router->get('/account/userDatas/:email','user.getUserDatasFromEmail')
     ->with('email', '^[^\s@]+@[^\s@]+\.[^\s@]+$');
 $router->post('/account/register', 'user.setUserIdentifiers');
 $router->post('/account/login', 'user.authenticateUser');
-$router->post('/account/token/verification', 'user.validateTokenSignature');
-$router->post('/account/profil','user.setUserProfil');
+$router->post('/account/token/expiration', 'user.extendJwtExpiration');
+$router->post('/account/userDatas','user.setUserDatas');
 $router->post('/account/address','user.setUserAddress');
 
 $router->run();

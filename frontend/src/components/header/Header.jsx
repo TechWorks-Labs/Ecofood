@@ -10,7 +10,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { productsContext } from "../../context/ProductsProvider";
 import CartSlideDrawer from "../CART/CartSlideDrawer";
-import ProfilSidebar from "./accountDropdown/accountDropdown";
+import AccountDropdown from "./accountDropdown/accountDropdown";
 import PanierIcon from "./icons/PanierIcon";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
@@ -63,6 +63,7 @@ function Header(props) {
     }
 
     const handleLogout = () => {
+        console.log("logout");
       authService.logout();
       removeUserDatasFromLocalStorage();
       window.location.reload();
@@ -83,7 +84,7 @@ function Header(props) {
             <div className="z-20 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
                     <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2 relative">
                     {/* vertical toolbar user detail */}
-                    <ProfilSidebar profilSidebarRef={profilSidebarRef} profilIsToggle={profilIsToggle} setProfilIsToggle={setProfilIsToggle} user={userToken} handleLogout={handleLogout}/> 
+                    <AccountDropdown profilSidebarRef={profilSidebarRef} profilIsToggle={profilIsToggle} setProfilIsToggle={setProfilIsToggle} user={userToken} handleLogout={handleLogout}/> 
 
                         <div className="flex flex-row items-center justify-center gap-x-4">
                             <Link to="/">

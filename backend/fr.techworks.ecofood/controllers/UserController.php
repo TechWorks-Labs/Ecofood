@@ -75,7 +75,7 @@ class UserController
     }
 
 
-    public function validateTokenSignature()
+    public function extendJwtExpiration()
     {
         try {
             $this->CorsHeader();
@@ -83,9 +83,11 @@ class UserController
             // token decode for the verification timestamp
             $user = json_decode(file_get_contents('php://input'));
             $token = $user->user;
-            // Le token est valide
+
+            // Le token est décodé
             $decoded = JWT::decode($token, new Key('!tns@o)%-0v#n*r3$gu05%1+tj6zbb)w9z=9w73=0^q=yj9r%-', 'HS256'));
 
+            // Si le token est encore valide (expiration)
             if (isset($decoded)) {
                 // je prolonge l'expiration du token
                 $payload = array(
@@ -120,7 +122,7 @@ class UserController
         echo json_encode($user);
     }
 
-    public function setUserProfil()
+    public function setUserDatas()
     {
         $this->CorsHeader();
         // récupère les données du formulaire
@@ -128,7 +130,6 @@ class UserController
         $email = $user->email;
         $password = $user->password;
         $user_id = $user->userId;
-
         // update user password
         $this->setUserPassword($password, $user_id);
         // update user email
