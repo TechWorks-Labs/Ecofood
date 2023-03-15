@@ -51,7 +51,7 @@ input[type="radio"]:checked {
   right: 0px;
   height: 100vh;
   background-color: white;
-  width: 300px;
+  width: 340px;
   display: flex;
   flex-direction: column;
   justify-items: center;
