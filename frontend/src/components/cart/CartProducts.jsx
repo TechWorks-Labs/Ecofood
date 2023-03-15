@@ -27,7 +27,7 @@ export default function CartProducts() {
                                 <span className="text-[1em] text-red-600 font-bold">{product.price} $</span>
                                 <span className="text-[0.8em]">{product.weight}$/Kg</span>
                             </div>
-                            <button data-id={product.id_product} data-quantity={product.quantity} data-price={product.price} onClick={(e) => removeProductFromCartByEvent(e)} className="border border-1 border-slate-300 p-1 w-[30px] text-slate-300">X</button>
+                            <button data-id={product.id_product} data-quantity={product.quantity} data-price={product.price} onClick={(e) => removeProductFromCartByEvent(e)} className="border border-1 border-slate-300 p-1 w-[30px] text-slate-300 hover:duration-500 hover:bg-red-700">X</button>
                         </div>
                     </div>
 

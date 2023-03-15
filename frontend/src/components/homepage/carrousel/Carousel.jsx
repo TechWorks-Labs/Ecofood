@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import Item from "../../product/ProductCard";
 import arrowLeft from '../../../assets/images/icons/arrow-left.svg';
 import arrowRight from '../../../assets/images/icons/arrow-right.svg';
@@ -58,17 +58,19 @@ export default function Carousel(props) {
         }
       });
     }
-  }
+  };
 
 
-  const translateItemByInputRadio = (event) => {
-    const inputID = parseInt(event.target.id);
-
+  const translateItemByInputRadio = (e) => {
+    const inputID = parseInt(e.target.id);
     itemsRef.forEach(item => {
       item.current.style.transform = 'translateX(-' + inputID * (item.current.offsetWidth) + 'px';
     });
   }
 
+  useEffect(() => {
+
+  }, []);
 
   useEffect(() => {
     // initalisation carousel useState
@@ -104,12 +106,34 @@ export default function Carousel(props) {
 
       </div>
       <div className="hidden md:inline-flex carrousel_radio flex flex-row items-center justify-around w-[140px] mt-8">
-        <input type="radio" name={props.inputName} id="0" className="bg-red-400" onChange={(e) => translateItemByInputRadio(e)} />
-        <input type="radio" name={props.inputName} id="1" onChange={(e) => translateItemByInputRadio(e)} />
-        <input type="radio" name={props.inputName} id="2" onChange={(e) => translateItemByInputRadio(e)} />
-        <input type="radio" name={props.inputName} id="3" onChange={(e) => translateItemByInputRadio(e)} />
+
+          <input type="radio"
+            name={props.inputName}
+            defaultChecked 
+            id="0"
+            onChange={(e) => translateItemByInputRadio(e)}
+          />
+
+
+        <input type="radio"
+          name={props.inputName}
+          id="1"
+          onChange={(e) => translateItemByInputRadio(e)}
+        />
+
+        <input type="radio"
+          name={props.inputName}
+          id="2"
+          onChange={(e) => translateItemByInputRadio(e)}
+        />
+        <input type="radio"
+          name={props.inputName}
+          id="3"
+          onChange={(e) => translateItemByInputRadio(e)}
+        />
+
       </div>
-      <button className="bg-[#EC3434] w-[160px] h-[45px] text-[0.9rem] p-2 rounded-lg text-white mt-5">TOUT CONSULTER</button>
+      <button className="bg-red-500 w-[160px] h-[45px] text-[0.9rem] p-2 rounded-lg text-white mt-5 duration-500 hover:bg-red-700 hover:duration-500">TOUT CONSULTER</button>
     </div>
   )
 };

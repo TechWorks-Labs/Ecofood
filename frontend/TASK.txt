@@ -1,6 +1,6 @@
 -> bogues 
-    -> Homepage -> Caroussel checked
-    -> Homepage -> Caroussel checked red Color
+    -> Homepage -> Caroussel checked -- CHECK
+    -> Homepage -> Caroussel checked red Color -- CHECK
     -> header/footer in all page
     -> fix "link to" dropdown menu -- CHECK
 
@@ -22,8 +22,8 @@
     -> MYORDERS
         -> component in personnal profil
     -> DROPDOWN menu
-        -> créé composant :hover slate-800 + hover:text-white
-        -> remplacer div + HandleLinkTo
+        -> créé composant :hover slate-800 + hover:text-white -- CHECK
+        -> remplacer div + HandleLinkTo -- CHECK
 -> refactoring 
     -> panier
         -> fix horizontale move
