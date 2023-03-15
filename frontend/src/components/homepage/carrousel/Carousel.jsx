@@ -108,6 +108,7 @@ export default function Carousel(props) {
       <div className="hidden md:inline-flex carrousel_radio flex flex-row items-center justify-around w-[140px] mt-8">
 
           <input type="radio"
+            className="carousel-input"
             name={props.inputName}
             defaultChecked 
             id="0"
@@ -116,17 +117,20 @@ export default function Carousel(props) {
 
 
         <input type="radio"
+          className="carousel-input"
           name={props.inputName}
           id="1"
           onChange={(e) => translateItemByInputRadio(e)}
         />
 
         <input type="radio"
+          className="carousel-input"
           name={props.inputName}
           id="2"
           onChange={(e) => translateItemByInputRadio(e)}
         />
         <input type="radio"
+          className="carousel-input"
           name={props.inputName}
           id="3"
           onChange={(e) => translateItemByInputRadio(e)}

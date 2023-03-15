@@ -3,6 +3,7 @@
     -> Homepage -> Caroussel checked red Color -- CHECK
     -> header/footer in all page
     -> fix "link to" dropdown menu -- CHECK
+    -> fix sécurisation des routes/account/JWT
 
 -> animation
     -> toast login
@@ -24,9 +25,10 @@
     -> DROPDOWN menu
         -> créé composant :hover slate-800 + hover:text-white -- CHECK
         -> remplacer div + HandleLinkTo -- CHECK
+    --> PRODUCTPAGE
 -> refactoring 
     -> panier
-        -> fix horizontale move
+        -> fix horizontale move -- CHECK
         -> fix name component (CartSlideDrawer) -- CHECK
         -> fix name variable and function "panier" a "cart" -- CHECK
     -> dropdown myProfil

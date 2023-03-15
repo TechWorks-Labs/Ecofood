@@ -18,7 +18,7 @@ export default function CartSlideDrawer(props) {
             // sinon fermeture
             "cart-slide-drawer"
         }>
-            <div className="w-full h-[200px] shadow-lg flex flow flex-row justify-center items-center">
+            <div className="min-w-[340px] h-[200px] shadow-lg flex flow flex-row justify-center items-center">
                 <span className="font-bold text-2xl">Mon panier</span>
                 <a href="" className="absolute right-3" onClick={panierToggle}>
                     <svg width="24" height="24" viewBox="0 0 24 24">
@@ -29,18 +29,18 @@ export default function CartSlideDrawer(props) {
             <div className="grow overflow-auto">
 
                 {shoppingList.products.length > 0 ?
-                    <div className="p-3">
+                    <div className="min-w-[340px] p-3">
                         <span className="font-bold text-lg">Votre panier Ecofood est de {shoppingList.priceCart} euros</span>
                         <CartProducts />
                     </div>
                     :
-                    <div className="mt-10">
+                    <div className="mt-10 min-w-[340px] w-full flex justify-center ">
                         <span className="font-semibold text-xl">Votre panier est vide</span>
                     </div>}
 
             </div>
 
-            <div className=" bg-white w-full p-3 h-[150px] flex flex-col justify-center border border-slate-200 border-t-1 border-b-0 border-r-0 border-l-0">
+            <div className=" bg-white min-w-[340px] p-3 h-[150px] flex flex-col justify-center border border-slate-200 border-t-1 border-b-0 border-r-0 border-l-0">
                 <span className="float-left mt-5">Total commande : <span className="font-bold">{shoppingList.priceCart} $</span></span>
                 <span className="float-left">Produits: {shoppingList.numberProducts}</span>
                 <Link to={'/account/mycart'}>

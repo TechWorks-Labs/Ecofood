@@ -13,6 +13,7 @@ import MyCart from './account/myCart/MyCart';
 import Checkout from './account/checkout/checkout';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { RequireAuth } from '../services/auth.token';
 
 class Site extends Component {
     render() {
@@ -24,11 +25,11 @@ class Site extends Component {
                     <Route path="/boutique" exact element={<Boutique />} />
                     <Route path="/signin" exact element={<SignIn/>} />
                     <Route path="/mon-compte/creer-mon-compte" exact element={<SignUp />} />
-                    <Route path="/account" exact element={<Account />} />
-                    <Route path="/account/myprofil" exact element={<MyProfil />} />
-                    <Route path="/account/myaddress" exact element={<MyAddress />} />
-                    <Route path="/account/mycart" exact element={<MyCart />} />
-                    <Route path="/checkout" exact element={<Checkout />} />
+                    <Route path="/account" exact element={<RequireAuth><Account /></RequireAuth>} />
+                    <Route path="/account/myprofil" exact element={<RequireAuth><MyProfil /></RequireAuth>} />
+                    <Route path="/account/myaddress" exact element={<RequireAuth><MyAddress /></RequireAuth>} />
+                    <Route path="/account/mycart" exact element={<RequireAuth><MyCart /></RequireAuth>} />
+                    <Route path="/checkout" exact element={<RequireAuth><Checkout /></RequireAuth>} />
                     <Route path="*" element={<span>ERROR 404</span>} />   
                 </Routes>
 

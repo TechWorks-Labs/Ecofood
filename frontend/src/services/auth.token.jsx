@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { Navigate } from 'react-router-dom';
 // const hostname = 'https://ecofood.techworks.fr/api';
 const hostname = 'http://localhost:9000';
 
@@ -44,6 +44,15 @@ const TokenUserIsExist = () => {
     return false;
 }
 
+export const RequireAuth = ({ children }) => {
+    if (TokenUserIsExist()) {
+      return children;
+    } else {
+      return <Navigate to="/signin" replace />
+    }
+  };
+  
+
 const getTokenInSessionStorage = () => {
     return sessionStorage.getItem("userToken");
 }
@@ -69,7 +78,8 @@ const token = {
     getTokenInSessionStorage,
     extendJwtExpiration,
     TokenUserIsExist,
-    logout
+    logout,
+    RequireAuth
 };
 
 export default token;
