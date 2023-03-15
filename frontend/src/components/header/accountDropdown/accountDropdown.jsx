@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import ButtonCustom from '../../button/ButtonCustom';
+import DropdownMenuItem from './DropdownMenuItem';
 
 export default function AccountDropdown(props){
 
@@ -24,23 +25,12 @@ export default function AccountDropdown(props){
             
                 <div className="flex flex-col gap-y-1 w-full">
 
-                    <div className="flex items-center justify-center border border-t-0 border-l-0 border-r-0 border-b-[1.4px] border-slate-200 w-full p-3  hover:bg-slate-400">
-                        {HandleLinkTo("/account", "Espace personnel")}
-                    </div>
-
-                    <div className="flex items-center justify-center border border-t-0 border-l-0 border-r-0 border-b-[1.4px] border-slate-200 w-full p-3  hover:bg-slate-400">
-                        {HandleLinkTo("/account/myprofil", "Mon profil")}
-                    </div>
-
-                    <div className="flex items-center justify-center border border-t-0 border-l-0 border-r-0 border-b-[1.4px] border-slate-200 w-full p-3 hover:bg-slate-400">
-                        {HandleLinkTo("/account/myaddress", "Mon addresse")}
-                    </div>
-                    <div className="flex items-center justify-center border border-t-0 border-l-0 border-r-0 border-b-[1.4px] border-slate-200 w-full p-3 hover:bg-slate-400">
-                        {HandleLinkTo("/account/mycart", "Mon panier")}
-                    </div>
-                    <div className="flex items-center justify-center border border-t-0 border-l-0 border-r-0 border-b-[1.4px] border-slate-200 w-full p-3 hover:bg-slate-400">
-                        {HandleLinkTo("/account/myorders", "Mes commandes")}
-                    </div>
+                    <DropdownMenuItem route={'/account/'} text={'Espace personnel'} HandleToggle={HandleToggle}/>
+                    <DropdownMenuItem route={'/account/myprofil'} text={'Mon profil'} HandleToggle={HandleToggle}/>
+                    <DropdownMenuItem route={'/account/myaddress'} text={'Mon addresse'} HandleToggle={HandleToggle}/>
+                    <DropdownMenuItem route={'/account/mycart'} text={'Mon panier'} HandleToggle={HandleToggle}/>
+                    <DropdownMenuItem route={'/account/myorders'} text={'Mes commandes'} HandleToggle={HandleToggle}/>
+                    
                 </div>
                 <ButtonCustom onClick={props.handleLogout} title="Déconnexion"/>
             </div>

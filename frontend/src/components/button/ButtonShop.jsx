@@ -43,7 +43,7 @@ export default function ButtonShop(props) {
 
 
     return (
-        <button onClick={addProductInShoppingList} className="bg-[#EC3434] rounded-lg p-1 float-right">
+        <button onClick={addProductInShoppingList} className="bg-[#EC3434] hover:bg-red-700 rounded-lg p-1 float-right">
             <img src={shop} data-id={props.id_product} className=" w-[35px] "></img>
         </button>
     )

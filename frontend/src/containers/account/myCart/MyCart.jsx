@@ -1,5 +1,5 @@
 import CartInfos from "../../../components/account/myCart/CartInfos";
-import CartProducts from "../../../components/CART/CartProducts";
+import CartProducts from "../../../components/cart/CartProducts";
 import { cartContext } from "../../../context/CartProvider";
 import { useContext, useState } from "react";
 import ButtonAccount from "../../../components/button/ButtonAccount";

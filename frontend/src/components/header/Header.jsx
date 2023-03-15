@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import profil from "/src/assets/images/icons/profil.svg";
-import rayon from "/src/assets/images/icons/hamburger.svg";
 import authService from "../../services/auth.token";
 import { useContext } from "react";
 import { userContext } from "../../context/UserProvider";
@@ -9,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { useRef } from "react";
 import { useEffect } from "react";
 import { productsContext } from "../../context/ProductsProvider";
-import CartSlideDrawer from "../CART/CartSlideDrawer";
+import CartSlideDrawer from "../cart/CartSlideDrawer";
 import AccountDropdown from "./accountDropdown/accountDropdown";
 import PanierIcon from "./icons/PanierIcon";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +43,6 @@ function Header(props) {
     const panierToggle = (event) => {
         document.body.style.overflow = "hidden";
         setPanierIsToggle(!panierIsToggle);
-        console.log(panierIsToggle);
     };
   
     function HamburgerToggle() {
@@ -63,7 +61,6 @@ function Header(props) {
     }
 
     const handleLogout = () => {
-        console.log("logout");
       authService.logout();
       removeUserDatasFromLocalStorage();
       window.location.reload();
@@ -79,7 +76,7 @@ function Header(props) {
 
     return(
         <div className="w-full h-full sticky top-0 z-50">
-            <CartSlideDrawer panierSlideRef = {panierSlideRef} panierIsToggle = {panierIsToggle} panierToggle={panierToggle}/>
+            <CartSlideDrawer panierSlideRef = {panierSlideRef} panierIsToggle = {panierIsToggle} setPanierIsToggle={setPanierIsToggle} panierToggle={panierToggle}/>
 
             <div className="z-20 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
                     <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2 relative">

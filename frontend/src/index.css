@@ -2,42 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-.productCategoryIsToggle {
-display: flex;
-justify-content: center;
-align-items: center;
-border: solid;
-border-width: 1px;
-border-color: #DC2626;
-padding: 10px;
-color: #DC2626;
+
+input[type="radio"] {
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transform: scale(0.8);
+  /* create custom radiobutton appearance */
+  width: 15px;
+  height: 15px;
+  /* background-color only for content */
+  border: 2px solid #bbbbbb;
+  background-color: white;
+  border-radius: 50%;
 }
 
-.productCategoryIsNotToggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: solid;
-    border-width: 1px;
-    border-color: #CBD5E1;
-    padding: 10px;
+/* appearance for checked radiobutton */
+input[type="radio"]:checked {
+  transition: all 0.2s ease-in;
+  transform: scale(1.5);
+  background-color: #EC3434;
 }
 
-.carousel {
-display: flex;
-flex-direction: row;
-max-width: 1152px;
-width: 100%;
-min-width: 300px;
-overflow: hidden;
+.cart-slide-drawer {
+  transition: all 0.3s ease-in;
+  opacity: 0;
+  z-index: 50;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100vh;
+  background-color: white;
+  width: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  transform: translateX(100%);
+  overflow: hidden;
 }
-.slide {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-.multi-carousel {
-    list-style-type: none;
-    transition: transform 0.6s ease-in-out;
+
+.cart-slide-drawer--isActive  {
+  transition: all 0.3s ease-in;
+  opacity: 1;
+  z-index: 50;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100vh;
+  background-color: white;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  overflow: hidden;
 }
