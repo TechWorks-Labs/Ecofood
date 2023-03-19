@@ -3,7 +3,10 @@
     -> Homepage -> Caroussel checked red Color -- CHECK
     -> header/footer in all page
     -> fix "link to" dropdown menu -- CHECK
-    -> fix sécurisation des routes/account/JWT
+    -> fix sécurisation des routes/account/JWT -- CHECK
+    -> fix dropdown ligne blanche lorsque le cartslide est ouvert -- CHECK
+    -> fix categorie color/hover produits dans boutique -- CHECK
+    -> fix cartslide horizontal scroll -- CHECK
 
 -> animation
     -> toast login
@@ -11,7 +14,7 @@
     -> toast add product in cart -- CHECK
     -> Homepage -> animate the ECOFOOD title
     -> Homepage -> animate button "panier du jour"
-    -> Header -> hover: color logo (profil, cart)
+    -> Header -> hover: color logo (profil, cart) -- CHECK
 
 -> feature
     -> add panier in homepage

@@ -28,11 +28,11 @@ export default function Carousel(props) {
   const getItemsWidth = () => {
     let width = null;
     if (carouselRef.current.offsetWidth < 400) {
-      width = Math.ceil(carouselRef.current.offsetWidth);
+      width = Math.ceil(carouselRef.current.offsetWidth)-16;
     } else if (carouselRef.current.offsetWidth > 400 && carouselRef.current.offsetWidth < 768) {
-      width = Math.ceil((carouselRef.current.offsetWidth) / 2);
+      width = Math.ceil((carouselRef.current.offsetWidth) / 2)-8;
     } else if (carouselRef.current.offsetWidth > 768) {
-      width = Math.ceil((carouselRef.current.offsetWidth) / 4);
+      width = Math.ceil((carouselRef.current.offsetWidth) / 4)-4;
     };
 
     return width;
@@ -43,15 +43,15 @@ export default function Carousel(props) {
       // width renvoie bien une valeur numérique correct
       let width = getItemsWidth();
       return props.itemsProduct.map((item, key) => {
-        if (key < 8) {
+        if (key < 4) {
           return (
-            <li key={key} style={{ width: `${width}px` }} className={`hidden md:inline-flex list-none transition-transform duration-150 ease-in-out border bg-red-400`} ref={itemsRef[key]}>
+            <li key={key} style={{ width: `${width}px` }} className={`hidden md:inline-flex list-none transition-transform duration-150 ease-in-out border`} ref={itemsRef[key]}>
               <Item origin={item.origin} weight={item.weight} name={item.name} id_product={item.id_product} product={item} />
             </li>
           )
         } else {
           return (
-            <li key={key} style={{ width: `${width}px` }} className={`list-none border transition-transform duration-150 ease-in-out bg-red-400`} ref={itemsRef[key]}>
+            <li key={key} style={{ width: `${width}px`, visibility: 'hidden' }} className={`list-none border transition-transform duration-150 ease-in-out`} ref={itemsRef[key]}>
               <Item origin={item.origin} weight={item.weight} name={item.name} id_product={item.id_product} product={item} />
             </li>
           )
@@ -61,10 +61,24 @@ export default function Carousel(props) {
   };
 
 
+  const isProductCardHidden = (ID,key) => {
+    const startHidden = ID*4;
+    const endHidden = startHidden + 3;
+    if(key >= startHidden && key <= endHidden){
+      return false;
+    }
+    return true;
+  } 
+
   const translateItemByInputRadio = (e) => {
     const inputID = parseInt(e.target.id);
-    itemsRef.forEach(item => {
-      item.current.style.transform = 'translateX(-' + inputID * (item.current.offsetWidth) + 'px';
+    itemsRef.forEach((item, key) => {
+      if(isProductCardHidden(inputID,key)){
+       item.current.style.visibility = "hidden";
+      } else {
+        item.current.style.visibility = "visible";
+      }
+      item.current.style.transform = 'translateX(-' + inputID * (4*item.current.offsetWidth) + 'px';
     });
   }
 
@@ -90,20 +104,19 @@ export default function Carousel(props) {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <span className="font-medium text-2xl underline underline-offset-4 mb-5">{props.title}</span>
-      <div className="carousel flex flex-row max-w-[1148px] w-[100%] h-[350px] overflow-hidden " ref={carouselRef}>
+      <div className="carousel flex flex-row max-w-[1148px] w-[100%] h-[350px] p-2  overflow-hidden" ref={carouselRef}>
 
-        <button className="z-10 absolute self-center left-[-60px] rounded-full w-[100px] h-[150px]  border border-slate-200 bg-white shadow-lg md:hidden">
+        {/* <button className="z-10 absolute self-center left-[-60px] rounded-full w-[100px] h-[150px]  border border-slate-200 bg-white shadow-lg md:hidden">
           <img src={arrowLeft} className="absolute right-0 self-center translate-y-[-50%] w-[40px]"></img>
         </button>
 
         <button className="z-10 absolute self-center right-[-60px] rounded-full w-[100px] h-[150px] border border-slate-200 bg-white shadow-lg md:hidden">
           <img src={arrowRight} className="absolute self-center translate-y-[-50%] w-[40px]"></img>
-        </button>
+        </button> */}
 
-        <div className="flex flex-row relative z-0">
-          <Products />
-        </div>
-
+          <div className="flex flex-row relative z-0">
+            <Products />
+          </div>
       </div>
       <div className="hidden md:inline-flex carrousel_radio flex flex-row items-center justify-around w-[140px] mt-8">
 
@@ -137,7 +150,7 @@ export default function Carousel(props) {
         />
 
       </div>
-      <button className="bg-red-500 w-[160px] h-[45px] text-[0.9rem] p-2 rounded-lg text-white mt-5 duration-500 hover:bg-red-700 hover:duration-500">TOUT CONSULTER</button>
+      {/* <button className="bg-red-500 w-[160px] h-[45px] text-[0.9rem] p-2 rounded-lg text-white mt-5 duration-500 hover:bg-red-700 hover:duration-500">TOUT CONSULTER</button> */}
     </div>
   )
 };

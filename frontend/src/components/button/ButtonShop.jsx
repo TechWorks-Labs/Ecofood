@@ -31,7 +31,8 @@ export default function ButtonShop(props) {
         return productsByQuantity;
     }
     
-    const addProductInShoppingList = () => {
+    const addProductInShoppingList = (event) => {
+       event.stopPropagation();
        let copyCart = copyAndAddItem(shoppingList, props.product);
        const newCartSorted = sortProductsByQuantity(copyCart);
        const numberProductsInCart = numberProductsInShoppingList(newCartSorted);

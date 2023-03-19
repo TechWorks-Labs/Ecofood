@@ -14,9 +14,9 @@ export default function AccountDropdown(props){
 
     return(
         <div ref={props.profilSidebarRef} className={props.profilIsToggle ? 
-            "transition-all duration-300 ease-in-out absolute z-20 min-w-[350px] w-[400px] flex flex-col items-center gap-y-3 top-[300px] right-[50%] translate-x-[50%]  md:absolute md:top-[67px] md:right-0 md:translate-x-0 md:w-[280px] bg-white border border-1 border-slate-300 shadow-md pt-3 pb-3 overflow-hidden"
+            "transition-all duration-100 ease-in-out absolute z-20 min-w-[350px] w-[400px] h-[435px] flex flex-col items-center gap-y-3 top-[300px] right-[50%] translate-x-[50%]  md:absolute md:top-[67px] md:right-0 md:translate-x-0 md:w-[280px] bg-white border border-1 border-slate-300 shadow-md pt-3 pb-3 overflow-hidden"
             : 
-            "transition-all duration-200 ease-in absolute z-20 top-[67px] border border-1 border-slate-300 shadow-md w-[280px] h-[0px] right-0 flex flex-col justify-around items-center p-0 overflow-hidden"
+            "transition-all duration-400 ease-in-out absolute z-20 min-w-[350px] w-[400px] h-[0px] flex flex-col items-center gap-y-3 top-[300px] right-[50%] translate-x-[50%]  md:absolute md:top-[67px] md:right-0 md:translate-x-0 md:w-[280px] shadow-md pt-0 pb-0 overflow-hidden"
             }>
                 <div className='flex flex-col justify-center items-center'>
                 <p className="font-bold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">BIENVENUE</p>
@@ -33,6 +33,6 @@ export default function AccountDropdown(props){
                     
                 </div>
                 <ButtonCustom onClick={props.handleLogout} title="Déconnexion"/>
-            </div>
+        </div>
     )
 }

@@ -57,3 +57,12 @@
   justify-items: center;
   overflow: hidden;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; /* Cacher la barre de défilement pour les navigateurs WebKit */
+}
+
+.custom-scrollbar {
+  scrollbar-width: none; /* Cacher la barre de défilement pour Firefox */
+  -ms-overflow-style: none; /* Cacher la barre de défilement pour Internet Explorer et Edge */
+}
