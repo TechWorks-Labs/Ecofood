@@ -1,6 +1,6 @@
 import Header from '../../components/header/Header';
 import SignInForm from '../../components/signin/SignInForm';
-import Footer from '../../components/footer/footer';
+import Footer from '../../components/footer/Footer';
 import { useState, useEffect } from 'react';
 import { object } from 'yup';
 import axios from 'axios';

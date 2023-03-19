@@ -1,6 +1,6 @@
 import Presentation from '../../components/homepage/Presentation';
 import CarouselsContainer from '../../components/homepage/CarouselsContainer';
-import Footer from '../../components/footer/footer';
+import Footer from '../../components/footer/Footer';
 import ProductsProvider from '../../context/ProductsProvider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
