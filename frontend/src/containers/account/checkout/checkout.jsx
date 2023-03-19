@@ -1,6 +1,8 @@
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import CheckoutForm from '../../../components/checkout/checkoutForm';
 
 // recreating the `Stripe` object on every render.
@@ -14,6 +16,8 @@ export default function Checkout() {
     // passing the client secret obtained from the server
     clientSecret: payment.client_secret,
   };
+  console.log(options);
+
 
   return (
     <div className='flex flex-col gap-y-5 max-w-3xl mx-auto mt-[100px] border border-1 border-slate-200 p-8 shadow-lg'>

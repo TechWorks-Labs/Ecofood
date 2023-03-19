@@ -26,15 +26,18 @@ export default function CartSlideDrawer(props) {
                     </svg>
                 </a>
             </div>
-            <div className="grow overflow-auto">
+            <div className="custom-scrollbar grow overflow-auto overflow-x-hidden">
 
                 {shoppingList.products.length > 0 ?
-                    <div className="min-w-[340px] p-3">
-                        <span className="font-bold text-lg">Votre panier Ecofood est de {shoppingList.priceCart} euros</span>
+                    <div className="min-w-[340px]">
+                        <div className="flex flex-col items-center justify-center">
+                            <span className="font-bold text-lg">Votre panier Ecofood est de </span>
+                            <span className="font-bold text-lg">{shoppingList.priceCart} euros</span>
+                        </div>
                         <CartProducts />
                     </div>
                     :
-                    <div className="mt-10 min-w-[340px] w-full flex justify-center ">
+                    <div className="mt-10 min-w-[340px] flex justify-center ">
                         <span className="font-semibold text-xl">Votre panier est vide</span>
                     </div>}
 
