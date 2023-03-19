@@ -6,7 +6,7 @@ use PDOException;
 
 abstract class Model 
 {
-    private static $pdo;
+    private static $pdo = null;
 
     private static function setBdd()
     {
@@ -65,12 +65,12 @@ abstract class Model
         }
     }
 
-    public function update(string $table, array $params, array $idParams)
+    public function update(string $table, array $params, array $id_params)
     {
         try {
             $fields = [];
-            $id = $idParams[0];
-            $idValue = $idParams[1];
+            $id = $id_params[0];
+            $id_value = $id_params[1];
 
             foreach ($params as $key => $value) {
                 $field = $key . " = '" . $value . "'";
@@ -82,7 +82,7 @@ abstract class Model
             $bdd = self::getBdd();
             $bdd->beginTransaction();
 
-            $sql = "UPDATE $table SET $values WHERE $id = $idValue";
+            $sql = "UPDATE `$table` SET $values WHERE $id = $id_value";
             $stmt = $bdd->prepare($sql);
             
             $stmt->execute();

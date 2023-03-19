@@ -45,7 +45,7 @@ class OrderController
             'amount' => $amount,
             'client_secret' => $client_secret
         ];
-
+        $this->model->update('order', ['total_price' => $amount], ['id_order', $this->id_order]);
         $this->model->sendJSON($order, $client_secret);
     }
 
@@ -81,6 +81,9 @@ class OrderController
         \Stripe\Stripe::setApiKey($_ENV["STRIPE_API_KEY"]);
         $amount = $this->getOrderAmount();
         header('Content-Type: application/json');
+
+        // Amount must be in cents
+        $amount = $amount * 100;
         
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
