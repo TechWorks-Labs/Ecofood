@@ -13,7 +13,7 @@ export default function Item(props){
     }
 
     return(
-        <div onClick={handleProduct} className={`w-full h-full bg-white  border border-1 border-slate-200 shadow-lg flex flex-col items-center justify-around relative transition-300 duration-300 hover:scale-105 hover:z-50 hover:border-slate-300`}>
+        <div onClick={handleProduct} className={`w-full h-full bg-white  border border-1 border-slate-200 shadow-lg flex flex-col items-center justify-around relative transition-300 duration-300 hover:scale-105 hover:z-30 hover:border-slate-300`}>
             <img src={banane} className="w-[100px]"/>
                 <div className="flex flex-col h-[150px] w-full items-center justify-center p-4">
                     <span className="font-medium tracking-widest">{props.name}</span>
@@ -24,7 +24,7 @@ export default function Item(props){
                     <div className="w-full mt-2">
                         <div className="float-right flex flex-row gap-x-3 items-center">
                             <div className="flex flex-col items-center justify-center mb-2">
-                                <span className="text-[#EC3434] font-bold text-lg">10,07 $</span>
+                                <span className="text-[#EC3434] font-bold text-lg">{props.product.price}</span>
                                 <span className="text-sm">{props.weight}/Kg</span>
                             </div>
                             <ButtonShop id_product = {props.id_product} product={props.product} />

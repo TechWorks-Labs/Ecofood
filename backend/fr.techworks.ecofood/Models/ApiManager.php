@@ -4,9 +4,27 @@ namespace Models;
 
 class ApiManager extends Model
 {
+
     public function getAllProduct()
     {
-        $req = " SELECT * from product";
+        $req = " SELECT
+        p.id_product,
+        pt.type,
+        p.name,
+        b.name as brand_name,
+        p.image,
+        p.weight,
+        p.description, 
+        p.composition, 
+        p.nutrition, 
+        p.price, 
+        p.sku, 
+        op.name as origin_name,
+        op.description as origin_description
+        from product as p
+        INNER JOIN product_type as pt on pt.id_type = p.type
+        INNER JOIN brand as b on b.id_brand = p.brand_id
+        INNER JOIN origin_product as op on op.id_origin = p.origin_id";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->execute();
         $all_product = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -16,7 +34,25 @@ class ApiManager extends Model
 
     public function getProductByType($value)
     {
-        $req = "SELECT * FROM product WHERE type = :idType";
+        $req = "SELECT
+        p.id_product,
+        pt.type,
+        p.name,
+        b.name as brand_name,
+        p.image,
+        p.weight,
+        p.description, 
+        p.composition, 
+        p.nutrition, 
+        p.price, 
+        p.sku, 
+        op.name as origin_name,
+        op.description as origin_description
+        FROM product as p
+        INNER JOIN product_type as pt on pt.id_type = p.type
+        INNER JOIN brand as b on b.id_brand = p.brand_id
+        INNER JOIN origin_product as op on op.id_origin = p.origin_id
+        WHERE p.type = :idType";
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":idType", $value, \PDO::PARAM_INT);
         $stmt->execute();
@@ -27,7 +63,27 @@ class ApiManager extends Model
 
     public function getProductsByTypeAndCount($type, $count)
     {
-        $req = "SELECT * FROM product WHERE type = :idType LIMIT $count";
+        $req = "SELECT
+        p.id_product,
+        pt.type,
+        p.name,
+        b.name as brand_name,
+        p.image,
+        p.weight,
+        p.description, 
+        p.composition, 
+        p.nutrition, 
+        p.price, 
+        p.sku, 
+        op.name as origin_name,
+        op.description as origin_description
+        FROM product as p
+        INNER JOIN product_type as pt on pt.id_type = p.type
+        INNER JOIN brand as b on b.id_brand = p.brand_id
+        INNER JOIN origin_product as op on op.id_origin = p.origin_id
+        WHERE p.type = :idType
+        LIMIT $count";
+
         $stmt = $this->getBdd()->prepare($req);
         $stmt->bindValue(":idType", $type, \PDO::PARAM_INT);
         $stmt->execute();
@@ -58,20 +114,38 @@ class ApiManager extends Model
 
     public function getProductsByFilter($type, $brand, $origin, $maxProduct)
     {
-        $req = 'SELECT * FROM product WHERE 1=1 ';
+        $req = 'SELECT 
+        p.id_product,
+        pt.type,
+        p.name,
+        b.name as brand_name,
+        p.image,
+        p.weight,
+        p.description, 
+        p.composition, 
+        p.nutrition, 
+        p.price, 
+        p.sku, 
+        op.name as origin_name,
+        op.description as origin_description
+        FROM product as p
+        INNER JOIN brand as b on b.id_brand = p.brand_id
+        INNER JOIN product_type as pt on pt.id_type = p.type
+        INNER JOIN origin_product as op on op.id_origin = p.origin_id
+        WHERE 1=1 ';
 
         if (!empty($type)) {
-            $req .= 'AND type = :type ';
+            $req .= 'AND p.type = :type ';
         } else {
-            $req .= 'AND type = "1"';
+            $req .= 'AND p.type = "1"';
         }
     
         if (!empty($brand)) {
-            $req .= 'AND brand_id IN ('.implode(',', $brand).') ';
+            $req .= 'AND p.brand_id IN ('.implode(',', $brand).') ';
         }
         
         if (!empty($origin)){
-            $req .= 'AND origin_id IN ('.implode(',', $origin).')';
+            $req .= 'AND p.origin_id IN ('.implode(',', $origin).')';
         }
 
         $stmt = $this->getBdd()->prepare($req);
