@@ -29,7 +29,7 @@ export const productsContext = createContext();
     const getProducts = async (type, count) => {
       await fetch(`${hostname}/products/type/${type}/count/${count}`)
         .then(response => response.json())
-        .then(data => setProducts({...products, product: data}))
+        .then(data => {console.log('data',data),setProducts({...products, product: data})})
         .catch(error => console.log(error));
     };
 
