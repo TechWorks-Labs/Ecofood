@@ -1,24 +1,23 @@
+19/03/2023
 -> bogues 
-    -> Homepage -> Caroussel checked -- CHECK
-    -> Homepage -> Caroussel checked red Color -- CHECK
     -> header/footer in all page
-    -> fix "link to" dropdown menu -- CHECK
-    -> fix sécurisation des routes/account/JWT -- CHECK
-    -> fix dropdown ligne blanche lorsque le cartslide est ouvert -- CHECK
-    -> fix categorie color/hover produits dans boutique -- CHECK
-    -> fix cartslide horizontal scroll -- CHECK
+    -> inscription -> renvoyer l'user sur une page 
+        -> "Votre inscription est validée login".
+    -> bug boutique filter selection
 
 -> animation
     -> toast login
     -> toast logout
-    -> toast add product in cart -- CHECK
     -> Homepage -> animate the ECOFOOD title
     -> Homepage -> animate button "panier du jour"
-    -> Header -> hover: color logo (profil, cart) -- CHECK
+    -> chargement productCard
 
 -> feature
     -> add panier in homepage
     -> add panier in BDD
+    -> PRODUCTPAGE
+        -> Ajouter logo par marque
+        -> modifier requete SQL pour l'image brand
     -> FOOTER 
         -> social network
         -> cgu
@@ -26,9 +25,28 @@
     -> MYORDERS
         -> component in personnal profil
     -> DROPDOWN menu
+    --> PRODUCTPAGE
+-> refactoring 
+    -> panier
+
+10/03/2023
+-> bogues 
+    -> Homepage -> Caroussel checked -- CHECK
+    -> Homepage -> Caroussel checked red Color -- CHECK
+    -> fix "link to" dropdown menu -- CHECK
+    -> fix sécurisation des routes/account/JWT -- CHECK
+    -> fix dropdown ligne blanche lorsque le cartslide est ouvert -- CHECK
+    -> fix categorie color/hover produits dans boutique -- CHECK
+    -> fix cartslide horizontal scroll -- CHECK
+
+-> animation
+    -> toast add product in cart -- CHECK
+    -> Header -> hover: color logo (profil, cart) -- CHECK
+
+-> feature
+    -> DROPDOWN menu
         -> créé composant :hover slate-800 + hover:text-white -- CHECK
         -> remplacer div + HandleLinkTo -- CHECK
-    --> PRODUCTPAGE
 -> refactoring 
     -> panier
         -> fix horizontale move -- CHECK

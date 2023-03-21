@@ -21,7 +21,7 @@ export default function ProductsGrid(props) {
             if (key < products.maxProduct) {
                 return (
                     <div key={key} className="h-[350px]">
-                        <ProductCard origin={product.origin} weight={product.weight} name={product.name} product={product} id_product={product.id_product} />
+                        <ProductCard origin={product.origin_name} weight={product.weight} name={product.name} product={product} id_product={product.id_product} />
                     </div>
                 )
             }

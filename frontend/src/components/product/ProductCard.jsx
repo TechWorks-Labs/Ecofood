@@ -9,7 +9,7 @@ export default function Item(props){
     const navigate = useNavigate();
 
     const handleProduct = () => {
-        navigate('/product');
+        navigate('/product', {state : props.product});
     }
 
     return(
