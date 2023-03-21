@@ -3,7 +3,8 @@
     -> header/footer in all page
     -> inscription -> renvoyer l'user sur une page 
         -> "Votre inscription est validée login".
-    -> bug boutique filter selection
+    -> bug boutique filter selection -- CHECK
+    -> bug carousel mobile resolution
 
 -> animation
     -> toast login
@@ -24,10 +25,9 @@
         -> others
     -> MYORDERS
         -> component in personnal profil
-    -> DROPDOWN menu
-    --> PRODUCTPAGE
+    --> PRODUCTPAGE -- CHECK
 -> refactoring 
-    -> panier
+    -> panier -- CHECK
 
 10/03/2023
 -> bogues 

@@ -11,7 +11,7 @@ export default function CartInfos(props){
     const priceCart = (shoppingList) => {
         let priceCart = null;
         shoppingList.products.forEach(element => {
-            priceCart = priceCart + element.price;
+            priceCart = priceCart + (element.price*element.quantity);
         });
         return priceCart;
     }
