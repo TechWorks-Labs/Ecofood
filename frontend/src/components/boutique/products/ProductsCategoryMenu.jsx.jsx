@@ -13,7 +13,6 @@ export default function ProductsCategoryMenu(){
             ...parameterFilter,
             type: [pType],
           });
-        console.log(parameterFilter);
     }
     
 

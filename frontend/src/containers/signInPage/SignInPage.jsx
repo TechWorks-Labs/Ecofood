@@ -26,7 +26,6 @@ export default function SignInPage() {
     return (
         <div className='w-full h-screen'>
             <SignInForm submit={handleLoginForm} />
-            <Footer css="absolute bottom-0" />
         </div>
     )
 }

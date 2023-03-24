@@ -4,6 +4,7 @@ import { useRef, useEffect, useMemo } from "react";
 import Item from "../../product/ProductCard";
 import arrowLeft from '../../../assets/images/icons/arrow-left.svg';
 import arrowRight from '../../../assets/images/icons/arrow-right.svg';
+import ButtonConsult from "../../button/ButtonConsult";
 
 export default function Carousel(props) {
   const itemsRef = Array.from({ length: 16 }, (_, i) => useRef(null));
@@ -203,7 +204,7 @@ export default function Carousel(props) {
         />
 
       </div>
-      {/* <button className="bg-red-500 w-[160px] h-[45px] text-[0.9rem] p-2 rounded-lg text-white mt-5 duration-500 hover:bg-red-700 hover:duration-500">TOUT CONSULTER</button> */}
+      <ButtonConsult filterProduct={props.filterProduct} />
     </div>
   )
 };

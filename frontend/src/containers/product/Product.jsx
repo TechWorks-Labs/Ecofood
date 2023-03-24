@@ -55,25 +55,25 @@ export default function Product(props){
                             }
                             dans des exploitations locales respectueuses de l'environnement. En choisissant nos fruits, vous soutenez l'agriculture durable tout en profitant d'une saveur authentique et fraîche.</span>
                         </div>
-                        <div className="flex items-center justify-center border border-1 border-slate-100 h-[25px] bg-green-300 text-white font-semibold">eco-responsable</div>
+                        <div className="flex items-center justify-center h-[25px] border border-1 border-slate-300 text-green-500 font-semibold">eco-responsable</div>
                     </div>
                 </div>
             </div>
             <div className="flex flex-col gap-y-5 w-full">
                 <div className="flex flex-col">
-                    <span className="text-xl font-semibold">Description</span>
+                    <span className="text-xl font-semibold underline underline-offset-2">Description</span>
                     <span className="text-md">{product.description}</span>
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-xl font-semibold">Origine</span>
+                    <span className="text-xl font-semibold underline underline-offset-2">Origine</span>
                     <span className="text-md">{product.origin_description}</span>
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-xl font-semibold">Composition</span>
+                    <span className="text-xl font-semibold underline underline-offset-2">Composition</span>
                     <span className="text-md">{product.composition}</span>
                 </div>
                 <div className="flex flex-col">
-                    <span className="text-xl font-semibold">Nutrition</span>
+                    <span className="text-xl font-semibold underline underline-offset-2">Nutrition</span>
                     <span className="text-md">{product.nutrition}</span>
                 </div>
             </div>
