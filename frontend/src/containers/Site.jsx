@@ -14,8 +14,10 @@ import Checkout from './account/checkout/checkout';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RequireAuth } from '../services/auth.token';
-import PaymentStatus from './account/checkout/PaymentStatus';
+import PaymentPage from './account/checkout/PaymentPage';
 import Product from './product/Product';
+import MyOrders from './account/myOrders/MyOrders';
+import Footer from '../components/footer/Footer';
 
 class Site extends Component {
     render() {
@@ -25,7 +27,7 @@ class Site extends Component {
                 <Routes>
                     <Route path="/" exact element={<HomePage />} />
                     <Route path="/boutique" exact element={<Boutique />} />
-                    <Route path="/signin" exact element={<SignIn/>} />
+                    <Route path="/signin" exact element={<SignIn />} />
                     <Route path="/mon-compte/creer-mon-compte" exact element={<SignUp />} />
                     <Route path="/account" exact element={<RequireAuth><Account /></RequireAuth>} />
                     <Route path="/account/myprofil" exact element={<RequireAuth><MyProfil /></RequireAuth>} />
@@ -33,11 +35,13 @@ class Site extends Component {
                     <Route path="/account/mycart" exact element={<RequireAuth><MyCart /></RequireAuth>} />
                     <Route path="/product" exact element={<Product />} />
                     <Route path="/checkout" exact element={<RequireAuth><Checkout /></RequireAuth>} />
-                    <Route path="/paymentstatus" exact element={<RequireAuth><PaymentStatus /></RequireAuth>} />
-                    <Route path="*" element={<span>ERROR 404</span>} />   
+                    <Route path="/paymentpage" exact element={<RequireAuth><PaymentPage /></RequireAuth>} />
+                    <Route path="/account/myorders" exact element={<RequireAuth><MyOrders /></RequireAuth>} />
+                    <Route path="*" element={<span>ERROR 404</span>} />
                 </Routes>
+                <Footer css="absolute bottom-0" />
 
-                    <ToastContainer
+                <ToastContainer
                     position="top-center"
                     autoClose={3000}
                     hideProgressBar={false}
@@ -46,7 +50,7 @@ class Site extends Component {
                     rtl={false}
                     pauseOnFocusLoss
                     theme="colored"
-                    />
+                />
             </AllProvider>
         )
     }

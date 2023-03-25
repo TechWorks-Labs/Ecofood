@@ -4,8 +4,8 @@
     -> inscription -> renvoyer l'user sur une page 
         -> "Votre inscription est validée login".
     -> bug boutique filter selection -- CHECK
-    -> bug carousel mobile resolution
-
+    -> bug carousel mobile resolution -- CHECK
+    -> bug retour fiche produit bouton
 -> animation
     -> toast login
     -> toast logout
@@ -14,16 +14,18 @@
     -> chargement productCard
 
 -> feature
-    -> add panier in homepage
+    -> add panier in homepage -> CHECK
     -> add panier in BDD
-    -> PRODUCTPAGE
+    -> PRODUCTPAGE 
         -> Ajouter logo par marque
         -> modifier requete SQL pour l'image brand
     -> FOOTER 
-        -> social network
-        -> cgu
-        -> others
+        -> social network -> CHECK
+        -> cgu -> CHECK
+        -> others -> CHECK
+        -> footer responsive
     -> MYORDERS
+    -> SIGN IN responsive
         -> component in personnal profil
     --> PRODUCTPAGE -- CHECK
 -> refactoring 
