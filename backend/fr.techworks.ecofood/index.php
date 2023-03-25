@@ -74,4 +74,10 @@ $router->post('/account/token/expiration', 'user.extendJwtExpiration');
 $router->post('/account/userDatas', 'user.setUserDatas');
 $router->post('/account/address', 'user.setUserAddress');
 
+// AUTH TESTING
+$router->get('/auth/test/login', 'auth.login');
+$router->get('/auth/test/authenticate', 'auth.auth');
+$router->get('/auth/test/youpi', 'auth.testAuthRouting')
+    ->auth();
+
 $router->run();
