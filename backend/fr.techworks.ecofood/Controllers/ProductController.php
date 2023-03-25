@@ -13,6 +13,7 @@ class ProductController
         $this->model = new ProductModel();
     }
 
+
     private function setHeaders() 
     {
         header("Access-Control-Allow-Origin: *");
@@ -147,4 +148,5 @@ class ProductController
         $Product::delete('product', $id);
         $Product->sendJSON(['product' => $Product]);
     }
+
 }

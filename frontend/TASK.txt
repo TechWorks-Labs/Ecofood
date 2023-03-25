@@ -1,31 +1,54 @@
+19/03/2023
 -> bogues 
-    -> Homepage -> Caroussel checked -- CHECK
-    -> Homepage -> Caroussel checked red Color -- CHECK
     -> header/footer in all page
-    -> fix "link to" dropdown menu -- CHECK
-    -> fix sécurisation des routes/account/JWT
-
+    -> inscription -> renvoyer l'user sur une page 
+        -> "Votre inscription est validée login".
+    -> bug boutique filter selection -- CHECK
+    -> bug carousel mobile resolution -- CHECK
+    -> bug retour fiche produit bouton
 -> animation
     -> toast login
     -> toast logout
-    -> toast add product in cart -- CHECK
     -> Homepage -> animate the ECOFOOD title
     -> Homepage -> animate button "panier du jour"
-    -> Header -> hover: color logo (profil, cart)
+    -> chargement productCard
 
 -> feature
-    -> add panier in homepage
+    -> add panier in homepage -> CHECK
     -> add panier in BDD
+    -> PRODUCTPAGE 
+        -> Ajouter logo par marque
+        -> modifier requete SQL pour l'image brand
     -> FOOTER 
-        -> social network
-        -> cgu
-        -> others
+        -> social network -> CHECK
+        -> cgu -> CHECK
+        -> others -> CHECK
+        -> footer responsive
     -> MYORDERS
+    -> SIGN IN responsive
         -> component in personnal profil
+    --> PRODUCTPAGE -- CHECK
+-> refactoring 
+    -> panier -- CHECK
+
+10/03/2023
+-> bogues 
+    -> Homepage -> Caroussel checked -- CHECK
+    -> Homepage -> Caroussel checked red Color -- CHECK
+    -> fix "link to" dropdown menu -- CHECK
+    -> fix sécurisation des routes/account/JWT -- CHECK
+    -> fix dropdown ligne blanche lorsque le cartslide est ouvert -- CHECK
+    -> fix categorie color/hover produits dans boutique -- CHECK
+    -> fix cartslide horizontal scroll -- CHECK
+
+-> animation
+    -> toast add product in cart -- CHECK
+    -> Header -> hover: color logo (profil, cart) -- CHECK
+
+-> feature
     -> DROPDOWN menu
         -> créé composant :hover slate-800 + hover:text-white -- CHECK
         -> remplacer div + HandleLinkTo -- CHECK
-    --> PRODUCTPAGE
 -> refactoring 
     -> panier
         -> fix horizontale move -- CHECK

@@ -73,7 +73,7 @@ class OrderController
         foreach($products as $product) {
             $amount += $product->quantity * $product->price;
         }
-        return (int)$amount;
+        return $amount;
     }
 
     public function checkout($amount)

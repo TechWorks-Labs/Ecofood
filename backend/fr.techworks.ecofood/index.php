@@ -20,7 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $router = new Router($_GET['url']);
 
 // INDEX
-$router->get('/', function() {echo 'index';});
+$router->get('/', function () {
+    echo 'index';
+});
 
 // FILTRES / PRODUITS
 $router->get('/products/type/:type/count/:count', 'api.getProductsByTypeAndCount')
@@ -46,6 +48,10 @@ $router->get('/products/brands', 'api.getBrandNames')
 $router->get('/products/:id', 'product.getProductFromId')
     ->with('id', '[0-9]');
 
+$router->get('/product/:type', 'api.getTypeByProductTypeId')
+    ->with('type', '[0-9]')
+    ->prefix('api');
+
 // BACK-OFFICE
 $router->get('/employees', 'employee.getAllEmployees');
 $router->post('/product/create', 'product.create');
@@ -60,13 +66,13 @@ $router->post('/order/new', 'order.newOrder');
 $router->get('/order/checkout', 'order.checkout');
 
 // ACCOUNT
-$router->get('/account/userDatas/:email','user.getUserDatasFromEmail')
+$router->get('/account/userDatas/:email', 'user.getUserDatasFromEmail')
     ->with('email', '^[^\s@]+@[^\s@]+\.[^\s@]+$');
 $router->post('/account/register', 'user.setUserIdentifiers');
 $router->post('/account/login', 'user.authenticateUser');
 $router->post('/account/token/expiration', 'user.extendJwtExpiration');
-$router->post('/account/userDatas','user.setUserDatas');
-$router->post('/account/address','user.setUserAddress');
+$router->post('/account/userDatas', 'user.setUserDatas');
+$router->post('/account/address', 'user.setUserAddress');
 
 // AUTH TESTING
 $router->get('/auth/test/login', 'auth.login');

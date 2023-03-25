@@ -20,20 +20,22 @@ export const productsContext = createContext();
     });
 
     const [parameterFilter,setParameterFilter] = useState({
-      type : [],
+      type: JSON.parse(localStorage.getItem('filterProduct') || '{}'),
       brand : [],
       origin :[],
       price : []
     })
 
     const getProducts = async (type, count) => {
+      console.log('type',type)
       await fetch(`${hostname}/products/type/${type}/count/${count}`)
         .then(response => response.json())
-        .then(data => setProducts({...products, product: data}))
+        .then(data => {console.log('data',data),setProducts({...products, product: data})})
         .catch(error => console.log(error));
     };
 
     const getProductsByFilter = async (parameterFilter, maxProduct) => {
+      console.log('filter ',parameterFilter)
       const parameter = {...parameterFilter, maxProduct};
       await fetch(`${hostname}/products/filter`, {
         method: "POST",
@@ -46,7 +48,6 @@ export const productsContext = createContext();
         .then(data => setProducts({... products, product: data}))
         .catch(error => console.error(error));
     };
-
 
     useEffect(() => {
 

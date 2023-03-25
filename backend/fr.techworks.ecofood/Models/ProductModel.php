@@ -4,21 +4,22 @@ namespace Models;
 
 class ProductModel extends Model
 {
+
     public function getProductFromId($id)
     {
         $req = 'SELECT 
         p.id_product,
-        p.name,
-        p.brand,
+        pt.type,
+        b.name,
         p.image,
+        p.name,
         p.weight,
+        p.description,
         p.composition,
         p.nutrition,
         p.price,
         p.sku,
-        p.origin,
-        p.status,
-        pt.type
+        op.description
         FROM product as p
         INNER JOIN product_type as pt on pt.id_type = p.type
         WHERE p.id_product = :id;';

@@ -14,7 +14,7 @@ export default function Account(){
                     <ProfilCard image={mapFilled} name="Mon addresse" path="/account/myaddress"/>
                     <ProfilCard image={brand} name="Stripe"/>
                     <ProfilCard image={shopping} name="Mon panier" path="/account/myCart"/>
-                    <ProfilCard image={receipt} name="Mes commandes"/>
+                    <ProfilCard image={receipt} name="Mes commandes" path="/account/myorders"/>
                 </div>
             </div>
         </div>

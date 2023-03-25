@@ -1,26 +1,47 @@
 import {withFormik} from "formik";
 import * as Yup from 'yup';
 import { Link } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
+
 function SignInForm (props){
+
+    const emailLabelRef = useRef();
+    const passwordRef = useRef();
+
+    const handleInputEmail = () => {
+        emailLabelRef.current.style.transform = "translateY(-30px)";
+    }
+    const handleInputPassword = () => {
+        passwordRef.current.style.transform = "translateY(-30px)";
+    }
+
     return(
-        <div className="max-w-xl min-w-[300px] mx-auto bg-gradient-to-r from-slate-800 to-cyan-900 mt-[100px] rounded-lg p-8 shadow-lg ">
-            <form className="flex flex-col w-full h-[350px] justify-around">
+        <div className="max-w-xl min-w-[200px] mx-auto flex flex-col relative">
+            <form className=" rounded-2xl w-[500px] p-8 shadow-lg bg-gradient-to-r from-slate-800 to-cyan-900  flex flex-col gap-y-10 justify-around absolute top-[200px]">
                 <span className="font-bold text-3xl text-center mb-5 text-white">Sign in</span>
-                <label className="text-white font-semibold text-xl mb-2 underline underline-offset-4">Email : </label>
-                <input type="text" placeholder="email" className="h-[45px] rounded-lg p-2" 
-                name='email'
-                onChange={props.handleChange}
-                value={props.values.email}
-                onBlur={props.handleBlur}
-                />
+                <div className="flex flex-col relative">
+                    <label ref={emailLabelRef} htmlFor='email' className=" absolute bottom-0 transition-all duration-1000 ease-in-out text-white font-medium text-xl mb-2 pointer-events-none">Email</label>
+                    <input onClick={handleInputEmail} type="text" placeholder="" className="caret-transparent text-cyan-800 font-bold  tracking-widesth-[45px] rounded-lg p-2 bg-transparent outline-none cursor-pointer" 
+                    name='email'
+                    onChange={props.handleChange}
+                    value={props.values.email}
+                    onBlur={props.handleBlur}
+                    />
+                    <div className="w-full h-[2px] bg-white"></div>
+                </div>
+
                 {props.touched.email && props.errors.email && <span className="text-white">{props.errors.email}</span>}
-                <label className="text-white font-semibold text-xl mb-2 underline underline-offset-4">password : </label>
-                <input type='password' placeholder="password" className="h-[45px] rounded-lg p-2" 
-                name='password'
-                onChange={props.handleChange}
-                value={props.values.password}
-                onBlur={props.handleBlur}
-                />
+                <div className="flex flex-col relative">
+                    <label ref={passwordRef} htmlFor="password" className=" absolute bottom-0 transition-all duration-1000 ease-in-out text-white font-medium text-xl mb-2 pointer-events-none">password</label>
+                    <input onClick={handleInputPassword} type='password' className="caret-transparent text-cyan-800 h-[45px] rounded-lg p-2 bg-transparent outline-none cursor-pointer" 
+                    name='password'
+                    onChange={props.handleChange}
+                    value={props.values.password}
+                    onBlur={props.handleBlur}
+                    />
+                    <div className="w-full h-[2px] bg-white"></div>
+                </div>
+
                  {props.touched.password && props.errors.password && <span className="text-white">{props.errors.password}</span>}
                  <div className="flex flex-row justify-between">
                  <Link to ="/mon-compte/creer-mon-compte">

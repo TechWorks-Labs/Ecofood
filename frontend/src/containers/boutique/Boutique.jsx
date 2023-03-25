@@ -10,9 +10,10 @@ export default function Boutique(){
     const {state} = useContext(productsContext);
     const {product} = useContext(productsContext).products;
     const {getProducts} = useContext(productsContext);
-    
+    const filterProduct = JSON.parse(localStorage.getItem('filterProduct') || '{}');
+   
     useEffect(()=>{
-        getProducts(1,16);
+        getProducts(filterProduct,16);
     }, []);
         return (
             <div className="max-w-7xl h-screen mx-auto">

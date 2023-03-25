@@ -20,8 +20,8 @@ export default function ProductsGrid(props) {
         return props.products.map((product, key) => {
             if (key < products.maxProduct) {
                 return (
-                    <div key={key} className="bg-blue-600 h-[350px] border border-1 border-slate-100">
-                        <ProductCard origin={product.origin} weight={product.weight} name={product.name} product={product} id_product={product.id_product} />
+                    <div key={key} className="h-[350px]">
+                        <ProductCard origin={product.origin_name} weight={product.weight} name={product.name} product={product} id_product={product.id_product} />
                     </div>
                 )
             }

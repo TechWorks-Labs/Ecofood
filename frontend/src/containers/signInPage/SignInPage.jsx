@@ -16,7 +16,6 @@ export default function SignInPage() {
 
     const handleLoginForm = async(credentials) => {
         if (await auth.login(credentials)){
-            console.log("true");
             setUserFromLoginToken();
             navigate('/');
         } else {
@@ -25,17 +24,8 @@ export default function SignInPage() {
     }
 
     return (
-        <>
-            {userToken.valid ?
-                <div>
-                    <span>{userToken.email}</span>
-                    <span>{userToken.lastname}</span>
-                    <span>{userToken.exp}</span>
-                </div>
-                :
-                <SignInForm submit={handleLoginForm} />}
-
-            <Footer css="absolute bottom-0" />
-        </>
+        <div className='w-full h-screen'>
+            <SignInForm submit={handleLoginForm} />
+        </div>
     )
 }
