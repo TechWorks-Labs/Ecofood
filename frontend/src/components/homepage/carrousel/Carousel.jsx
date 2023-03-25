@@ -57,19 +57,19 @@ export default function Carousel(props) {
       // width renvoie bien une valeur numérique correct
       let width = getItemsWidth();
       return props.itemsProduct.map((item, key) => {
-        if (displayFormat === 'mobile' && key == 0 ){
+        if (displayFormat === 'mobile' && key == 0) {
           return (
             <li key={key} style={{ width: `${width}px` }} className={`md:inline-flex list-none transition-transform duration-150 ease-in-out border`} ref={itemsRef[key]}>
               <Item origin={item.origin} weight={item.weight} name={item.name} id_product={item.id_product} product={item} />
             </li>
           )
-        } else if (displayFormat === 'tablet' && key < 2 ){
+        } else if (displayFormat === 'tablet' && key < 2) {
           return (
             <li key={key} style={{ width: `${width}px` }} className={`md:inline-flex list-none transition-transform duration-150 ease-in-out border`} ref={itemsRef[key]}>
               <Item origin={item.origin} weight={item.weight} name={item.name} id_product={item.id_product} product={item} />
             </li>
           )
-        } else if (displayFormat === 'desktop' && key < 4 ){
+        } else if (displayFormat === 'desktop' && key < 4) {
           return (
             <li key={key} style={{ width: `${width}px` }} className={`md:inline-flex list-none transition-transform duration-150 ease-in-out border`} ref={itemsRef[key]}>
               <Item origin={item.origin} weight={item.weight} name={item.name} id_product={item.id_product} product={item} />
@@ -167,10 +167,32 @@ export default function Carousel(props) {
       <span className="font-medium text-2xl underline underline-offset-4 mb-5">{props.title}</span>
       <div className="carousel flex flex-row max-w-[1148px] w-[100%] h-[350px] p-2  overflow-hidden" ref={carouselRef}>
 
-        <div className="flex flex-row relative z-0">
-          <Products />
-        </div>
-        
+        {/* <div className="flex flex-row relative z-0">
+          {(Boolean(props.itemsProduct.length) && Boolean(carouselRef.current.offsetWidth)) ?
+            // <div className="animate-pulse grid grid-cols-3 gap-x-10 w-full h-full border-[10px] border-slate-300 rounded-xl p-10">
+            //   <div className="bg-slate-300 rounded-xl"></div>
+            //   <div className="bg-slate-300"></div>
+            //   <div className="bg-slate-300"></div>
+            // </div>
+            <Products />
+            :
+            <div className="w-full h-full flex justify-center items-center bg-red-400">
+              <span className="mx-auto w-[30px] h-[30px] bg-red-400">en attente</span>
+            </div>}
+        </div> */}
+
+        {(Boolean(props.itemsProduct.length) && Boolean(carouselRef.current.offsetWidth)) ?
+          <div className="flex flex-row relative z-0">
+            <Products />
+          </div>
+          :
+          <div className="animate-pulse grid grid-cols-3 gap-x-10 w-full h-full border-[10px] border-slate-300 rounded-xl p-10">
+            <div className="bg-slate-300 rounded-xl"></div>
+            <div className="bg-slate-300"></div>
+            <div className="bg-slate-300"></div>
+          </div>
+        }
+
       </div>
       <div className=" md:inline-flex carrousel_radio flex flex-row items-center justify-around w-[140px] mt-8">
 
