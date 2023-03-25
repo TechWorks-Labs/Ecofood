@@ -2,13 +2,19 @@
 
 namespace Router;
 
+use Services\AuthTrait;
+
 class Route
 {
+    use AuthTrait;
+
     private string $path;
     private mixed $callback;
     private string $prefix;
     private $matches;
     private array $params = [];
+    private bool $isAuthenticated = true;
+    private bool $beAuthenticated = false;
 
     public function __construct(string $path, mixed $callback)
     {
@@ -17,6 +23,10 @@ class Route
     }
 
     public function call() {
+        if ($this->beAuthenticated) {
+            $this->isAuthenticated = $this->authenticate();
+        }
+
         if (is_string($this->callback)) {
             $params = explode('.', $this->callback);
             
@@ -69,6 +79,12 @@ class Route
     public function with($param, $regex) 
     {
         $this->params[$param] = str_replace('(', '(?:', $regex);
+        return $this;
+    }
+
+    public function auth() 
+    {
+        $this->beAuthenticated = true;
         return $this;
     }
 }

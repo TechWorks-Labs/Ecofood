@@ -103,14 +103,4 @@ class OrderController
             echo json_encode(['error' => $error->getMessage()]);
         }
     }
-
-    public function auth()
-    {
-        // $this->setHeaders();
-        $headers = getallheaders();
-        if (in_array('Authorization', $headers)) {
-            echo $headers['Authorization'];
-        }
-        var_dump($_SERVER);
-    }
 }

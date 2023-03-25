@@ -14,6 +14,7 @@ export default function Product() {
       async function fetchProduct() {
         const response = await fetch(`${ hostname }/products/${id}`);
         const productData = await response.json();
+        console.log(productData);
         setProduct(productData);
       };
       fetchProduct();

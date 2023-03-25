@@ -6,6 +6,13 @@ use Models\ProductModel;
 
 class ProductController
 {
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new ProductModel();
+    }
+
     private function setHeaders() 
     {
         header("Access-Control-Allow-Origin: *");
@@ -97,9 +104,8 @@ class ProductController
     public function getProductFromId(int $id)
     {
         $this->setHeaders();
-        $Product = new ProductModel();
-        $product = $Product->getProductFromId($id);
-        $Product->sendJSON($product);
+        $product = $this->model->getProductFromId($id);
+        $this->model->sendJSON($product);
     }
 
     public function getAllProducts()
