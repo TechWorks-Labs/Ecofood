@@ -60,19 +60,19 @@ export default function Carousel(props) {
         if (displayFormat === 'mobile' && key == 0) {
           return (
             <li key={key} style={{ width: `${width}px` }} className={`md:inline-flex list-none transition-transform duration-150 ease-in-out border`} ref={itemsRef[key]}>
-              <Item origin={item.origin} weight={item.weight} name={item.name} id_product={item.id_product} product={item} />
+              <Item product={item} />
             </li>
           )
         } else if (displayFormat === 'tablet' && key < 2) {
           return (
             <li key={key} style={{ width: `${width}px` }} className={`md:inline-flex list-none transition-transform duration-150 ease-in-out border`} ref={itemsRef[key]}>
-              <Item origin={item.origin} weight={item.weight} name={item.name} id_product={item.id_product} product={item} />
+              <Item product={item} />
             </li>
           )
         } else if (displayFormat === 'desktop' && key < 4) {
           return (
             <li key={key} style={{ width: `${width}px` }} className={`md:inline-flex list-none transition-transform duration-150 ease-in-out border`} ref={itemsRef[key]}>
-              <Item origin={item.origin} weight={item.weight} name={item.name} id_product={item.id_product} product={item} />
+              <Item product={item} />
             </li>
           )
         }
@@ -80,7 +80,7 @@ export default function Carousel(props) {
         else {
           return (
             <li key={key} style={{ width: `${width}px`, visibility: 'hidden' }} className={`list-none border transition-transform duration-150 ease-in-out`} ref={itemsRef[key]}>
-              <Item origin={item.origin} weight={item.weight} name={item.name} id_product={item.id_product} product={item} />
+              <Item product={item} />
             </li>
           )
         }
@@ -117,7 +117,6 @@ export default function Carousel(props) {
     const startHidden = hiddenStartProductNumber(ID);
     const endHidden = hiddenEndProductNumber(ID);
     if (key >= startHidden && key <= endHidden) {
-      console.log(key);
       return false;
     }
     return true;

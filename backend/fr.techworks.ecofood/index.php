@@ -62,6 +62,8 @@ $router->delete('/products/:id', 'product.delete')
 
 // COMMANDES
 $router->post('/order/new', 'order.newOrder');
+$router->get('/order/:user_id', 'order.getOrdersProductByUserId')
+    ->with('user_id', '\d+');
 // STRIPE
 $router->get('/order/checkout', 'order.checkout');
 

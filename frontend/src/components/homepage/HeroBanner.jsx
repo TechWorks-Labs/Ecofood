@@ -1,12 +1,13 @@
 import React from "react";
 import ButtonCartOfDay from "../button/ButtonCartOfDay";
-import background from "/src/assets/images/background/backgroundEcofood.png";
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import ecofoodAnimated from '../../assets/animated/animacaodentro.json';
 import { gsap, Bounce } from "gsap";
 import { useRef, useEffect } from "react";
+import ROOT_URL from "../../config";
 
 export default function HeroBanner(props) {
+
     const lettersRef = useRef([]);
     const ecofoodRef = useRef();
     const bannerRef = useRef();
@@ -16,7 +17,6 @@ export default function HeroBanner(props) {
     ));
 
     useEffect(() => {
-        console.log('Animation started'); // Vérifiez que l'animation a commencé
         gsap.from(lettersRef.current, {
             duration: 0.8,
             y: -50,

@@ -4,6 +4,23 @@ namespace Models;
 
 class OrderModel extends Model
 {
+    public function getOrdersProductByUserId(int $id_user){
+        $req = 'SELECT
+        o.id_order,
+        o.status,
+        o.date, 
+        o.total_price 
+        FROM order AS o
+        WHERE id_user = :id_user;';
+        $bdd = $this->getBdd();
+        $stmt = $bdd->prepare($req);
+        $stmt->bindValue(':id_user', $id_user);
+        $stmt->execute();
+        $orderProducts = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        $stmt->closeCursor();
+        return $orderProducts;
+    }
+
     public function getOrderProducts(int $id_order)
     {
         $req = "SELECT 
