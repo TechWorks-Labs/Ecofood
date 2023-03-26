@@ -30,12 +30,11 @@ export const productsContext = createContext();
       console.log('type',type)
       await fetch(`${hostname}/products/type/${type}/count/${count}`)
         .then(response => response.json())
-        .then(data => {console.log('data',data),setProducts({...products, product: data})})
+        .then(data => {setProducts({...products, product: data})})
         .catch(error => console.log(error));
     };
 
     const getProductsByFilter = async (parameterFilter, maxProduct) => {
-      console.log('filter ',parameterFilter)
       const parameter = {...parameterFilter, maxProduct};
       await fetch(`${hostname}/products/filter`, {
         method: "POST",

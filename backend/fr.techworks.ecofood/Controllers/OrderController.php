@@ -14,7 +14,7 @@ class OrderController
         $this->model = new OrderModel();
     }
 
-    private function setHeaders() 
+    private function setHeaders()
     {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
@@ -26,14 +26,14 @@ class OrderController
         $this->setHeaders();
         $cart = json_decode(file_get_contents('php://input'));
         $products = $cart->products;
-        
+
         $data = ['id_user' => $cart->user_id];
         $filters = ['id_user' => FILTER_SANITIZE_NUMBER_INT];
         $id_user = filter_var_array($data, $filters);
 
         $this->id_order = $this->model->create('order', $id_user);
 
-        foreach($products as $product) {
+        foreach ($products as $product) {
             $new_order_product = $this->sanitizeInputData($product);
             $this->model->create('order_product', $new_order_product);
         }
@@ -70,7 +70,7 @@ class OrderController
     {
         $products = $this->model->getOrderProducts($this->id_order);
         $amount = 0;
-        foreach($products as $product) {
+        foreach ($products as $product) {
             $amount += $product->quantity * $product->price;
         }
         return $amount;
@@ -84,7 +84,7 @@ class OrderController
 
         // Amount must be in cents
         $amount = $amount * 100;
-        
+
         try {
             $paymentIntent = \Stripe\PaymentIntent::create([
                 'amount' => $amount,
@@ -102,5 +102,15 @@ class OrderController
             http_response_code(500);
             echo json_encode(['error' => $error->getMessage()]);
         }
+    }
+
+    public function getOrdersProductByUserId($user_id)
+    {
+        // Récuperer toutes les commandes de l'utilisateur
+        // $ordersProducts = $this->model->getOrdersProductByUserId($user_id);
+        // echo json_encode($ordersProducts);
+        echo json_encode($user_id);
+        // parcourir toutes les commandes et rajouter le contenu de la commande dans un tableau
+        // renvoyer le tableau au front end et le stocker dans un useState et dans le navigateur
     }
 }
