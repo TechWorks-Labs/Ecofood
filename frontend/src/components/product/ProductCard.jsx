@@ -11,12 +11,11 @@ export default function Item(props){
     const handleProduct = () => {
         navigate('/product', {state : props.product});
     }
-    console.log(props)
     return(
         <div onClick={handleProduct} className={`w-full h-full bg-white  border border-1 border-slate-200 shadow-lg flex flex-col items-center justify-around relative transition-300 duration-300 hover:scale-105 hover:z-30 hover:border-slate-300`}>
-            <img src={props.product.image} className="w-[100px]"/>
+            <img src={banane} className="w-[100px]"/>
                 <div className="flex flex-col h-[150px] w-full items-center justify-center p-4">
-                    <span className="font-medium tracking-widest">{props.name}</span>
+                    <span className="font-medium tracking-widest">{props.product.name}</span>
                     <span className="mb-3">Origine {props.product.origin}</span>
 
                     <span className="font-bold text-[#B4B4B4] mt-3">{props.product.weight}/kg</span>

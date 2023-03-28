@@ -182,13 +182,26 @@ export default function Carousel(props) {
 
         {(Boolean(props.itemsProduct.length) && Boolean(carouselRef.current.offsetWidth)) ?
           <div className="flex flex-row relative z-0">
-            <Products />
+            <Products /> */
+
           </div>
           :
-          <div className="animate-pulse grid grid-cols-3 gap-x-10 w-full h-full border-[10px] border-slate-300 rounded-xl p-10">
-            <div className="bg-slate-300 rounded-xl"></div>
-            <div className="bg-slate-300"></div>
-            <div className="bg-slate-300"></div>
+          <div className="animate-pulse grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full h-full rounded-xl">
+
+            <div className="flex flex-col justify-center items-center rounded-xl p-2">
+              <div className="bg-slate-300 w-full h-full rounded-xl"></div>
+            </div>
+            <div className="hidden sm:visible sm:flex justify-center items-center rounded-xl p-2">
+              <div className="bg-slate-300 w-full h-full rounded-xl"></div>
+            </div>
+            <div className="hidden lg:visible lg:flex lg:flex-col justify-center items-center rounded-xl p-2">
+              <div className="bg-slate-300 w-full h-full rounded-xl"></div>
+            </div>
+            <div className="hidden lg:visible lg:flex flex-col justify-center items-center rounded-xl p-2">
+              <div className="bg-slate-300 w-full h-full rounded-xl"></div>
+            </div>
+
+
           </div>
         }
 

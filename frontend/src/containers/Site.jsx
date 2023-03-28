@@ -39,7 +39,7 @@ class Site extends Component {
                     <Route path="/account/myorders" exact element={<RequireAuth><MyOrders /></RequireAuth>} />
                     <Route path="*" element={<span>ERROR 404</span>} />
                 </Routes>
-                <Footer css="absolute bottom-0" />
+                <Footer />
 
                 <ToastContainer
                     position="top-center"
