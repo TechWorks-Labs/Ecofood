@@ -91,13 +91,13 @@ function Header(props) {
                     </div>
 
                     <ul className="hidden md:inline-block md:flex md:flex-row md:gap-x-10 text-white">
-                        <li onClick={() => setParameterFilter({ ...parameterFilter, type: "1" })}>
+                        <li onClick={() => setParameterFilter({ ...parameterFilter, type: ["1"] })}>
                             <Link to="/boutique">FRUITS</Link>
                         </li>
-                        <li onClick={() => setParameterFilter({ ...parameterFilter, type: "2" })}>
+                        <li onClick={() => setParameterFilter({ ...parameterFilter, type: ["2"] })}>
                             <Link to="/boutique">LEGUMES</Link>
                         </li>
-                        <li onClick={() => setParameterFilter({ ...parameterFilter, type: "3" })}>
+                        <li onClick={() => setParameterFilter({ ...parameterFilter, type: ["3"] })}>
                             <Link to="/boutique">VIANDES</Link>
                         </li>
                     </ul>

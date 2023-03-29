@@ -13,7 +13,7 @@ export default function Account() {
     const body = 'h-[' + bodyHeight + 'px]';
 
     return (
-        <div className={`max-w-4xl mx-auto bg-slate-100 p-10 ${body}`}>
+        <div className={`grow max-w-4xl mx-auto bg-slate-100 p-10 ${body}`}>
             <h2 className="font-bold text-4xl text-slate-600">Mon espace personnel</h2>
             <div className="w-[800px] mx-auto">
                 <div className="grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-11 mt-10">

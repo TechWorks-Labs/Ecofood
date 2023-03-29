@@ -1,16 +1,13 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import AddressForm from "../../../components/profil/form/addressForm/AddressForm"
 import { userContext } from "../../../context/UserProvider"
 import update from "../../../services/update.account";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ButtonAccount from "../../../components/button/ButtonAccount";
-import { AllContext } from "../../../context/AllProviders";
 
 export default function MyAddress() {
     const { userDatas, setUserDatas, userToken } = useContext(userContext);
-    const { bodyHeight } = useContext(AllContext);
-    const body = bodyHeight.toString() + 'px';
+
     const handleAddressValide = async (value) => {
         const updateUserDatas = {
             ...userDatas,
@@ -29,27 +26,29 @@ export default function MyAddress() {
     }
 
     return (
-        <div className={`max-w-4xl h-[${body}] mx-auto bg-slate-100 p-10`}>
-            <div className="flex flex-col gap-y-3 mb-5">
-                <h2 className="text-slate-600 text-3xl font-semibold">Mon adresse</h2>
-                <span className="text-slate-600 text-xl ">Adresse de facturation</span>
-                <ButtonAccount />
-            </div>
-            <div className="w-full  bg-white border border-1 border-slate-200 shadow-lg">
-                <AddressForm userDatas={userDatas} submit={handleAddressValide} />
+        <div className="container max-w-4xl">
+            <div className="grow w-full min-h-full mx-auto bg-slate-100 p-10">
+                <div className="w-full flex flex-col gap-y-3 mb-5">
+                    <h2 className="text-slate-600 text-3xl font-semibold">Mon adresse</h2>
+                    <span className="text-slate-600 text-xl ">Adresse de facturation</span>
+                </div>
+                <div className="w-full bg-white shadow-lg">
+                    <AddressForm userDatas={userDatas} submit={handleAddressValide} />
 
-                <ToastContainer
-                    position="top-center"
-                    autoClose={3000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    theme="colored"
-                />
+                    <ToastContainer
+                        position="top-center"
+                        autoClose={3000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        theme="colored"
+                    />
 
+                </div>
             </div>
         </div>
+
     )
 }

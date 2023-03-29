@@ -42,7 +42,7 @@ export default function MyProfil(props) {
 
 
   return (
-    <div className="grow max-w-4xl mx-auto p-10">
+    <div className="container max-w-4xl bg-slate-100 p-8">
       <h2 className="text-slate-600 text-3xl font-semibold mb-5">Mon profil</h2>
       <div className="w-full bg-white border border-1 border-slate-200 shadow-lg">
         <ProfilForm submit={handleProfilSubmit} profil={userDatas} />

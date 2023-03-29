@@ -13,7 +13,7 @@ export default function CartInfos(props){
         shoppingList.products.forEach(element => {
             priceCart = priceCart + (element.price*element.quantity);
         });
-        return priceCart;
+        return priceCart.toFixed(2);
     }
 
     const {userToken} = useContext(userContext);

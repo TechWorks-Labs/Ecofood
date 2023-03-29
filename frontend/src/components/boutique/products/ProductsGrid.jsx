@@ -29,10 +29,10 @@ export default function ProductsGrid(props) {
     }
 
     return (
-        <div className="w-full mt-[50px] flex flex-row">
+        <div className="w-full mt-[50px] flex flex-row gap-1">
             <VerticalFilters />
             <div className="flex flex-col w-full">
-                <div className="grow grid grid-cols-1 gap-0 sm:grid-cols-2 lg:grid-cols-4 b">
+                <div className="grow grid grid-cols-1 gap-0 md:grid-cols-2 lg:grid-cols-4 b">
                     <ListProduct />
                 </div>
                 <button onClick={handleMoreProduct} className="w-[200px] h-[45px] mt-5 self-center bg-[#EC3434] rounded-lg p-1 text-white font-semibold">Voir plus de produits</button>

@@ -10,7 +10,7 @@ export default function Boutique() {
     const { state } = useContext(productsContext);
     const { product } = useContext(productsContext).products;
     const { getProducts } = useContext(productsContext);
-    const filterProduct = JSON.parse(localStorage.getItem('filterProduct') || '{}');
+    const filterProduct = JSON.parse(localStorage.getItem('filterProduct') || '[]');
 
 
 
@@ -19,7 +19,7 @@ export default function Boutique() {
     }, []);
 
     return (
-        <div className="max-w-7xl mx-auto mb-10">
+        <div className="container max-w-7xl mx-auto mb-10">
             <HeaderBanner />
             <ProductCategoryBanner />
             <ProductsGrid products={product} />

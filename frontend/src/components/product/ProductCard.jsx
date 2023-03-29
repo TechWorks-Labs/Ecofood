@@ -1,8 +1,6 @@
 import React from "react";
 import banane from "/src/assets/images/products/banane.png";
-import shop from "/src/assets/images/icons/shopping-bag-header.svg";
 import ButtonShop from "../button/ButtonShop";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function Item(props){

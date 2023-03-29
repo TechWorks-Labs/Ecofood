@@ -6,8 +6,10 @@ export default function HomePage() {
 
         return (
                 <ProductsProvider>
-                        <HeroBanner />
-                        <CarouselsContainer />
+                        <div className='w-full grow'>
+                                <HeroBanner />
+                                <CarouselsContainer />
+                        </div>
                 </ProductsProvider>
         )
 }

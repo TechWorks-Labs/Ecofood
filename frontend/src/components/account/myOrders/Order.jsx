@@ -9,7 +9,7 @@ export default function Order(props) {
     }
 
     return (
-        <div className="w-full md:max-w-2xl flex flex-col justify-center border border-1 border-slate-200">
+        <div className="w-full flex flex-col justify-center border border-1 border-slate-200">
             <div className='relative w-full flex flex-col justify-center  md:h-[90px] md:flex md:flex-row md:items-center md:justify-center'>
                 <div className='md:flex md:items-center md:justify-center border border-l-0 border-t-0 border-b-0 border-r-1 border-slate-200 p-5 h-[20px]'>
                     <span className="text-sm">{props.order.date}</span>

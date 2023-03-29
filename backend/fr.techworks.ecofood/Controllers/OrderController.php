@@ -106,11 +106,18 @@ class OrderController
 
     public function getOrdersProductByUserId($user_id)
     {
-        // Récuperer toutes les commandes de l'utilisateur
-        // $ordersProducts = $this->model->getOrdersProductByUserId($user_id);
-        // echo json_encode($ordersProducts);
-        echo json_encode($user_id);
-        // parcourir toutes les commandes et rajouter le contenu de la commande dans un tableau
-        // renvoyer le tableau au front end et le stocker dans un useState et dans le navigateur
+        $this->setHeaders();
+        $ordersProducts = $this->model->getOrdersProductByUserId($user_id);
+        $ordersProducts = $this->getDetailOrderProductByOrderId($ordersProducts);
+        echo json_encode($ordersProducts);
+    }
+
+    public function getDetailOrderProductByOrderId(array $ordersProducts)
+    {
+        foreach ($ordersProducts as $order) {
+            $detailsOrder = $this->model->getDetailsOrderProductByOrderId($order->id_order);
+            $order->detail = $detailsOrder;
+        }
+        return $ordersProducts;
     }
 }
