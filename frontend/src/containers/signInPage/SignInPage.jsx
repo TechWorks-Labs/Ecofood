@@ -1,11 +1,5 @@
-import Header from '../../components/header/Header';
 import SignInForm from '../../components/signin/SignInForm';
-import Footer from '../../components/footer/footer';
-import { useState, useEffect } from 'react';
-import { object } from 'yup';
-import axios from 'axios';
 import auth from '../../services/auth.token';
-import jwt_decode from "jwt-decode";
 import { userContext } from '../../context/UserProvider';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +18,7 @@ export default function SignInPage() {
     }
 
     return (
-        <div className='w-full h-screen'>
+        <div className='container'>
             <SignInForm submit={handleLoginForm} />
         </div>
     )

@@ -30,7 +30,7 @@ export default function FilterOptionMenu(props){
 
     const MyFilterOptionMenu = useMemo(() => {
         return FilterOptionMenu.map((filter, key)=> {
-            return <li data-id={props.content[key][props.filterId]} key={key} className="list-none hover:bg-slate-400 p-1" onClick={(e) => handleModifyStatus(e)}>{props.content[key].name}</li>
+            return <li data-id={props.content[key][props.filterId]} key={key} className="list-none hover:bg-slate-400 p-1 hover:cursor-pointer" onClick={(e) => handleModifyStatus(e)}>{props.content[key].name}</li>
         });})
     
 

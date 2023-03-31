@@ -37,7 +37,7 @@ export default function HeroBanner(props) {
     return (
         <div className="min-w-[300px] max-w-6xl h-[600px] mx-auto flex flex-row justify-center items-center p-10">
 
-            <div ref={bannerRef} className="p-5 flex flex-col gap-y-8 justify-around">
+            <div ref={bannerRef} className="hidden h-[450px] sm:inline-flex p-5 flex flex-col gap-y-8 justify-around">
                 <h1 className="text-5xl font-bold text-slate-800 underline-offset-2 md:text-6xl lg:text-7xl">{letterArray}</h1>
                 <span className="text-[0.9rem]">ECOFOOD est le site de vente en ligne idéal pour acheter des légumes et des fruits biologiques
                     de qualité supérieure, issus d'une agriculture locale durable. Notre large gamme de produits
@@ -48,15 +48,30 @@ export default function HeroBanner(props) {
                 <ButtonCartOfDay css={"self-center md:self-start"} />
             </div>
 
-            <Player
-                autoplay
-                speed={1}
-                loop={false}
-                keepLastFrame
-                src={ecofoodAnimated}
-                style={{ width: "500px" }}
-            >
-            </Player>
+            <div className="flex flex-col justify-center items-center h-[450px] min-w-[300px]">
+                <h1 className="translate-y-[40px] text-5xl font-bold text-slate-800 underline-offset-2 sm:text-6xl lg:text-7xl sm:hidden">{letterArray}</h1>
+                <div className="sm:hidden">
+                    <Player
+                        autoplay
+                        speed={1}
+                        loop={false}
+                        keepLastFrame
+                        src={ecofoodAnimated}
+                        style={{ width: "300px" }}
+                    />
+                </div>
+                <div className="hidden sm:inline-flex sm:-translate-x-[50px]">
+                    <Player
+                        autoplay
+                        speed={1}
+                        loop={false}
+                        keepLastFrame
+                        src={ecofoodAnimated}
+                        style={{ width: "390px" }}
+                    />
+                </div>
+                <ButtonCartOfDay css={"self-center md:self-start sm:hidden"} />
+            </div>
         </div>
     )
 };

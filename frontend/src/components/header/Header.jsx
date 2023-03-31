@@ -42,7 +42,7 @@ function Header(props) {
     }
 
     const panierToggle = () => {
-        // document.body.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
         setPanierIsToggle(!panierIsToggle);
     };
 
@@ -52,7 +52,7 @@ function Header(props) {
 
     function profilToggle() {
         if (userToken.valid) {
-            // document.body.style.overflow = "hidden";
+            document.body.style.overflow = "hidden";
             setProfilIsToggle(!profilIsToggle);
         }
     }

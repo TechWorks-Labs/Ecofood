@@ -1,7 +1,7 @@
 import {withFormik} from "formik";
 import * as Yup from 'yup';
 import { Link } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 
 function SignInForm (props){
 
@@ -16,7 +16,7 @@ function SignInForm (props){
     }
 
     return(
-        <div className="max-w-xl min-w-[200px] mx-auto flex flex-col relative">
+        <div className="max-w-xl min-w-[200px] mx-auto w-full flex flex-col relative">
             <form className=" rounded-2xl w-[500px] p-8 shadow-lg bg-gradient-to-r from-slate-800 to-cyan-900  flex flex-col gap-y-10 justify-around absolute top-[200px]">
                 <span className="font-bold text-3xl text-center mb-5 text-white">Sign in</span>
                 <div className="flex flex-col relative">

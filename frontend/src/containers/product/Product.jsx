@@ -22,7 +22,7 @@ export default function Product(props) {
     }, []);
 
     return (
-        <div className="max-w-5xl flex flex-col gap-y-5 h-screen mx-auto mt-[25px]">
+        <div className="container max-w-5xl flex flex-col gap-y-5 mx-auto mt-[50px]">
             <div className="max-w-5xl flex flex-col gap-y-3 mx-auto">
                 <div className="flex flex-row justify-between">
                     <div className="flex justify-center items-center border border-1 border-slate-200 rounded-lg p-1 w-[140px]">
@@ -59,24 +59,24 @@ export default function Product(props) {
                                 }
                                 dans des exploitations locales respectueuses de l'environnement. En choisissant nos fruits, vous soutenez l'agriculture durable tout en profitant d'une saveur authentique et fraîche.</span>
                         </div>
-                        <div className="flex items-center justify-center h-[25px] border border-1 border-slate-300 text-green-500 font-semibold">eco-responsable</div>
+                        <div className="flex h-[25px] text-sm text-slate-800 font-semibold">Tous nos produits sont éco-responsables et issue d'une agriculture raisonnée.</div>
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col gap-y-5 w-full">
-                <div className="flex flex-col">
+            <div className="flex flex-col gap-y-7 w-full">
+                <div className="flex flex-col shadow-md p-7">
                     <span className="text-xl font-semibold underline underline-offset-2">Description</span>
                     <span className="text-md">{product.description}</span>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col shadow-md p-7">
                     <span className="text-xl font-semibold underline underline-offset-2">Origine</span>
                     <span className="text-md">{product.origin_description}</span>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col shadow-md p-7">
                     <span className="text-xl font-semibold underline underline-offset-2">Composition</span>
                     <span className="text-md">{product.composition}</span>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col shadow-md p-7">
                     <span className="text-xl font-semibold underline underline-offset-2">Nutrition</span>
                     <span className="text-md">{product.nutrition}</span>
                 </div>

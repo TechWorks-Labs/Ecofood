@@ -162,23 +162,9 @@ export default function Carousel(props) {
   })
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
+    <div className="w-full flex flex-col justify-center items-center mt-4">
       <span className="font-medium text-2xl underline underline-offset-4 mb-5">{props.title}</span>
       <div className="carousel flex flex-row max-w-[1148px] w-[100%] h-[350px] p-2  overflow-hidden" ref={carouselRef}>
-
-        {/* <div className="flex flex-row relative z-0">
-          {(Boolean(props.itemsProduct.length) && Boolean(carouselRef.current.offsetWidth)) ?
-            // <div className="animate-pulse grid grid-cols-3 gap-x-10 w-full h-full border-[10px] border-slate-300 rounded-xl p-10">
-            //   <div className="bg-slate-300 rounded-xl"></div>
-            //   <div className="bg-slate-300"></div>
-            //   <div className="bg-slate-300"></div>
-            // </div>
-            <Products />
-            :
-            <div className="w-full h-full flex justify-center items-center bg-red-400">
-              <span className="mx-auto w-[30px] h-[30px] bg-red-400">en attente</span>
-            </div>}
-        </div> */}
 
         {(Boolean(props.itemsProduct.length) && Boolean(carouselRef.current.offsetWidth)) ?
           <div className="flex flex-row relative z-0">
@@ -238,7 +224,9 @@ export default function Carousel(props) {
         />
 
       </div>
-      <ButtonConsult filterProduct={props.filterProduct} />
+      <div className="mb-8">
+        <ButtonConsult filterProduct={props.filterProduct} />
+      </div>
     </div>
   )
 };
