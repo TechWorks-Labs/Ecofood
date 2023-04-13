@@ -102,7 +102,7 @@ class ProductController
         }
     }
 
-    public function getProductFromId(int $id)
+    public function getProductFromId($id)
     {
         $this->setHeaders();
         $product = $this->model->getProductFromId($id);
