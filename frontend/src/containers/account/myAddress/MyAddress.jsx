@@ -27,7 +27,7 @@ export default function MyAddress() {
 
     return (
         <div className="container max-w-4xl">
-            <div className="grow w-full min-h-full mx-auto bg-slate-100 p-10">
+            <div className="grow w-full min-w-[300px] min-h-full mx-auto bg-slate-100 p-5">
                 <div className="w-full flex flex-col gap-y-3 mb-5">
                     <h2 className="text-slate-600 text-3xl font-semibold">Mon adresse</h2>
                     <span className="text-slate-600 text-xl ">Adresse de facturation</span>

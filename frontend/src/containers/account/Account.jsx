@@ -9,13 +9,10 @@ import { AllContext } from "../../context/AllProviders";
 
 export default function Account() {
 
-    const { bodyHeight } = useContext(AllContext);
-    const body = 'h-[' + bodyHeight + 'px]';
-
     return (
-        <div className={`grow max-w-4xl mx-auto bg-slate-100 p-10 ${body}`}>
+        <div className={`grow max-w-7xl w-full min-w-[300px] mx-auto bg-slate-100 p-10`}>
             <h2 className="font-bold text-4xl text-slate-600">Mon espace personnel</h2>
-            <div className="w-[800px] mx-auto">
+            <div className="w-full mx-auto">
                 <div className="grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-11 mt-10">
                     <ProfilCard image={profilSVG} name="Mon profil" path="/account/myprofil"/>
                     <ProfilCard image={mapFilled} name="Mon addresse" path="/account/myaddress"/>

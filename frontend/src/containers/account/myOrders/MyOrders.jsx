@@ -16,7 +16,7 @@ export default function MyOrders() {
     }
 
     return (
-        <div className="grow w-full max-w-4xl flex mx-auto border border-1 border-slate-200 shadow-lg p-10">
+        <div className="grow w-full max-w-4xl flex mx-auto p-10">
             <div className="flex flex-col items-center w-full">
                 <h2 className='font-bold text-2xl mb-5'>MES COMMANDES </h2>
                 <Orders />

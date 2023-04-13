@@ -42,9 +42,9 @@ export default function MyProfil(props) {
 
 
   return (
-    <div className="container max-w-4xl bg-slate-100 p-8">
-      <h2 className="text-slate-600 text-3xl font-semibold mb-5">Mon profil</h2>
-      <div className="w-full bg-white border border-1 border-slate-200 shadow-lg">
+    <div className="container max-w-4xl min-w-[300px] w-full bg-slate-100 p-8">
+      <div className="w-full mx-auto bg-white border border-1 border-slate-200 shadow-lg p-3">
+        <h2 className="text-slate-600 text-3xl font-semibold mb-5">Mon profil</h2>
         <ProfilForm submit={handleProfilSubmit} profil={userDatas} />
       </div>
     </div>

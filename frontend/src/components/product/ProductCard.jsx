@@ -10,7 +10,7 @@ export default function Item(props){
         navigate('/product', {state : props.product});
     }
     return(
-        <div onClick={handleProduct} className={`w-full h-full bg-white  border border-1 border-slate-200 shadow-lg flex flex-col items-center justify-around relative transition-300 duration-300 hover:scale-105 hover:z-30 hover:border-slate-300`}>
+        <div onClick={handleProduct} className={`w-full h-full bg-white  border border-1 border-slate-200 shadow-xl flex flex-col items-center justify-around relative transition-300 duration-300 hover:scale-105 hover:z-30 hover:border-slate-300`}>
             <img src={banane} className="w-[100px]"/>
                 <div className="flex flex-col h-[150px] w-full items-center justify-center p-4">
                     <span className="font-medium tracking-widest">{props.product.name}</span>

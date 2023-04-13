@@ -10,9 +10,9 @@ export default function MyCart() {
 
     return (
         <div className="container">
-            <div className="grow max-w-7xl flex flex-row mx-auto">
-                <div className="flex-1 p-10">
-                    <ButtonAccount />
+            <div className="grow max-w-7xl w-full min-w-[300px] p-3 flex flex-col mx-auto sm:flex sm:flex-row">
+                <div className="flex-1">
+                        <ButtonAccount />
                     <div className="flex flex-col">
                         {shoppingList.products.length == 0 ?
                             <span className="font-bold text-xl mx-auto">Vous n'avez rien dans votre panier :(</span>

@@ -26,7 +26,7 @@ class Site extends Component {
                 <Header />
                 <Routes>
                     <Route path="/" exact element={<HomePage />} />
-                    {/* <Route path="/boutique" exact element={<Boutique />} />
+                    <Route path="/boutique" exact element={<Boutique />} />
                     <Route path="/signin" exact element={<SignIn />} />
                     <Route path="/mon-compte/creer-mon-compte" exact element={<SignUp />} />
                     <Route path="/account" exact element={<RequireAuth><Account /></RequireAuth>} />
@@ -37,7 +37,7 @@ class Site extends Component {
                     <Route path="/checkout" exact element={<RequireAuth><Checkout /></RequireAuth>} />
                     <Route path="/paymentpage" exact element={<RequireAuth><PaymentPage /></RequireAuth>} />
                     <Route path="/account/myorders" exact element={<RequireAuth><MyOrders /></RequireAuth>} />
-                    <Route path="*" element={<span>ERROR 404</span>} /> */}
+                    <Route path="*" element={<span>ERROR 404</span>} />
                 </Routes>
                 <Footer />
 

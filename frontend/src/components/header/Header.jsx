@@ -76,10 +76,10 @@ function Header(props) {
     }, []);
 
     return (
-        <div className="w-full h-full sticky top-0 z-50">
+        <div className="w-full min-w-[300px] h-[full] sticky top-0 z-50">
             <CartSlideDrawer panierSlideRef={panierSlideRef} panierIsToggle={panierIsToggle} setPanierIsToggle={setPanierIsToggle} panierToggle={panierToggle} />
 
-            <div className="z-20 bg-slate-800 shadow-lg w-full h-[67px] min-w-[300px]">
+            <div className="z-20 bg-slate-800 shadow-lg w-full h-[77px]">
                 <div className="min-w-[300px] max-w-6xl h-full mx-auto flex flex-row justify-between items-center p-2 relative">
                     {/* vertical toolbar user detail */}
                     <AccountDropdown profilSidebarRef={profilSidebarRef} profilIsToggle={profilIsToggle} setProfilIsToggle={setProfilIsToggle} user={userToken} handleLogout={handleLogout} />

@@ -37,7 +37,7 @@ export default function HeroBanner(props) {
     return (
         <div className="min-w-[300px] max-w-6xl h-[600px] mx-auto flex flex-row justify-center items-center p-10">
 
-            <div ref={bannerRef} className="hidden h-[450px] sm:inline-flex p-5 flex flex-col gap-y-8 justify-around">
+            <div ref={bannerRef} className="w-1/2 hidden h-[450px] sm:inline-flex p-5 flex flex-col gap-y-65 justify-around">
                 <h1 className="text-5xl font-bold text-slate-800 underline-offset-2 md:text-6xl lg:text-7xl">{letterArray}</h1>
                 <span className="text-[0.9rem]">ECOFOOD est le site de vente en ligne idéal pour acheter des légumes et des fruits biologiques
                     de qualité supérieure, issus d'une agriculture locale durable. Notre large gamme de produits

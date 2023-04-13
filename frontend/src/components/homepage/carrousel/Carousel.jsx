@@ -2,8 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useRef, useEffect, useMemo } from "react";
 import Item from "../../product/ProductCard";
-import arrowLeft from '../../../assets/images/icons/arrow-left.svg';
-import arrowRight from '../../../assets/images/icons/arrow-right.svg';
 import ButtonConsult from "../../button/ButtonConsult";
 
 export default function Carousel(props) {
@@ -14,8 +12,10 @@ export default function Carousel(props) {
   const [displayFormat, setDisplayFormat] = useState();
 
   const updateCarouselWidthOnResize = () => {
-    setCarouselWidth(carouselRef.current.offsetWidth);
-    updateItemsWidth();
+    if (carouselRef) {
+      setCarouselWidth(carouselRef.current.offsetWidth);
+      updateItemsWidth();
+    }
   }
 
   const updateItemsWidth = () => {
@@ -28,13 +28,15 @@ export default function Carousel(props) {
   };
 
   const UpdateStateDisplayFormat = () => {
-    const width = carouselRef.current.offsetWidth;
-    const displayFormat = width < 640
-      ? 'mobile'
-      : width < 1024
-        ? 'tablet'
-        : width > 1024 && 'desktop';
-    setDisplayFormat(displayFormat);
+    if (carouselRef) {
+      const width = carouselRef.current.offsetWidth;
+      const displayFormat = width < 640
+        ? 'mobile'
+        : width < 1024
+          ? 'tablet'
+          : width > 1024 && 'desktop';
+      setDisplayFormat(displayFormat);
+    }
   };
 
 

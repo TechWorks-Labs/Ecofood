@@ -18,7 +18,7 @@ export default function SignInPage() {
     }
 
     return (
-        <div className='container'>
+        <div className='container w-full min-w-[300px] p-3'>
             <SignInForm submit={handleLoginForm} />
         </div>
     )

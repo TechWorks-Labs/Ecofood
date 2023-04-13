@@ -13,7 +13,10 @@ export default function CartInfos(props){
         shoppingList.products.forEach(element => {
             priceCart = priceCart + (element.price*element.quantity);
         });
-        return priceCart.toFixed(2);
+        if(priceCart !== null){
+            return priceCart.toFixed(2);
+        }
+        return priceCart;
     }
 
     const {userToken} = useContext(userContext);
@@ -37,7 +40,7 @@ export default function CartInfos(props){
                 <div className=" flex-1 h-[1px] w-full border border-1 border-dotted border-slate-300"></div>
                 <span className="font-bold text-xl">{totalPriceCart}$</span>
             </div>
-            <button onClick={()=>paymentService.validCart(userToken.id_user,shoppingList.products, navigate)} className="w-[200px] bg-red-500 text-white font-semibold rounded-xl p-2">Valider mon panier</button>
+            <button onClick={()=>paymentService.validCart(userToken.id_user,shoppingList.products, navigate)} className="self-center max-w-[300px] h-[50px] w-full bg-red-500 text-white font-semibold rounded-xl p-2 sm:h-[45px] sm:self-start">Valider mon panier</button>
         </div>
     )
 }

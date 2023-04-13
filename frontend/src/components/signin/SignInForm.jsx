@@ -16,8 +16,8 @@ function SignInForm (props){
     }
 
     return(
-        <div className="max-w-xl min-w-[200px] mx-auto w-full flex flex-col relative">
-            <form className=" rounded-2xl w-[500px] p-8 shadow-lg bg-gradient-to-r from-slate-800 to-cyan-900  flex flex-col gap-y-10 justify-around absolute top-[200px]">
+        <div className="max-w-2xl w-full min-w-[300px] mx-auto my-auto flex flex-col relative">
+            <form className=" rounded-2xl w-full p-8 shadow-lg bg-gradient-to-r from-slate-800 to-cyan-900  flex flex-col gap-y-[65px] justify-around">
                 <span className="font-bold text-3xl text-center mb-5 text-white">Sign in</span>
                 <div className="flex flex-col relative">
                     <label ref={emailLabelRef} htmlFor='email' className=" absolute bottom-0 transition-all duration-1000 ease-in-out text-white font-medium text-xl mb-2 pointer-events-none">Email</label>
@@ -43,11 +43,11 @@ function SignInForm (props){
                 </div>
 
                  {props.touched.password && props.errors.password && <span className="text-white">{props.errors.password}</span>}
-                 <div className="flex flex-row justify-between">
+                 <div className="flex flex-col gap-y-5 justify-center items-center sm:flex sm:flex-row sm:justify-between sm:gap-y-0">
                  <Link to ="/mon-compte/creer-mon-compte">
                     <span className="text-white">Vous n'avez pas encore de compte ?</span>
                  </Link>
-                    <button type="submit" onClick={props.handleSubmit} className="text-slate-800 font-bold bg-white w-[80px] rounded-lg h-[35px] self-end">Log in</button>
+                    <button type="submit" onClick={props.handleSubmit} className="text-slate-800 font-bold bg-white w-[80px] rounded-lg h-[35px] sm:self-end">Log in</button>
                  </div>
             </form>
         </div>

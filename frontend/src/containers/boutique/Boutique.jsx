@@ -9,19 +9,14 @@ export default function Boutique() {
 
     const { state } = useContext(productsContext);
     const { product } = useContext(productsContext).products;
-    const { getProducts } = useContext(productsContext);
-    const filterProduct = JSON.parse(localStorage.getItem('filterProduct') || '[]');
-
-
+    const { getProducts, parameterFilter } = useContext(productsContext);
 
     useEffect(() => {
-        getProducts(filterProduct, 16);
+        
     }, []);
 
     return (
-        <div className="container max-w-7xl mx-auto mb-10">
-            <HeaderBanner />
-            <ProductCategoryBanner />
+        <div className="container-row grow">
             <ProductsGrid products={product} />
         </div>
     )
