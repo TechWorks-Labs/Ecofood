@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+.App {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+}
+.container-row {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+}
 
 .carousel-input {
   /* remove standard background appearance */
@@ -25,6 +46,27 @@
   background-color: #EC3434;
 }
 
+.formProfil-input {
+  /* remove standard background appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transform: scale(0.8);
+  /* create custom radiobutton appearance */
+  width: 15px;
+  height: 15px;
+  /* background-color only for content */
+  border: 2px solid #bbbbbb;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.formProfil-input:checked {
+  transition: all 0.2s ease-in;
+  transform: scale(1.3);
+  background-color: #EC3434;
+}
+
 .cart-slide-drawer {
   transition: all 0.5s ease-in;
   opacity: 0;
@@ -42,7 +84,7 @@
   overflow: hidden;
 }
 
-.cart-slide-drawer--isActive  {
+.cart-slide-drawer--isActive {
   transition: all 0.5s ease-in;
   opacity: 1;
   z-index: 50;
@@ -59,10 +101,45 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  display: none; /* Cacher la barre de défilement pour les navigateurs WebKit */
+  display: none;
+  /* Cacher la barre de défilement pour les navigateurs WebKit */
 }
 
 .custom-scrollbar {
-  scrollbar-width: none; /* Cacher la barre de défilement pour Firefox */
-  -ms-overflow-style: none; /* Cacher la barre de défilement pour Internet Explorer et Edge */
+  scrollbar-width: none;
+  /* Cacher la barre de défilement pour Firefox */
+  -ms-overflow-style: none;
+  /* Cacher la barre de défilement pour Internet Explorer et Edge */
+}
+
+.productCategoryIsNotToggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 1px;
+  border-radius: 3px;
+  padding: 8px;
+  height: 40px;
+}
+
+.productCategoryIsNotToggle:hover {
+  background-color: #EC3434;
+  color: white;
+  cursor: pointer;
+}
+
+.productCategoryIsToggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 1px;
+  background-color: #EC3434;
+  color: white;
+  padding: 8px;
+  height: 40px;
+  border-radius: 3px;
+}
+
+.productCategoryIsToggle:hover {
+  cursor: pointer;
 }

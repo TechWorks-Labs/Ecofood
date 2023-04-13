@@ -7,8 +7,9 @@ import { userContext } from "../../../context/UserProvider";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ButtonAccount from "../../../components/button/ButtonAccount";
-
+import { AllContext } from "../../../context/AllProviders";
 export default function MyProfil(props) {
+
   const { userToken, getUserDatas, userDatas, setUserDatas } = useContext(userContext)
   const handleProfilSubmit = async (value) => {
     const updatedUserDatas = {
@@ -41,10 +42,9 @@ export default function MyProfil(props) {
 
 
   return (
-    <div className="max-w-4xl h-screen mx-auto bg-slate-100 p-10">
-      <div className="mb-3">
-      </div>
-      <div className="w-full  bg-white border border-1 border-slate-200 shadow-lg">
+    <div className="container max-w-4xl min-w-[300px] w-full bg-slate-100 p-8">
+      <div className="w-full mx-auto bg-white border border-1 border-slate-200 shadow-lg p-3">
+        <h2 className="text-slate-600 text-3xl font-semibold mb-5">Mon profil</h2>
         <ProfilForm submit={handleProfilSubmit} profil={userDatas} />
       </div>
     </div>

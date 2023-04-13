@@ -14,7 +14,6 @@ function UserProvider(props) {
   const navigate = useNavigate();
   const hostname = 'http://localhost:9000';
   const [userDatas, setUserDatas] = useState({});
-  const [userOrders, setUserOrders] = useState([]);
   const [userToken, setUserToken] = useState({});
 
   const userTokenJWTUpdate = async () => {
@@ -52,8 +51,11 @@ function UserProvider(props) {
   
   const getUserOrdersByUserId = async (user_id) => {
     if(user_id != undefined){
-      const ordersProduct = await axios.get(`${hostname}/order/${user_id}`);
-      console.log('ordersProduct',ordersProduct);
+      await axios.get(`${hostname}/order/${user_id}`)
+      .then(response => {
+        localStorage.setItem('ordersUser', JSON.stringify(response.data))
+      })
+      .catch(error => console.log('error userOrders'));
     }
   }
 
@@ -89,6 +91,9 @@ function UserProvider(props) {
       setUserDatas(AESEncrypt.localStorageGetEncryptAESItem('userDatas'));
     }
   }
+
+  
+
 
   useEffect(() => {
     // update userDatas

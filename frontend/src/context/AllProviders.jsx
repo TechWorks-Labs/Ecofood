@@ -6,14 +6,16 @@ import UserProvider from './UserProvider';
 export const AllContext = createContext();
 
 function AllProvider(props) {
-
+  const headerHeight = 67;
+  const footerHeight = 150;
+  const bodyHeight = window.innerHeight - footerHeight - headerHeight;
   return (
-    <AllContext.Provider value={{}}>
+    <AllContext.Provider value={{ bodyHeight }}>
       <UserProvider>
         <ProductsProvider>
-            <CartProvider>
-              {props.children}
-            </CartProvider>
+          <CartProvider>
+            {props.children}
+          </CartProvider>
         </ProductsProvider>
       </UserProvider>
     </AllContext.Provider>

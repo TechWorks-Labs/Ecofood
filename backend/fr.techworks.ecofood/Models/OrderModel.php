@@ -4,14 +4,34 @@ namespace Models;
 
 class OrderModel extends Model
 {
-    public function getOrdersProductByUserId(int $id_user){
+    public function getDetailsOrderProductByOrderId($id_order)
+    {
+        $req = 'SELECT
+        op.id_product,
+        p.name,
+        p.image,
+        op.quantity
+        FROM order_product AS op
+        JOIN product AS p ON p.id_product = op.id_product
+        WHERE op.id_order = :id_order;';
+        $bdd = $this->getBdd();
+        $stmt = $bdd->prepare($req);
+        $stmt->bindValue(':id_order', $id_order);
+        $stmt->execute();
+        $detailsOrder = $stmt->fetchAll(\PDO::FETCH_OBJ);
+        $stmt->closeCursor();
+        return $detailsOrder;
+    }
+    
+    public function getOrdersProductByUserId(int $id_user)
+    {
         $req = 'SELECT
         o.id_order,
         o.status,
         o.date, 
         o.total_price 
-        FROM order AS o
-        WHERE id_user = :id_user;';
+        FROM `order` AS o
+        WHERE o.id_user = :id_user;';
         $bdd = $this->getBdd();
         $stmt = $bdd->prepare($req);
         $stmt->bindValue(':id_user', $id_user);
@@ -37,6 +57,6 @@ class OrderModel extends Model
         $smtp->execute();
         $OrderProducts = $smtp->fetchAll(\PDO::FETCH_OBJ);
         $smtp->closeCursor();
-        return $OrderProducts;          
+        return $OrderProducts;
     }
 }

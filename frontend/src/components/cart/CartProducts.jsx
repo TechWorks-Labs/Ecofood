@@ -8,7 +8,7 @@ export default function CartProducts() {
     const Products = () => {
         return shoppingList.products.map((product, key) => {
             return (
-                <div key={key} className="flex flex-col min-w-[340px] w-full border border-b-1 border-t-0 border-l-0 border-r-0 border-slate-300">
+                <div key={key} className="flex flex-col w-full border border-b-1 border-t-0 border-l-0 border-r-0 border-slate-300">
 
                     <div className="flex flex-row items-center justify-center gap-x-3 p-5">
                         <img src={banane} className="w-[30px] h-[30px]" />
@@ -37,8 +37,6 @@ export default function CartProducts() {
     }
 
     return (
-        <div>
-            <Products />
-        </div>
+        <Products />
     )
 }

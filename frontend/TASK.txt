@@ -1,32 +1,42 @@
-19/03/2023
+30/03/2023
 -> bogues 
+    -> input color rouge myProfil form
     -> header/footer in all page
     -> inscription -> renvoyer l'user sur une page 
         -> "Votre inscription est validée login".
-    -> bug boutique filter selection -- CHECK
-    -> bug carousel mobile resolution -- CHECK
-    -> bug retour fiche produit bouton
+    -> bug scroll in espace profil (header bug hidden scroll)
+-> responsive all site
 -> animation
     -> toast login
     -> toast logout
-    -> Homepage -> animate the ECOFOOD title
-    -> Homepage -> animate button "panier du jour"
-    -> chargement productCard
 
 -> feature
-    -> add panier in homepage -> CHECK
-    -> add panier in BDD
     -> PRODUCTPAGE 
         -> Ajouter logo par marque
         -> modifier requete SQL pour l'image brand
     -> FOOTER 
+        -> footer responsive
+    -> SIGN IN responsive
+        -> component in personnal profil
+
+19/03/2023
+-> bogues 
+    -> bug boutique filter selection -- CHECK
+    -> bug carousel mobile resolution -- CHECK
+    -> bug retour fiche produit bouton -- CHECK
+-> animation
+    -> Homepage -> animate the ECOFOOD title -- CHECK
+    -> Homepage -> animate button "panier du jour" -- CHECK
+    -> chargement productCard -- CHECK
+
+-> feature
+    -> add panier in homepage -> CHECK
+    -> add panier in BDD -- DELETE FEATURE
+    -> FOOTER 
         -> social network -> CHECK
         -> cgu -> CHECK
         -> others -> CHECK
-        -> footer responsive
-    -> MYORDERS
-    -> SIGN IN responsive
-        -> component in personnal profil
+    -> MYORDERS -- CHECK
     --> PRODUCTPAGE -- CHECK
 -> refactoring 
     -> panier -- CHECK

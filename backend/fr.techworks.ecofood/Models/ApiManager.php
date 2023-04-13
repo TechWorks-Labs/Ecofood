@@ -150,7 +150,7 @@ class ApiManager extends Model
 
         $stmt = $this->getBdd()->prepare($req);
         if (!empty($type)) {
-            $stmt->bindValue(':type', $type[0], \PDO::PARAM_INT);
+            $stmt->bindValue(':type', $type, \PDO::PARAM_INT);
         }
 
         $stmt->execute();
